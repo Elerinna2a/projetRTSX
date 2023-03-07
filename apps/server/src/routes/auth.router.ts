@@ -7,7 +7,7 @@ export const router = express.Router();
 router.post("/login", async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
-  const user = await prismaClient.user.findFirst({
+  const user = await prismaClient.employe.findFirst({
     where: {
       email,
     },

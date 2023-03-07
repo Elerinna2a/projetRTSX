@@ -1,28 +1,28 @@
 import { Request, Response } from "express";
-import { UserService } from "../services/user.services";
+import { EmployeService } from "../services/employe.services";
 import { getIdOrVoid } from "../utils";
 
-const userService = new UserService();
+const employeService = new EmployeService();
 
 export class UserController {
-  async getUsers(_req: Request, res: Response) {
+  async getEmployes(_req: Request, res: Response) {
     try {
-      const users = await userService.getUsers();
-      res.json(users);
+      const employes = await employeService.getEmploye();
+      res.json(employes);
     } catch (error: unknown) {
       console.log(error, res);
     }
   }
 
-  async getUserById(req: Request, res: Response) {
+  async getEmployeById(req: Request, res: Response) {
     const id = getIdOrVoid(req.params.id, res);
     if (id) {
       try {
-        const user = await userService.getUserById(id);
-        if (user) {
-          res.json(user);
+        const employe = await employeService.getEmployeById(id);
+        if (employe) {
+          res.json(employe);
         } else {
-          res.json({ message: "User not found for this id..." });
+          res.json({ message: "employe not found for this id..." });
         }
       } catch (error: unknown) {
         console.log(error, res);
@@ -30,25 +30,28 @@ export class UserController {
     }
   }
 
-  async createUser(req: Request, res: Response) {
+  async createEmploye(req: Request, res: Response) {
     try {
-      const newUser = await userService.createUser(req.body);
-      res.json(newUser);
+      const newEmploye = await employeService.createEmploye(req.body);
+      res.json(newEmploye);
     } catch (error: unknown) {
       console.log(error, res);
     }
   }
 
-  async updateUser(req: Request, res: Response) {
+  async updateEmploye(req: Request, res: Response) {
     const id = getIdOrVoid(req.params.id, res);
     if (id) {
       try {
-        const doesUserExist = await userService.checkIfUserExists(id);
-        if (doesUserExist) {
-          const updatedUser = await userService.updateUser(id, req.body);
-          res.json(updatedUser);
+        const doesEmployeExist = await employeService.checkIfEmployeExists(id);
+        if (doesEmployeExist) {
+          const updatedEmploye = await employeService.updateEmploye(
+            id,
+            req.body
+          );
+          res.json(updatedEmploye);
         } else {
-          res.json({ message: "User not found for this id..." });
+          res.json({ message: "Employe not found for this id..." });
         }
       } catch (error: unknown) {
         console.log(error, res);
@@ -56,16 +59,16 @@ export class UserController {
     }
   }
 
-  async deleteUser(req: Request, res: Response) {
+  async deleteEmploye(req: Request, res: Response) {
     const id = getIdOrVoid(req.params.id, res);
     if (id) {
       try {
-        const doesUserExist = await userService.checkIfUserExists(id);
-        if (doesUserExist) {
-          const deleteUser = await userService.deleteUser(id);
-          res.json(deleteUser);
+        const doesEmployeExist = await employeService.checkIfEmployeExists(id);
+        if (doesEmployeExist) {
+          const deleteEmploye = await employeService.deleteEmploye(id);
+          res.json(deleteEmploye);
         } else {
-          res.json({ message: "User not found for this id..." });
+          res.json({ message: "Employe not found for this id..." });
         }
       } catch (error: unknown) {
         console.log(error, res);

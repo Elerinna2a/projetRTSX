@@ -13,22 +13,22 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { User } from "../store/users.store";
+import { Client } from "../store/client.store";
 import Error from "./Error";
 
-export default function Users() {
+export default function Clients() {
   const [cookies] = useCookies(["sessionid"]);
-  const [users, setUsers] = useState<User[]>([]);
+  const [clients, setClients] = useState<Client[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/users", {
+      .get("http://localhost:3000/clients", {
         headers: {
           sessionid: cookies.sessionid,
         },
       })
-      .then((res) => setUsers(res.data))
+      .then((res) => setClients(res.data))
       .catch((err) =>
         setError(
           "Impssible d'acceder a cette page car vos droit ne le permettant pas"
@@ -48,24 +48,23 @@ export default function Users() {
   return (
     <div>
       <Flex flexDirection={"column"} padding={4} borderRadius={4} ml={4}>
-        {users.map((user) => (
-          <div key={user.id}>
+        {clients.map((client) => (
+          <div key={client.id}>
             <Accordion allowMultiple>
               <AccordionItem>
                 <AccordionButton>
-                  <Box>Utilisateur n°{user.id}</Box>
+                  <Box>Utilisateur n°{client.id}</Box>
                   <AccordionIcon />
                 </AccordionButton>
                 <AccordionPanel>
                   <Flex>
                     <Flex flexDirection={"column"} justifyContent="center">
-                      <p>
-                        Nom & prénom : {user.nom} {user.prenom}
-                      </p>
-                      <p>Adresse :{user.adress}</p>
-                      <p>Email : {user.email}</p>
-                      <p>Tel : {user.tel} </p>
-                      <p>Son role est : {user.role}</p>
+                      <p>Nom & prénom : {client.nom}</p>
+                      <p>Adresse :{client.adresse}</p>
+                      <p>Email : {client.contact_email}</p>
+                      <p>Tel : {client.contact_num} </p>
+                      <p>Type: {client.type_tier}</p>
+                      <p>Score : {client.score_facilite_acces}</p>
                     </Flex>
                     <Spacer />
                     <Flex

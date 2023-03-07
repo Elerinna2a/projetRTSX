@@ -2,8 +2,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import { router as authRouter } from "./routes/auth.router";
-import { router as clientRouter } from "./routes/client.router";
-import { router as userRouter } from "./routes/user.router";
+import { router as clientRouter } from "./routes/tiersCollecte.router";
+import { router as userRouter } from "./routes/employe.router";
 
 dotenv.config();
 const app = express();

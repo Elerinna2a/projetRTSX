@@ -10,87 +10,135 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-model User {
-  id Int @id @default(autoincrement())
-  nom String
-  prenom String
-  tel String @db.VarChar(10)
-  adress String
-  role Role 
-  email String @unique
+model Employe {
+  id       Int    @id @default(autoincrement())
+  nom      String
+  prenom   String
+  adresse  String
+  tel      String
+  role     Role
+  email    String @unique
   password String
 
-  created_at DateTime @default(now())
+  dateCreation DateTime @default(now())
 
-  session Session? // relation vers la session
-  collecte Collecte[]
+  session    Session? //onetoOne
+  tournees   Tournee[]
+  traitement Traitement[]
+  collectes  Collecte[]
 }
 
-// many to many y'a rien a mettre
-// one to many mettre les crochet sans @unique
-// one to one faut mettre le ? avec @unique
+model Tournee {
+  idTournee    Int          @id @default(autoincrement())
+  dateTournee  DateTime     @default(now())
+  chauffeur    Employe      @relation(fields: [chauffeurId], references: [id])
+  chauffeurId  Int
+  typeVehicule TypeVehicule
+  remorque     Remorque
 
-model Collecte {
-    id Int @id @default(autoincrement())
-    quantite_kg Float
-    forme_collecte String
-    date_collecte DateTime @default(now())
-    chauffeur String
-    forme_vehicule String
-    operator_name String
-    quality String
-    quantity_strange_corps Float
-    num_lot String
-    score String 
-    facturation Float
-
-    tierCollecte TierCollecte @relation(fields: [tierCollecteId], references: [id]) // relation avec la table tierCollecte
-    tierCollecteId Int
-    expedition Expedition @relation(fields: [expeditionId], references: [id]) // relation avec la table expedition
-    expeditionId Int 
-    user User @relation(fields: [userId], references: [id]) // relation avec la table user
-    userId Int                                               // relation avec la table user
-}
-
-model Expedition {
-      id Int @id @default(autoincrement())
-      date_expedition DateTime @default(now())
-      destinataire String
-      num_bl String
-      num_facture String
-      nb_palette String
-      poids_net_total Float
-
-      tiersCompacte TiersCompacte?
-      collecte Collecte[]
-}
-
-model TiersCompacte {
-  id Int @id @default(autoincrement())
-  nom String
-  adresse String
-  type_tiers String
-  contact_nom String
-  contact_email String
-  contact_num String
-
-  expedition Expedition @relation(fields: [expeditionId], references: [id]) // relation avec la table expedition
-  expeditionId Int @unique                                           // relation avec la table expedition
+  clients TierCollecte[]
 }
 
 model TierCollecte {
-  id Int @id @default(autoincrement())
-  nom String
-  adresse String
-  type_tiers String
-  score_facilite_acces Score
-  contact_nom String
-  contact_email String @unique
-  contact_num String @db.VarChar(10)
-  role Role @default(CLIENT)
+  idTierCollecte  Int    @id @default(autoincrement())
+  nom             String @unique
+  adresse         String
+  typeEntreprise  String
+  scoringFacilite Score
+  nomContact      String
+  tel             String
+  role            Role   @default(CLIENT)
+  mail            String @unique
+  password        String
 
-  collecte Collecte[]                                              // relation avec la table collectes
+  dateCreation DateTime @default(now())
+
+  collecte  Collecte[]
+  tournees  Tournee    @relation(fields: [tourneeId], references: [idTournee])
+  tourneeId Int
+  factures  Facture[]
+}
+
+model Collecte {
+  idNumLot      Int      @id @default(autoincrement())
+  quantite      Int
+  formeCollecte Forme
+  dateCollecte  DateTime @default(now())
+
+  employes     Employe      @relation(fields: [employeId], references: [id])
+  TierCollecte TierCollecte @relation(fields: [TierCollecteId], references: [idTierCollecte])
+  expedition   Expedition   @relation(fields: [expeditionId], references: [idNumBl])
+  traitement   Traitement   @relation(fields: [traitementId], references: [idTraitement])
+
+  TierCollecteId Int
+  employeId      Int
+  expeditionId   Int
+  traitementId   Int
+}
+
+model Traitement {
+  idTraitement          Int        @id @default(autoincrement())
+  dateTraitement        DateTime   @default(now())
+  qualite               Qualite
+  quantiteCorpsEtranger Int
+  scoringBonusMalus     Int
+  operateur             Employe    @relation(fields: [operateurId], references: [id])
+  operateurId           Int
+  collecte              Collecte[]
+}
+
+model Expedition {
+  idNumBl        Int      @id @default(autoincrement())
+  dateExpedition DateTime @default(now())
+  destinataire   String
+  numFacture     Facture?
+  nbPalette      Int
+  poidNetTotal   Float
+
+  collecte      Collecte[]
+  tiersCompacte TiersCompacte @relation(fields: [tiersCompacteId], references: [idTiersCompacte])
+
+  tiersCompacteId Int @unique
+}
+
+model TiersCompacte {
+  idTiersCompacte Int    @id @default(autoincrement())
+  nom             String
+  adresse         String
+  typeTiers       String
+  contactNom      String
+  tel             String
+  mail            String
+
+  expedition Expedition?
+  factures   Facture[]
+}
+
+model Facture {
+  idFacture   Int      @id @default(autoincrement())
+  dateFacture DateTime @default(now())
+  montant     Float
+
+  nomTierCollecte TierCollecte @relation(fields: [nomTcId], references: [idTierCollecte])
+  nomTcId         Int
+
+  nomTiersTompacte TiersCompacte @relation(fields: [nomTcomId], references: [idTiersCompacte])
+  nomTcomId        Int
+
+  num_expedition Expedition @relation(fields: [numExpId], references: [idNumBl])
+  numExpId       Int        @unique
+}
+
+enum Role {
+  CLIENT
+  ADMIN
+  OPERATEUR
+  CHAUFFEUR
+}
+
+enum Remorque {
+  OUI
+  NON
 }
 
 enum Score {
@@ -99,16 +147,26 @@ enum Score {
   TROIS
 }
 
-enum Role {
-  ADMIN  // chef de projet
-  OPERATOR // opérateur
-  DRIVER // chauffeur
-  CLIENT // client
+enum Qualite {
+  PURE
+  POLLUEE
+  NONRECYCLABLE
+}
+
+enum Forme {
+  SAC
+  VRAC
+  PALETTE
+}
+
+enum TypeVehicule {
+  FOURGON
+  NONARTICULE
+  SEMIREMORQUE
 }
 
 model Session {
-  id String @id @default(uuid())
-  user User @relation(fields: [userId], references: [id])
-  userId Int @unique
+  id     String  @id @default(uuid())
+  user   Employe @relation(fields: [userId], references: [id]) //relation oneToOne
+  userId Int     @unique
 }
-

@@ -2,11 +2,13 @@ import { map } from "nanostores";
 
 export type User = {
   id?: number;
+  nom?: string;
+  prenom?: string;
+  tel?: string;
+  adress?: string;
+  role?: string;
   email?: string;
   password?: string;
-  role?: string;
-  firstname?: string;
-  lastname?: string;
   createdAt?: string;
 };
 
