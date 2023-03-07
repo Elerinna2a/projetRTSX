@@ -7,8 +7,8 @@ import {
 
 export class TiersCollecteService {
   async getTierCollectes(): Promise<TierCollecte[]> {
-    const clients = await prismaClient.tierCollecte.findMany();
-    return clients;
+    const tierCollectes = await prismaClient.tierCollecte.findMany();
+    return tierCollectes;
   }
 
   async getTierCollectesById(
@@ -23,28 +23,30 @@ export class TiersCollecteService {
   async createTierCollectes(
     data: CreateTierCollecte
   ): Promise<TierCollecte | null> {
-    const newClient = await prismaClient.tierCollecte.create({ data: data });
-    return newClient;
+    const newTierCollecte = await prismaClient.tierCollecte.create({
+      data: data,
+    });
+    return newTierCollecte;
   }
 
   async updateTierCollectes(
     idTierCollecte: number,
     data: UpdateTierCollecte
   ): Promise<TierCollecte | null> {
-    const updatedClient = await prismaClient.tierCollecte.update({
+    const updatedTierCollecte = await prismaClient.tierCollecte.update({
       where: { idTierCollecte },
       data,
     });
-    return updatedClient;
+    return updatedTierCollecte;
   }
 
   async deleteTierCollectes(
     idTierCollecte: number
   ): Promise<TierCollecte | null> {
-    const deletedClient = await prismaClient.tierCollecte.delete({
+    const deletedTierCollecte = await prismaClient.tierCollecte.delete({
       where: { idTierCollecte },
     });
-    return deletedClient;
+    return deletedTierCollecte;
   }
 
   async checkIfTierCollectesExists(idTierCollecte: number): Promise<boolean> {
