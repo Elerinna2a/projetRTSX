@@ -13,12 +13,12 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { User } from "../store/employe.store";
+import { Employe } from "../store/employe.store";
 import Error from "./Error";
 
 export default function Users() {
   const [cookies] = useCookies(["sessionid"]);
-  const [users, setUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<Employe[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {

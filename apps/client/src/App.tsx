@@ -11,12 +11,12 @@ import Error from "./pages/Error";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Users from "./pages/Users";
-import { setUser, user } from "./store/employe.store";
+import { employe, setemploye } from "./store/employe.store";
 import { useAuth } from "./utils/CustomHook";
 
 function App() {
   const [cookies] = useCookies(["sessionid"]);
-  const authedUser = useStore(user);
+  const authedUser = useStore(employe);
 
   function authonly(page: JSX.Element) {
     const [cookie] = useCookies(["sessionid"]);
@@ -33,7 +33,7 @@ function App() {
         .post("http://localhost:3000/auth/get-user-infos", {
           sessionId: cookies.sessionid,
         })
-        .then((res) => setUser(res.data.user));
+        .then((res) => setemploye(res.data.user));
     }
   }, []);
 

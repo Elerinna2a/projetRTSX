@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRef } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import { setUser } from "../store/employe.store";
+import { setemploye } from "../store/employe.store";
 
 const Login = () => {
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -21,7 +21,7 @@ const Login = () => {
       })
       .then((res) => {
         setCookie("sessionid", res.data.sessionid);
-        setUser(res.data.user);
+        setemploye(res.data.user);
         navigate("/");
       });
   }

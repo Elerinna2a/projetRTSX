@@ -1,13 +1,13 @@
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { useStore } from "@nanostores/react";
-import { user } from "../store/employe.store";
+import { employe } from "../store/employe.store";
 import Clients from "./Clients";
 import Collecte from "./Collecte";
 import Driver from "./Driver";
 import Users from "./Users";
 
 export default function Home() {
-  const authedUser = useStore(user);
+  const authedUser = useStore(employe);
   return (
     <div>
       {authedUser.role === "ADMIN" ? (

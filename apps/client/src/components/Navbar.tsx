@@ -3,11 +3,11 @@ import { useStore } from "@nanostores/react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
-import { removeUser, user } from "../store/employe.store";
+import { employe, removeemploye } from "../store/employe.store";
 
 export default function Navbar() {
   const [cookies, , removeCookie] = useCookies(["sessionid"]);
-  const authedUser = useStore(user);
+  const authedUser = useStore(employe);
   const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -18,7 +18,7 @@ export default function Navbar() {
       })
       .then(() => {
         removeCookie("sessionid");
-        removeUser();
+        removeemploye();
         navigate("/login");
       })
       .catch((err) => {
