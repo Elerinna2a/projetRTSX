@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import { useStore } from "@nanostores/react";
-import { user } from "../store/users.store";
+import { user } from "../store/employe.store";
 
 export default function Home() {
   const authedUser = useStore(user);

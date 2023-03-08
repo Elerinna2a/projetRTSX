@@ -1,19 +1,22 @@
+import { Role } from "@prisma/client";
+
 export type CreateEmploye = {
   nom: string;
   prenom: string;
   adresse: string;
   tel: string;
-  role: "ADMIN" | "CLIENT" | "DRIVER" | "OPERATOR";
+  role: Role;
   email: string;
   password: string;
 };
 
 export type UpdateEmploye = {
+  id?: number;
   nom?: string;
   prenom?: string;
   tel?: string;
   adresse?: string;
-  role?: "ADMIN" | "CLIENT" | "DRIVER" | "OPERATOR";
+  role?: Role;
   email?: string;
   password?: string;
 };

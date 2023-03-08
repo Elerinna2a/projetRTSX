@@ -3,7 +3,7 @@ import { useStore } from "@nanostores/react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
-import { removeUser, user } from "../store/users.store";
+import { removeUser, user } from "../store/employe.store";
 
 export default function Navbar() {
   const [cookies, , removeCookie] = useCookies(["sessionid"]);

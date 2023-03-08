@@ -13,7 +13,7 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { User } from "../store/users.store";
+import { User } from "../store/employe.store";
 import Error from "./Error";
 
 export default function Driver() {

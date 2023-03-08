@@ -1,6 +1,6 @@
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { useStore } from "@nanostores/react";
-import { user } from "../store/users.store";
+import { user } from "../store/employe.store";
 import Clients from "./Clients";
 import Collecte from "./Collecte";
 import Driver from "./Driver";

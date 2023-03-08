@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRef } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import { setUser } from "../store/users.store";
+import { setUser } from "../store/employe.store";
 
 const Login = () => {
   const emailRef = useRef<HTMLInputElement | null>(null);

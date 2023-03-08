@@ -1,0 +1,15 @@
+import express from "express";
+import { TourneeController } from "../controllers/tournee.controllers";
+
+export const router = express.Router();
+
+const tourneeController = new TourneeController();
+
+router.get("/", tourneeController.getTournees);
+router.get("/:id", tourneeController.getTourneeById);
+
+router.post("/", tourneeController.createtournee);
+
+router.put("/:id", tourneeController.updatetournee);
+
+router.delete("/", tourneeController.deletetournee);

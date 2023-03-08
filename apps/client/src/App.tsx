@@ -11,7 +11,7 @@ import Error from "./pages/Error";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Users from "./pages/Users";
-import { setUser, user } from "./store/users.store";
+import { setUser, user } from "./store/employe.store";
 import { useAuth } from "./utils/CustomHook";
 
 function App() {

@@ -1,6 +1,6 @@
 import { map } from "nanostores";
 
-export type User = {
+export type Employe = {
   id?: number;
   nom?: string;
   prenom?: string;
@@ -12,12 +12,12 @@ export type User = {
   createdAt?: string;
 };
 
-export const user = map<User>({});
+export const employe = map<Employe>({});
 
-export function setUser(userInfo: User) {
-  user.set(userInfo);
+export function setemploye(employeInfo: Employe) {
+  employe.set(employeInfo);
 }
 
-export function removeUser() {
-  user.set({});
+export function removeemploye() {
+  employe.set({});
 }

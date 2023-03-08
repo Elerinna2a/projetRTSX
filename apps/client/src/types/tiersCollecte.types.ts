@@ -5,21 +5,24 @@ export type CreateTierCollecte = {
   adresse: string;
   typeEntreprise: string;
   scoringFacilite: Score;
-  nomContact: String;
+  nomContact: string;
   tel: string;
   mail: string;
   password: string;
   dateCreation: string;
+  tourneeId: number;
 };
 
 export type UpdateTierCollecte = {
+  idTierCollecte?: number;
   nom?: string;
   adresse?: string;
   typeEntreprise?: string;
   scoringFacilite?: Score;
-  nomContact?: String;
+  nomContact?: string;
   tel?: string;
   mail?: string;
   password?: string;
   dateCreation?: string;
+  tourneeID?: number;
 };

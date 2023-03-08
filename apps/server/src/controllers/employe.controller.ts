@@ -4,7 +4,7 @@ import { getIdOrVoid } from "../utils";
 
 const employeService = new EmployeService();
 
-export class UserController {
+export class EmployeController {
   async getEmployes(_req: Request, res: Response) {
     try {
       const employes = await employeService.getEmploye();

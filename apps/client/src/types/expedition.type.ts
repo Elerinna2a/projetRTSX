@@ -7,6 +7,7 @@ export type CreateExpedition = {
 };
 
 export type UpdateExpedition = {
+  idNumBl?: number;
   dateExpedition?: string;
   destinataire?: string;
   nbPalette?: number;

@@ -2,7 +2,7 @@ import { Tournee } from "@prisma/client";
 import { prismaClient } from "../prisma";
 import { CreateTournee, UpdateTournee } from "../types/tournee.type";
 
-export class tourneeService {
+export class TourneeService {
   async gettournee(): Promise<Tournee[]> {
     const tournees = await prismaClient.tournee.findMany();
     return tournees;

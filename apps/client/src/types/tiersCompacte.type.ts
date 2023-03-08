@@ -8,6 +8,7 @@ export type CreateTiersCompacte = {
 };
 
 export type UpdateTiersCompacte = {
+  idTiersCompacte?: number;
   nom?: string;
   adresse?: string;
   typeTiers?: string;

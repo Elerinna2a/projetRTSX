@@ -54,8 +54,8 @@ model TierCollecte {
   dateCreation DateTime @default(now())
 
   collecte  Collecte[]
-  tournees  Tournee    @relation(fields: [tourneeId], references: [idTournee])
-  tourneeId Int
+  tournees  Tournee?   @relation(fields: [tourneeId], references: [idTournee])
+  tourneeId Int?
   factures  Facture[]
 }
 
@@ -67,24 +67,24 @@ model Collecte {
 
   employes     Employe      @relation(fields: [employeId], references: [id])
   TierCollecte TierCollecte @relation(fields: [TierCollecteId], references: [idTierCollecte])
-  expedition   Expedition   @relation(fields: [expeditionId], references: [idNumBl])
-  traitement   Traitement   @relation(fields: [traitementId], references: [idTraitement])
+  traitement   Traitement?  @relation(fields: [traitementId], references: [idTraitement])
 
   TierCollecteId Int
   employeId      Int
-  expeditionId   Int
-  traitementId   Int
+  traitementId   Int?
 }
 
 model Traitement {
-  idTraitement          Int        @id @default(autoincrement())
-  dateTraitement        DateTime   @default(now())
+  idTraitement          Int         @id @default(autoincrement())
+  dateTraitement        DateTime    @default(now())
   qualite               Qualite
   quantiteCorpsEtranger Int
   scoringBonusMalus     Int
-  operateur             Employe    @relation(fields: [operateurId], references: [id])
+  operateur             Employe     @relation(fields: [operateurId], references: [id])
   operateurId           Int
   collecte              Collecte[]
+  Expedition            Expedition? @relation(fields: [expeditionID], references: [idNumBl])
+  expeditionID          Int?
 }
 
 model Expedition {
@@ -95,7 +95,7 @@ model Expedition {
   nbPalette      Int
   poidNetTotal   Float
 
-  collecte      Collecte[]
+  traitement    Traitement[]
   tiersCompacte TiersCompacte @relation(fields: [tiersCompacteId], references: [idTiersCompacte])
 
   tiersCompacteId Int @unique
@@ -119,11 +119,11 @@ model Facture {
   dateFacture DateTime @default(now())
   montant     Float
 
-  nomTierCollecte TierCollecte @relation(fields: [nomTcId], references: [idTierCollecte])
-  nomTcId         Int
+  nomTierCollecte TierCollecte? @relation(fields: [nomTcId], references: [idTierCollecte])
+  nomTcId         Int?
 
-  nomTiersTompacte TiersCompacte @relation(fields: [nomTcomId], references: [idTiersCompacte])
-  nomTcomId        Int
+  nomTiersTompacte TiersCompacte? @relation(fields: [nomTcomId], references: [idTiersCompacte])
+  nomTcomId        Int?
 
   num_expedition Expedition @relation(fields: [numExpId], references: [idNumBl])
   numExpId       Int        @unique

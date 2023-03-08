@@ -3,7 +3,7 @@ import { TiersCollecteService } from "../services/tiersCollecte.services";
 import { getIdOrVoid } from "../utils";
 const tierCollecteService = new TiersCollecteService();
 
-export class ClientController {
+export class TierCollecteController {
   async getTiercollectes(req: Request, res: Response) {
     try {
       const tierCollectes = await tierCollecteService.getTierCollectes();
