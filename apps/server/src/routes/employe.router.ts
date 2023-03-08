@@ -1,15 +1,15 @@
 import express from "express";
-import { UserController } from "../controllers/employe.controller";
+import { EmployeController } from "../controllers/employe.controller";
 
 export const router = express.Router();
 
-const userController = new UserController();
+const employeController = new EmployeController();
 
-router.get("/", userController.getEmployes);
-router.get("/:id", userController.getEmployeById);
+router.get("/", employeController.getEmployes);
+router.get("/:id", employeController.getEmployeById);
 
-router.post("/", userController.createEmploye);
+router.post("/", employeController.createEmploye);
 
-router.put("/:id", userController.updateEmploye);
+router.put("/:id", employeController.updateEmploye);
 
-router.delete("/:id", userController.deleteEmploye);
+router.delete("/:id", employeController.deleteEmploye);

@@ -1,28 +1,28 @@
 import { Request, Response } from "express";
-import { TourneeService } from "../services/tournee.services";
+import { FactureService } from "../services/facture.services";
 import { getIdOrVoid } from "../utils";
 
-const tourneeService = new TourneeService();
+const factureService = new FactureService();
 
-export class TourneeController {
-  async getTournees(_req: Request, res: Response) {
+export class FactureController {
+  async getFactures(_req: Request, res: Response) {
     try {
-      const tournees = await tourneeService.gettournee();
-      res.json(tournees);
+      const factures = await factureService.getFacture();
+      res.json(factures);
     } catch (error: unknown) {
       console.log(error, res);
     }
   }
 
-  async getTourneeById(req: Request, res: Response) {
+  async getFactureById(req: Request, res: Response) {
     const id = getIdOrVoid(req.params.id, res);
     if (id) {
       try {
-        const tournee = await tourneeService.gettourneeById(id);
-        if (tournee) {
-          res.json(tournee);
+        const facture = await factureService.getFactureById(id);
+        if (facture) {
+          res.json(facture);
         } else {
-          res.json({ message: "tournee not found for this id..." });
+          res.json({ message: "facture not found for this id..." });
         }
       } catch (error: unknown) {
         console.log(error, res);
@@ -30,28 +30,28 @@ export class TourneeController {
     }
   }
 
-  async createtournee(req: Request, res: Response) {
+  async createFacture(req: Request, res: Response) {
     try {
-      const newtournee = await tourneeService.createtournee(req.body);
-      res.json(newtournee);
+      const newFacture = await factureService.createFacture(req.body);
+      res.json(newFacture);
     } catch (error: unknown) {
       console.log(error, res);
     }
   }
 
-  async updatetournee(req: Request, res: Response) {
+  async updateFacture(req: Request, res: Response) {
     const id = getIdOrVoid(req.params.id, res);
     if (id) {
       try {
-        const doesTourneeExist = await tourneeService.checkIftourneeExists(id);
-        if (doesTourneeExist) {
-          const updatedTournee = await tourneeService.updatetournee(
+        const doesFactureExist = await factureService.checkIfFactureExists(id);
+        if (doesFactureExist) {
+          const updatedFacture = await factureService.updateFacture(
             id,
             req.body
           );
-          res.json(updatedTournee);
+          res.json(updatedFacture);
         } else {
-          res.json({ message: "tournee not found for this id..." });
+          res.json({ message: "facture not found for this id..." });
         }
       } catch (error: unknown) {
         console.log(error, res);
@@ -59,16 +59,16 @@ export class TourneeController {
     }
   }
 
-  async deletetournee(req: Request, res: Response) {
+  async deleteFacture(req: Request, res: Response) {
     const id = getIdOrVoid(req.params.id, res);
     if (id) {
       try {
-        const doesTourneeExist = await tourneeService.checkIftourneeExists(id);
-        if (doesTourneeExist) {
-          const deleteTournee = await tourneeService.deletetournee(id);
-          res.json(deleteTournee);
+        const doesFactureExist = await factureService.checkIfFactureExists(id);
+        if (doesFactureExist) {
+          const deleteFacture = await factureService.deleteFacture(id);
+          res.json(deleteFacture);
         } else {
-          res.json({ message: "tournee not found for this id..." });
+          res.json({ message: "facture not found for this id..." });
         }
       } catch (error: unknown) {
         console.log(error, res);

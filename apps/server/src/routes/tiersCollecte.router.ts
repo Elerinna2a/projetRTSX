@@ -1,15 +1,15 @@
 import express from "express";
-import { ClientController } from "../controllers/tiersCollecte.controller";
+import { TierCollecteController } from "../controllers/tiersCollecte.controller";
 
 export const router = express.Router();
 
-const clientController = new ClientController();
+const tierCollecteController = new TierCollecteController();
 
-router.get("/", clientController.getTiercollectes);
-router.get("/:id", clientController.getTiersCollecteById);
+router.get("/", tierCollecteController.getTiercollectes);
+router.get("/:id", tierCollecteController.getTiersCollecteById);
 
-router.post("/", clientController.createTiersCollecte);
+router.post("/", tierCollecteController.createTiersCollecte);
 
-router.put("/:id", clientController.updateTiersCollecte);
+router.put("/:id", tierCollecteController.updateTiersCollecte);
 
-router.delete("/", clientController.deleteTiersCollecte);
+router.delete("/", tierCollecteController.deleteTiersCollecte);

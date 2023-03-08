@@ -1,14 +1,15 @@
 export type CreateFacture = {
   dateFacture: string;
-  montang: number;
-  nomTcId?: number;
-  nomTcomId?: number;
-  numExpId?: number;
+  montant: number;
+  nomTcId: number;
+  nomTcomId: number;
+  numExpId: number;
 };
 
 export type UpdateFacture = {
+  idFacture?: number;
   dateFacture?: string;
-  montang?: number;
+  montant?: number;
   nomTcId?: number;
   nomTcomId?: number;
   numExpId?: number;
