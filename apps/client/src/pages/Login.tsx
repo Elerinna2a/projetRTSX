@@ -25,9 +25,14 @@ const Login = () => {
           setCookie("sessionid", res.data.sessionid);
           setEmploye(res.data.employe);
           navigate("/");
+        })
+        .catch((err) => {
+          console.log("Password or email is incorrect" + err.message);
+          alert("Password or email is incorrect");
         });
     } catch (err) {
       console.log("error on login");
+      alert("Error on login");
     }
   }
 

@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import { useStore } from "@nanostores/react";
 import { employe } from "../store/employe.store";
+import Collecte from "./Collecte";
 
 export default function Home() {
   const authedUser = useStore(employe);
@@ -22,6 +23,7 @@ export default function Home() {
                   <Button>Modifier</Button>
                   <Button>Créer</Button>
                 </Flex>
+                <Collecte />
               </Flex>
             </Box>
           </>

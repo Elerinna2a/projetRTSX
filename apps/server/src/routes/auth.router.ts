@@ -5,36 +5,51 @@ import { prismaClient } from "../prisma";
 export const router = express.Router();
 
 router.post("/login", async (req: Request, res: Response) => {
-  // récupération du body de la requete
-  const { email, password } = req.body;
-
-  const employe = await prismaClient.employe.findFirst({
-    where: {
-      email,
-    },
-  });
-  if (!employe) {
-    res.json({ error: "employe doesn't excd appsist..." });
-    return;
-  }
   try {
-    if (employe.password === password) {
-      const session = await prismaClient.session.create({
-        data: {
-          employeId: employe.id,
-        },
-      });
+    // récupération du body de la requete
+    const { email, password } = req.body;
+
+    // validation des données d'entrée
+    if (!email || !password) {
+      res.status(400).json({ error: "Email and password are required" });
+      return;
+    }
+
+    const employe = await prismaClient.employe.findFirst({
+      where: {
+        email,
+      },
+    });
+    if (!employe) {
+      res.status(404).json({ error: "Employe doesn't exist" });
+      return;
+    }
+    // vérification du mot de passe
+    const passwordMatch = employe.password === password;
+    if (!passwordMatch) {
+      res.status(401).json({ error: "Password doesn't match" });
+      return;
+    }
+
+    // création de la session
+    const session = await prismaClient.session.create({
+      data: {
+        employeId: employe.id,
+      },
+    });
+
+    if (session) {
       res.json({
         success: "Authentification réussie!",
         sessionid: session.id,
         employe: employe,
       });
     } else {
-      res.json({ error: "Password doesn't match..." });
+      res.status(500).json({ error: "Failed to create session" });
     }
   } catch (err) {
     console.log("error on login", { err });
-    res.json({ error: "error" });
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
