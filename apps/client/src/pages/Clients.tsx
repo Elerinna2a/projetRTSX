@@ -13,7 +13,7 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { TierCollecte } from "../store/client.store";
+import { TierCollecte } from "../store/tierCollecte.store";
 import Error from "./Error";
 
 export default function Clients() {

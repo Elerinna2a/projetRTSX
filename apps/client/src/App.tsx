@@ -19,11 +19,11 @@ function App() {
   const authedUser = useStore(employe);
 
   function authonly(page: JSX.Element) {
-    const [cookie] = useCookies(["sessionid"]);
+    const [cookies] = useCookies(["sessionid"]);
     return cookies.sessionid ? page : <Login />;
   }
   function notAuthOnly(page: JSX.Element) {
-    const [cookie] = useCookies(["sessionid"]);
+    const [cookies] = useCookies(["sessionid"]);
     return cookies.sessionid ? <Home /> : page;
   }
 

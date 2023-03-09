@@ -166,7 +166,7 @@ enum TypeVehicule {
 }
 
 model Session {
-  id     String  @id @default(uuid())
-  user   Employe @relation(fields: [userId], references: [id]) //relation oneToOne
-  userId Int     @unique
+  id        String  @id @default(uuid())
+  employe   Employe @relation(fields: [employeId], references: [id]) //relation oneToOne
+  employeId Int     @unique
 }

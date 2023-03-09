@@ -5,22 +5,23 @@ import { prismaClient } from "../prisma";
 export const router = express.Router();
 
 router.post("/login", async (req: Request, res: Response) => {
+  // récupération du body de la requete
   const { email, password } = req.body;
 
+  const employe = await prismaClient.employe.findFirst({
+    where: {
+      email,
+    },
+  });
+  if (!employe) {
+    res.json({ error: "employe doesn't excd appsist..." });
+    return;
+  }
   try {
-    const employe = await prismaClient.employe.findFirst({
-      where: {
-        email,
-      },
-    });
-    if (!employe) {
-      res.json({ error: "employe doesn't exist..." });
-      return;
-    }
-    if (employe?.password === password) {
+    if (employe.password === password) {
       const session = await prismaClient.session.create({
         data: {
-          userId: employe?.id,
+          employeId: employe.id,
         },
       });
       res.json({
@@ -37,7 +38,7 @@ router.post("/login", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/get-employe-infos", async (req, res) => {
+router.post("/get-employe-infos", async (req: Request, res: Response) => {
   try {
     const { sessionId } = req.body;
     const session = await prismaClient.session.findFirst({
@@ -45,25 +46,27 @@ router.post("/get-employe-infos", async (req, res) => {
         id: sessionId,
       },
       include: {
-        user: true,
+        employe: true,
       },
     });
     if (session) {
-      res.json({ employe: session.id });
+      res.json({ employe: session.employe });
       return;
     } else {
       res.json({ error: "Pas de session de disponible..." });
     }
   } catch (err) {
-    console.log("error on getting user info", { err });
+    console.log("error on getting employe info", { err });
     res.json({ error: err });
   }
 });
 
-router.post("/logout", async (req, res) => {
+router.post("/logout", async (req: Request, res: Response) => {
   try {
     const { sessionId } = req.body;
+    console.log(req.body);
     if (sessionId) {
+      console.log("sessionid dans la condition" + sessionId);
       await prismaClient.session.delete({
         where: {
           id: sessionId,
