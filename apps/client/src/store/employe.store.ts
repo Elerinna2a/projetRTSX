@@ -14,10 +14,10 @@ export type Employe = {
 
 export const employe = map<Employe>({});
 
-export function setemploye(employeInfo: Employe) {
+export function setEmploye(employeInfo: Employe) {
   employe.set(employeInfo);
 }
 
-export function removeemploye() {
+export function removeEmploye() {
   employe.set({});
 }

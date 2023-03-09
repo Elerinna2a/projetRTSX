@@ -13,12 +13,12 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { Client } from "../store/client.store";
+import { TierCollecte } from "../store/client.store";
 import Error from "./Error";
 
 export default function Clients() {
   const [cookies] = useCookies(["sessionid"]);
-  const [clients, setClients] = useState<Client[]>([]);
+  const [clients, setClients] = useState<TierCollecte[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {

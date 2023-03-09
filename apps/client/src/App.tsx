@@ -11,7 +11,7 @@ import Error from "./pages/Error";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Users from "./pages/Users";
-import { employe, setemploye } from "./store/employe.store";
+import { employe, setEmploye } from "./store/employe.store";
 import { useAuth } from "./utils/CustomHook";
 
 function App() {
@@ -30,10 +30,10 @@ function App() {
   useEffect(() => {
     if (!authedUser?.email) {
       axios
-        .post("http://localhost:3000/auth/get-user-infos", {
+        .post("http://localhost:3000/auth/get-employe-infos", {
           sessionId: cookies.sessionid,
         })
-        .then((res) => setemploye(res.data.user));
+        .then((res) => setEmploye(res.data.employe));
     }
   }, []);
 

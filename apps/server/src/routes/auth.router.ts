@@ -7,26 +7,26 @@ export const router = express.Router();
 router.post("/login", async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
-  const user = await prismaClient.employe.findFirst({
-    where: {
-      email,
-    },
-  });
-  if (!user) {
-    res.json({ error: "User doesn't exist..." });
-    return;
-  }
   try {
-    if (user.password === password) {
+    const employe = await prismaClient.employe.findFirst({
+      where: {
+        email,
+      },
+    });
+    if (!employe) {
+      res.json({ error: "employe doesn't exist..." });
+      return;
+    }
+    if (employe?.password === password) {
       const session = await prismaClient.session.create({
         data: {
-          userId: user.id,
+          userId: employe?.id,
         },
       });
       res.json({
         success: "Authentification réussie!",
         sessionid: session.id,
-        user: user,
+        employe: employe,
       });
     } else {
       res.json({ error: "Password doesn't match..." });
@@ -37,7 +37,7 @@ router.post("/login", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/get-user-infos", async (req, res) => {
+router.post("/get-employe-infos", async (req, res) => {
   try {
     const { sessionId } = req.body;
     const session = await prismaClient.session.findFirst({
@@ -49,7 +49,7 @@ router.post("/get-user-infos", async (req, res) => {
       },
     });
     if (session) {
-      res.json({ user: session.user });
+      res.json({ employe: session.id });
       return;
     } else {
       res.json({ error: "Pas de session de disponible..." });

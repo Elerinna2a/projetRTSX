@@ -1,6 +1,6 @@
 import { map } from "nanostores";
 
-export type Client = {
+export type TierCollecte = {
   id?: number;
   nom?: string;
   adresse?: string;
@@ -11,12 +11,12 @@ export type Client = {
   contact_num?: number;
 };
 
-export const client = map<Client>({});
+export const tierCollecte = map<TierCollecte>({});
 
-export function setClient(clientInfo: Client) {
-  client.set(clientInfo);
+export function setTierCollecte(tierCollecteInfo: TierCollecte) {
+  tierCollecte.set(tierCollecteInfo);
 }
 
-export function removeClient() {
-  client.set({});
+export function removeTierCollecte() {
+  tierCollecte.set({});
 }

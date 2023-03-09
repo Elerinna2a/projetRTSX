@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRef } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import { setemploye } from "../store/employe.store";
+import { setEmploye } from "../store/employe.store";
 
 const Login = () => {
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -14,16 +14,20 @@ const Login = () => {
   const [cookies, setCookie] = useCookies(["sessionid"]);
 
   function onClickSubmitForm() {
-    axios
-      .post("http://localhost:3000/auth/login/", {
-        email: emailRef?.current?.value,
-        password: passwordRef?.current?.value,
-      })
-      .then((res) => {
-        setCookie("sessionid", res.data.sessionid);
-        setemploye(res.data.user);
-        navigate("/");
-      });
+    try {
+      axios
+        .post("http://localhost:3000/auth/login/", {
+          email: emailRef?.current?.value,
+          password: passwordRef?.current?.value,
+        })
+        .then((res) => {
+          setCookie("sessionid", res.data.sessionid);
+          setEmploye(res.data.employe);
+          navigate("/");
+        });
+    } catch (err) {
+      console.log("error on login");
+    }
   }
 
   return (
