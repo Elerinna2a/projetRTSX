@@ -7,7 +7,7 @@ const collecteService = new CollecteService();
 export class CollecteController {
   async getcollectes(_req: Request, res: Response) {
     try {
-      const collectes = await collecteService.getCollecte();
+      const collectes = await collecteService.getCollectes();
       res.json(collectes);
     } catch (error: unknown) {
       console.log(error, res);

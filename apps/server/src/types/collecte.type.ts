@@ -11,6 +11,7 @@ export type CreateCollecte = {
 };
 
 export type UpdateCollecte = {
+  idNumLot: number;
   quantite?: number;
   formeCollecte?: Forme;
   dateCollecte?: string;
@@ -18,4 +19,15 @@ export type UpdateCollecte = {
   employeId?: number;
   expeditionId?: number;
   traitementId?: number;
+};
+
+export type Collecte = {
+  idNumLot: number;
+  quantite: number;
+  formeCollecte: string;
+  dateCollecte: string;
+  TierCollecteId: number;
+  employeId: number;
+  expeditionId: number;
+  traitementId: number;
 };

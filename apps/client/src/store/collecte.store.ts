@@ -1,6 +1,7 @@
 import { map } from "nanostores";
 
 export type Collecte = {
+  idNumLot?: number;
   quantite?: number;
   formeCollecte?: string;
   dateCollecte?: string;
