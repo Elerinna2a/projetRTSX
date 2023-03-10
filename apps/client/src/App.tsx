@@ -5,9 +5,7 @@ import { useCookies } from "react-cookie";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Route, Routes } from "react-router-dom";
 import Mainlayout from "./layouts/MainLayout";
-import Clients from "./pages/Clients";
 import Collecte from "./pages/Collecte";
-import Driver from "./pages/Driver";
 import Error from "./pages/Error";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -48,9 +46,7 @@ function App() {
         <Route path="/" element={<Mainlayout />}>
           <Route index element={<Home />} />
           <Route path="/users" element={authonly(<Users />)} />
-          <Route path="/clients" element={authonly(<Clients />)} />
           <Route path="/collecte" element={authonly(<Collecte />)} />
-          <Route path="/chauffeur" element={authonly(<Driver />)} />
           <Route path="/login" element={notAuthOnly(<Login />)} />
           <Route path="/*" element={<Error />} />
         </Route>

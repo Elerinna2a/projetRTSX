@@ -1,11 +1,16 @@
 import express from "express";
 import { CollecteController } from "../controllers/collecte.controller";
+import { checkPermissions } from "../middleware/middleware";
 
 export const router = express.Router();
 
 const collecteController = new CollecteController();
 
-router.get("/", collecteController.getcollectes);
+router.get(
+  "/",
+  (req, res, next) => checkPermissions(req, res, next, ["CLIENT"]),
+  collecteController.getcollectes
+);
 router.get("/:id", collecteController.getCollecteById);
 
 router.post("/", collecteController.createCollecte);
