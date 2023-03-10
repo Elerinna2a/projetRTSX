@@ -18,7 +18,7 @@ export default function CreateCollecte() {
 
   return (
     <div>
-      <h1></h1>
+      <h1>CreateCollecte Page</h1>
     </div>
   );
 }

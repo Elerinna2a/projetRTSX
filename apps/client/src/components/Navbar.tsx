@@ -7,7 +7,7 @@ import { employe, removeEmploye } from "../store/employe.store";
 
 export default function Navbar() {
   const [cookies, , removeCookie] = useCookies(["sessionid"]);
-  const authedUser = useStore(employe);
+  const authedEmploye = useStore(employe);
   const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -30,10 +30,10 @@ export default function Navbar() {
     <Flex padding={4}>
       <Box>
         <img src="/logo.png" alt="logo" width="200" height="200" />
-        {authedUser?.email ? (
+        {authedEmploye?.email ? (
           <>
             {" "}
-            Bonjour, {authedUser.nom} {authedUser.prenom}
+            Bonjour, {authedEmploye.nom} {authedEmploye.prenom}
           </>
         ) : (
           <></>
@@ -41,15 +41,15 @@ export default function Navbar() {
       </Box>
       <Spacer />
       <Flex gap={4} fontSize={"20px"}>
-        {authedUser?.role === "ADMIN" ? (
+        {authedEmploye?.role === "ADMIN" ? (
           <>
             <Button>
               <Link to="/">Home</Link>
             </Button>
             <Button>
-              <Link to="/collecte">Collecte</Link>
+              <Link to="/tiers-collecte">Tiers Collecte</Link>
             </Button>
-            {authedUser?.email ? (
+            {authedEmploye?.email ? (
               <>
                 <Button onClick={onClickLogout}>
                   <Link to="/login">Déconnexion</Link>
@@ -65,7 +65,7 @@ export default function Navbar() {
           </>
         ) : (
           <>
-            {authedUser?.email ? (
+            {authedEmploye?.email ? (
               <Button onClick={onClickLogout}>
                 <Link to="/login">Déconnexion</Link>
               </Button>

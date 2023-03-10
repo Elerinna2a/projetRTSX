@@ -3,28 +3,23 @@ import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { Collecte as Collectes } from "../store/collecte.store";
+import { Traitement as Traitements } from "../types/traitement.type";
 
-export default function Collecte() {
+export default function Traitement() {
   const [cookies] = useCookies(["sessionid"]);
-  const [collectes, setCollectes] = useState<Collectes[]>([]);
+  const [traitements, setTraitements] = useState<Traitements[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/collectes")
-      .then((res) => setCollectes(res.data))
+      .get("http://localhost:3000/traitement")
+      .then((res) => setTraitements(res.data))
       .catch((err) =>
         setError(
           "Impssible d'acceder a cette page car vos droit ne le permettant pas"
         )
       );
   }, []);
-
-  const f = new Intl.DateTimeFormat("fr-fr", {
-    dateStyle: "short",
-    timeStyle: "short",
-  });
 
   return (
     <div>
@@ -34,31 +29,32 @@ export default function Collecte() {
             flexDirection={"column"}
             gap={3}
             justifyContent={"center"}
+            alignItems="center"
             mb={4}
           >
-            <Heading>Collecte </Heading>
+            <Heading>traitement</Heading>
             <Flex gap={4}>
               <Button>Créer</Button>
             </Flex>
           </Flex>
-
-          {collectes.length === 0 ? (
-            <p>Aucun collecte à faire</p>
+          {traitements.length === 0 ? (
+            <p>Aucun traitement à faire</p>
           ) : (
             <>
-              {collectes.map((collecte) => (
+              {traitements.map((traitement) => (
                 <>
-                  <Flex mb={"4"} border={"1px solid gray"} p={"4"}>
+                  <Flex mb={"4"} border={"1px solid gray"} p={"4"} >
                     <Flex alignItems={"center"} gap={4} justifyContent="center">
                       <Flex>
                         <Box>
                           <Heading size={"md"}>
-                            Collecte N°{collecte.idNumLot}
+                            Traitement N°{traitement.idTraitement}
                           </Heading>
                           <Box>
-                            <p> {collecte.dateCollecte} </p>
-                            <p> {collecte.quantite} KG</p>
-                            <p> {collecte.formeCollecte}</p>
+                            <p> {traitement.dateTraitement} </p>
+                            <p> {traitement.qualite} KG</p>
+                            <p> {traitement.quantiteCorpsEtranger}</p>
+                            <p> {traitement.scoringBonusMalus}</p>
                           </Box>
                         </Box>
                       </Flex>

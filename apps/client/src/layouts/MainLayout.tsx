@@ -5,9 +5,7 @@ const Mainlayout = () => {
   return (
     <>
       <Navbar />
-      {/* <Container> */}
       <Outlet />
-      {/* </Container> */}
     </>
   );
 };
