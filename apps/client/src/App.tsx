@@ -1,7 +1,4 @@
 import { useStore } from "@nanostores/react";
-import axios from "axios";
-import { useEffect } from "react";
-import { useCookies } from "react-cookie";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Route, Routes } from "react-router-dom";
 import Collecte from "./components/Collecte";
@@ -11,37 +8,23 @@ import Error from "./pages/Error";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import TiersCollecte from "./pages/TiersCollecte";
-import Users from "./pages/Users";
-import { employe, setEmploye } from "./store/employe.store";
+import Users from "./pages/Employes";
+import { employe } from "./store/employe.store";
 import { useAuth } from "./utils/CustomHook";
 
 const queryClient = new QueryClient();
 
-function App() {
-  const [cookies] = useCookies(["sessionid"]);
+export default function App() {
   const authedUser = useStore(employe);
-
-  function authonly(page: JSX.Element) {
-    const [cookies] = useCookies(["sessionid"]);
-    return cookies.sessionid ? page : <Login />;
-  }
-  function notAuthOnly(page: JSX.Element) {
-    const [cookies] = useCookies(["sessionid"]);
-    return cookies.sessionid ? <Home /> : page;
-  }
-
-  useEffect(() => {
-    if (!authedUser?.email) {
-      axios
-        .post("http://localhost:3000/auth/get-employe-infos", {
-          sessionId: cookies.sessionid,
-        })
-        .then((res) => setEmploye(res.data.employe));
-    }
-  }, []);
-
   useAuth();
 
+  function authonly(page: JSX.Element) {
+    return authedUser?.email ? page : <Login />;
+  }
+
+  function notAuthOnly(page: JSX.Element) {
+    return !authedUser?.email ? page : <Home />;
+  }
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
@@ -62,5 +45,3 @@ function App() {
     </QueryClientProvider>
   );
 }
-
-export default App;

@@ -42,8 +42,8 @@ export default function Traitement() {
           ) : (
             <>
               {traitements.map((traitement) => (
-                <>
-                  <Flex mb={"4"} border={"1px solid gray"} p={"4"} >
+                <div key={traitement.idTraitement}>
+                  <Flex mb={"4"} border={"1px solid gray"} p={"4"}>
                     <Flex alignItems={"center"} gap={4} justifyContent="center">
                       <Flex>
                         <Box>
@@ -68,7 +68,7 @@ export default function Traitement() {
                       </Flex>
                     </Flex>
                   </Flex>
-                </>
+                </div>
               ))}
             </>
           )}

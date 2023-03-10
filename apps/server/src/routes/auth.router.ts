@@ -65,7 +65,7 @@ router.post("/get-employe-infos", async (req: Request, res: Response) => {
       },
     });
     if (session) {
-      res.json({ employe: session.employeId });
+      res.json({ employe: session.employe });
       return;
     } else {
       res.json({ error: "Pas de session de disponible..." });

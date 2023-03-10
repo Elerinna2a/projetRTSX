@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { setEmploye } from "../store/employe.store";
+import DebugCookies from "../utils/DebugCookie";
 
 const Login = () => {
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -36,6 +37,7 @@ const Login = () => {
     }
   }
 
+  DebugCookies();
   return (
     <>
       <Flex
