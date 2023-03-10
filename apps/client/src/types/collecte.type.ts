@@ -12,7 +12,7 @@ export type UpdateCollecte = {
   idNumLot: number;
   nomTierCollecte?: string;
   quantite?: number;
-  formeCollecte?: Forme;
+  formeCollecte?: string;
   dateCollecte?: string;
   traitementId?: number;
 };
