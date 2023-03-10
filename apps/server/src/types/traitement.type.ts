@@ -5,13 +5,20 @@ export type CreateTraitement = {
   qualite: Qualite;
   quantiteCorpsEtranger: number;
   scoringBonusMalus: number;
-  operateurId: number;
 };
 
 export type UpdateTraitement = {
+  idTraitement: number;
   dateTraitement?: string;
   qualite?: Qualite;
   quantiteCorpsEtranger?: number;
   scoringBonusMalus?: number;
-  operateurId?: number;
+};
+
+export type Traitement = {
+  idTraitement: number;
+  dateTraitement?: string;
+  qualite?: Qualite;
+  quantiteCorpsEtranger?: number;
+  scoringBonusMalus?: number;
 };

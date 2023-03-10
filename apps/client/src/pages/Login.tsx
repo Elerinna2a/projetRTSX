@@ -16,17 +16,23 @@ const Login = () => {
   function onClickSubmitForm() {
     try {
       axios
-        .post("http://localhost:3000/auth/login/", {
+        .post("http://localhost:3000/auth/login", {
           email: emailRef?.current?.value,
           password: passwordRef?.current?.value,
         })
         .then((res) => {
+          console.log(res.data);
           setCookie("sessionid", res.data.sessionid);
           setEmploye(res.data.employe);
           navigate("/");
+        })
+        .catch((err) => {
+          console.log("Password or email is incorrect" + err.message);
+          alert("Password or email is incorrect");
         });
     } catch (err) {
       console.log("error on login");
+      alert("Error on login");
     }
   }
 

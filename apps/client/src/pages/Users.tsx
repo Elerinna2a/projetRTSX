@@ -13,7 +13,7 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { Employe } from "../store/employe.store";
+import { Employe, setEmploye } from "../store/employe.store";
 import Error from "./Error";
 
 export default function Users() {
@@ -23,12 +23,12 @@ export default function Users() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/users", {
+      .get("http://localhost:3000/employes", {
         headers: {
           sessionid: cookies.sessionid,
         },
       })
-      .then((res) => setUsers(res.data))
+      .then((res) => setEmploye(res.data))
       .catch((err) =>
         setError(
           "Impssible d'acceder a cette page car vos droit ne le permettant pas"

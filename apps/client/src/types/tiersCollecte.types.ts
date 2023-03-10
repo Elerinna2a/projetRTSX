@@ -1,4 +1,4 @@
-import { Score } from "@prisma/client";
+import { Role, Score } from "@prisma/client";
 
 export type CreateTierCollecte = {
   nom: string;
@@ -7,14 +7,16 @@ export type CreateTierCollecte = {
   scoringFacilite: Score;
   nomContact: string;
   tel: string;
+  role: Role;
   mail: string;
   password: string;
   dateCreation: string;
-  tourneeId: number;
+  collecteId?: number;
+  factureId?: number;
 };
 
 export type UpdateTierCollecte = {
-  idTierCollecte?: number;
+  idTierCollecte: number;
   nom?: string;
   adresse?: string;
   typeEntreprise?: string;
@@ -24,5 +26,21 @@ export type UpdateTierCollecte = {
   mail?: string;
   password?: string;
   dateCreation?: string;
-  tourneeID?: number;
+  collecteId?: number;
+  factureId?: number;
+};
+
+export type TierCollecte = {
+  idTierCollecte: number;
+  nom?: string;
+  adresse?: string;
+  typeEntreprise?: string;
+  scoringFacilite?: Score;
+  nomContact?: string;
+  tel?: string;
+  mail?: string;
+  password?: string;
+  dateCreation?: string;
+  collecteId?: number;
+  factureId?: number;
 };

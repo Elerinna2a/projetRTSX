@@ -3,7 +3,7 @@ import { prismaClient } from "../prisma";
 import { CreateCollecte, UpdateCollecte } from "../types/collecte.type";
 
 export class CollecteService {
-  async getCollecte(): Promise<Collecte[]> {
+  async getCollectes(): Promise<Collecte[]> {
     const Collectes = await prismaClient.collecte.findMany();
     return Collectes;
   }

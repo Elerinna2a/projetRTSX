@@ -7,19 +7,19 @@ export async function checkAdmin(
   next: NextFunction
 ) {
   try {
-    const sessionId = req.headers.sessionid as string;
+    const sessionid = req.headers.sessionid as string;
     const session = await prismaClient.session.findFirst({
       where: {
-        id: sessionId,
+        id: sessionid,
       },
       include: {
-        user: true,
+        employe: true,
       },
     });
-    if (session && session.user?.role === "ADMIN") {
+    if (session && session.employe?.role === "ADMIN") {
       next();
     } else {
-      console.log("Access denied for session", sessionId);
+      console.log("Access denied for session", sessionid);
       const error = new Error("Access denied");
       throw error;
     }
@@ -34,19 +34,19 @@ export async function checkOperator(
   next: NextFunction
 ) {
   try {
-    const sessionId = req.headers.sessionid as string;
+    const sessionid = req.headers.sessionid as string;
     const session = await prismaClient.session.findFirst({
       where: {
-        id: sessionId,
+        id: sessionid,
       },
       include: {
-        user: true,
+        employe: true,
       },
     });
-    if (session && session.user?.role === "OPERATOR") {
+    if (session && session.employe.role === "OPERATEUR") {
       next();
     } else {
-      console.log("Access denied for session", sessionId);
+      console.log("Access denied for session", sessionid);
       const error = new Error("Access denied");
       throw error;
     }
@@ -61,19 +61,19 @@ export async function checkClient(
   next: NextFunction
 ) {
   try {
-    const sessionId = req.headers.sessionid as string;
+    const sessionid = req.headers.sessionid as string;
     const session = await prismaClient.session.findFirst({
       where: {
-        id: sessionId,
+        id: sessionid,
       },
       include: {
-        user: true,
+        employe: true,
       },
     });
-    if (session && session.user?.role === "CLIENT") {
+    if (session && session.employe?.role === "CLIENT") {
       next();
     } else {
-      console.log("Access denied for session", sessionId);
+      console.log("Access denied for session", sessionid);
       const error = new Error("Access denied");
       throw error;
     }
@@ -88,19 +88,19 @@ export async function checkDriver(
   next: NextFunction
 ) {
   try {
-    const sessionId = req.headers.sessionid as string;
+    const sessionid = req.headers.sessionid as string;
     const session = await prismaClient.session.findFirst({
       where: {
-        id: sessionId,
+        id: sessionid,
       },
       include: {
-        user: true,
+        employe: true,
       },
     });
-    if (session && session.user?.role === "DRIVER") {
+    if (session && session.employe?.role === "CHAUFFEUR") {
       next();
     } else {
-      console.log("Access denied for session", sessionId);
+      console.log("Access denied for session", sessionid);
       const error = new Error("Access denied");
       throw error;
     }
