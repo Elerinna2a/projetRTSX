@@ -24,6 +24,8 @@ model Employe {
 
   session Session? //onetoOne
 
+  collecte Collecte[]
+
   tournees  Tournee? @relation(fields: [tourneeId], references: [idTournee])
   tourneeId Int?
 
@@ -68,6 +70,9 @@ model Collecte {
   formeCollecte   Forme
   dateCollecte    DateTime @default(now())
   nomTierCollecte String
+
+  employe   Employe? @relation(fields: [employeId], references: [id])
+  employeId Int?
 
   TierCollecte TierCollecte[]
   traitement   Traitement?    @relation(fields: [traitementId], references: [idTraitement])
