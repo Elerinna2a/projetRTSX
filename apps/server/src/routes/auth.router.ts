@@ -97,3 +97,12 @@ router.post("/logout", async (req: Request, res: Response) => {
     res.json({ error: err });
   }
 });
+
+export async function deleteAllSessions() {
+  try {
+    await prismaClient.session.deleteMany({});
+    console.log("All sessions have been deleted");
+  } catch (err) {
+    console.log("Error deleting sessions:", err);
+  }
+}

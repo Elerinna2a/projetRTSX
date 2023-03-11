@@ -6,6 +6,7 @@ export type CreateCollecte = {
   formeCollecte: Forme;
   dateCollecte: string;
   traitementId?: number;
+  employeeId?: number;
 };
 
 export type UpdateCollecte = {
@@ -15,6 +16,7 @@ export type UpdateCollecte = {
   formeCollecte?: string;
   dateCollecte?: string;
   traitementId?: number;
+  employeeId?: number;
 };
 
 export type Collecte = {
@@ -24,4 +26,5 @@ export type Collecte = {
   formeCollecte: string;
   dateCollecte: string;
   traitementId: number;
+  employeeId: number;
 };

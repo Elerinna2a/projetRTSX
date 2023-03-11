@@ -4,11 +4,11 @@ import { Route, Routes } from "react-router-dom";
 import Collecte from "./components/Collecte";
 import CreateCollecte from "./components/CreateCollecte";
 import Mainlayout from "./layouts/MainLayout";
+import Users from "./pages/Employes";
 import Error from "./pages/Error";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import TiersCollecte from "./pages/TiersCollecte";
-import Users from "./pages/Employes";
 import { employe } from "./store/employe.store";
 import { useAuth } from "./utils/CustomHook";
 
@@ -16,7 +16,6 @@ const queryClient = new QueryClient();
 
 export default function App() {
   const authedUser = useStore(employe);
-  useAuth();
 
   function authonly(page: JSX.Element) {
     return authedUser?.email ? page : <Login />;
@@ -25,6 +24,8 @@ export default function App() {
   function notAuthOnly(page: JSX.Element) {
     return !authedUser?.email ? page : <Home />;
   }
+
+  useAuth();
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>

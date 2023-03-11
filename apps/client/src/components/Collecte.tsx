@@ -52,13 +52,19 @@ export default function Collecte() {
                     <Flex alignItems={"center"} gap={4} justifyContent="center">
                       <Flex>
                         <Box>
-                          <Heading size={"md"}>
+                          <Heading size={"md"} mb={4}>
                             Collecte N°{collecte.idNumLot}
                           </Heading>
                           <Box>
-                            <p> {collecte.dateCollecte} </p>
-                            <p> {collecte.quantite} KG</p>
-                            <p> {collecte.formeCollecte}</p>
+                            <p>
+                              {" "}
+                              <strong>Date</strong> : {collecte.dateCollecte}{" "}
+                            </p>
+                            <p> Quantité : {collecte.quantite} KG</p>
+                            <p> Forme :{collecte.formeCollecte}</p>
+                            <p>
+                              Collecte fait par l'ID : {collecte.employeId}{" "}
+                            </p>
                           </Box>
                         </Box>
                       </Flex>

@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { employe, removeEmploye } from "../store/employe.store";
 
 export default function Navbar() {
-  const [cookies, , removeCookie] = useCookies(["sessionid"]);
+  const [cookies, setCookies, removeCookie] = useCookies(["sessionid"]);
   const authedEmploye = useStore(employe);
   const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
@@ -25,6 +25,17 @@ export default function Navbar() {
         console.log("error" + err);
       });
   }
+
+  // function deleteAllSessions() {
+  //   axios
+  //     .post("http://localhost:3000/auth/deleteAllSessions")
+  //     .then(() => {
+  //       console.log("All sessions deleted successfully");
+  //     })
+  //     .catch((err) => {
+  //       console.log("Error deleting sessions: " + err);
+  //     });
+  // }
 
   return (
     <Flex padding={4}>
