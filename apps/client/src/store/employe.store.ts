@@ -1,3 +1,4 @@
+import { Role } from "@prisma/client";
 import { map } from "nanostores";
 
 export type Employe = {
@@ -6,7 +7,7 @@ export type Employe = {
   prenom?: string;
   tel?: string;
   adress?: string;
-  role?: string;
+  role?: Role;
   email?: string;
   password?: string;
   createdAt?: string;

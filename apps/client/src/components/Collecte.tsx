@@ -2,13 +2,10 @@ import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Collecte as Collectes } from "../store/collecte.store";
 
 export default function Collecte() {
-  const navigate = useNavigate();
-  const [cookies] = useCookies(["sessionid"]);
   const [collectes, setCollectes] = useState<Collectes[]>([]);
   const [error, setError] = useState<string | null>(null);
 

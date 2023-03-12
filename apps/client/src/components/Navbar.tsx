@@ -38,7 +38,7 @@ export default function Navbar() {
   // }
 
   return (
-    <Flex padding={4}>
+    <Flex padding={4} borderBottom={"1px"} mb={"16"} alignItems="center">
       <Box>
         <img src="/logo.png" alt="logo" width="200" height="200" />
         {authedEmploye?.email ? (
@@ -58,8 +58,11 @@ export default function Navbar() {
               <Button>Home</Button>
             </Link>
 
-            <Link to="/tiers-collecte">
+            {/* <Link to="/tiers-collecte">
               <Button>Tiers Collecte</Button>
+            </Link> */}
+            <Link to="/employes">
+              <Button>Employes</Button>
             </Link>
             {authedEmploye?.email ? (
               <>

@@ -14,7 +14,7 @@ export default function Home() {
     <div>
       {authedUser.role === "ADMIN" && (
         <HStack>
-          <Flex gap={"4"}>
+          <Flex gap={4}>
             <Collecte />
             <Traitement />
           </Flex>

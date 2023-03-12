@@ -1,34 +1,18 @@
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box,
-  Button,
-  Flex,
-  Spacer,
-} from "@chakra-ui/react";
+import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
-import { Employe, setEmploye } from "../store/employe.store";
-import Error from "./Error";
+import { Link } from "react-router-dom";
+import { Employe } from "../store/employe.store";
 
-export default function Users() {
-  const [cookies] = useCookies(["sessionid"]);
-  const [users, setUsers] = useState<Employe[]>([]);
+export default function Employes() {
+  const [employes, setEmployes] = useState<Employe[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/employes", {
-        headers: {
-          sessionid: cookies.sessionid,
-        },
-      })
-      .then((res) => setEmploye(res.data))
+      .get("http://localhost:3000/employes")
+      .then((res) => setEmployes(res.data))
       .catch((err) =>
         setError(
           "Impssible d'acceder a cette page car vos droit ne le permettant pas"
@@ -37,56 +21,63 @@ export default function Users() {
   }, []);
 
   const f = new Intl.DateTimeFormat("fr-fr", {
-    dateStyle: "medium",
+    dateStyle: "short",
     timeStyle: "short",
   });
 
-  if (error) {
-    return <Error />;
-  }
-
   return (
     <div>
-      <Flex flexDirection={"column"} padding={4} borderRadius={4} ml={4}>
-        {users.map((user) => (
-          <div key={user.id}>
-            <Accordion allowMultiple>
-              <AccordionItem>
-                <AccordionButton>
-                  <Box>Utilisateur n°{user.id}</Box>
-                  <AccordionIcon />
-                </AccordionButton>
-                <AccordionPanel>
-                  <Flex>
-                    <Flex flexDirection={"column"} justifyContent="center">
-                      <p>
-                        Nom & prénom : {user.nom} {user.prenom}
-                      </p>
-                      <p>Adresse :{user.adress}</p>
-                      <p>Email : {user.email}</p>
-                      <p>Tel : {user.tel} </p>
-                      <p>Son role est : {user.role}</p>
-                    </Flex>
-                    <Spacer />
-                    <Flex
-                      alignItems={"center"}
-                      flexDirection={"column"}
-                      gap={4}
-                      justifyContent="center"
-                    >
-                      <Button ml={6}>
-                        <EditIcon />
-                      </Button>
-                      <Button ml={6}>
-                        <DeleteIcon />
-                      </Button>
+      <Flex>
+        <Box>
+          <Flex gap={3} justifyContent={"center"} mb={4}>
+            <Heading>Employes </Heading>
+            <Link to="/create-employe">
+              <Button>
+                <AddIcon />
+              </Button>
+            </Link>
+          </Flex>
+
+          {employes.length === 0 ? (
+            <>
+              <Text>Voulez vous en créer un ?</Text>
+              <AddIcon />
+            </>
+          ) : (
+            <>
+              {employes.map((employe) => (
+                <>
+                  <Flex mb={"4"} border={"1px solid gray"} p={"4"}>
+                    <Flex alignItems={"center"} gap={4} justifyContent="center">
+                      <Flex>
+                        <Box>
+                          <Heading size={"md"} mb={4}>
+                            employe N°{employe.id}
+                          </Heading>
+                          <Box>
+                            <Text>Nom : {employe.nom} </Text>
+                            <Text>Prénom : {employe.prenom} </Text>
+                            <Text>Adresse : {employe.adress} </Text>
+                            <Text>Téléphone : {employe.tel} </Text>
+                            <Text>Role : {employe.role} </Text>
+                          </Box>
+                        </Box>
+                      </Flex>
+                      <Flex gap={"4"} flexDirection="column">
+                        <Button ml={6}>
+                          <EditIcon />
+                        </Button>
+                        <Button ml={6}>
+                          <DeleteIcon />
+                        </Button>
+                      </Flex>
                     </Flex>
                   </Flex>
-                </AccordionPanel>
-              </AccordionItem>
-            </Accordion>
-          </div>
-        ))}
+                </>
+              ))}
+            </>
+          )}
+        </Box>
       </Flex>
     </div>
   );

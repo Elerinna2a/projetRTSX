@@ -28,7 +28,7 @@ export default function Traitement() {
         <Box>
           <Flex gap={3} justifyContent={"center"} mb={4}>
             <Heading>Traitement </Heading>
-            <Link to="">
+            <Link to="/create-traitement">
               <Button>
                 <AddIcon />
               </Button>
