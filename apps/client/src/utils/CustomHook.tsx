@@ -2,11 +2,13 @@ import { useStore } from "@nanostores/react";
 import axios from "axios";
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 import { employe, setEmploye } from "../store/employe.store";
 
 export function useAuth() {
   const [cookies] = useCookies(["sessionid"]);
   const authedUser = useStore(employe);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!authedUser?.email && cookies.sessionid) {
