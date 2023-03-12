@@ -15,6 +15,7 @@ import Login from "./pages/Login";
 import TiersCollecte from "./pages/TiersCollecte";
 import { employe } from "./store/employe.store";
 import { useAuth } from "./utils/CustomHook";
+import EmployeDetails from "./components/EmployeDetails";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ export default function App() {
           {/* Single page route */}
 
           <Route path="/collecte/:id" element={<CollecteDetails />} />
+          <Route path="/employes/:id" element={<EmployeDetails />} />
 
           {/* create page route */}
           <Route path="/create-employe" element={authonly(<CreateEmploye />)} />
