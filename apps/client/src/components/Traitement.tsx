@@ -1,8 +1,9 @@
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { Link } from "react-router-dom";
 import { Traitement as Traitements } from "../types/traitement.type";
 
 export default function Traitement() {
@@ -25,17 +26,13 @@ export default function Traitement() {
     <div>
       <Flex>
         <Box>
-          <Flex
-            flexDirection={"column"}
-            gap={3}
-            justifyContent={"center"}
-            alignItems="center"
-            mb={4}
-          >
-            <Heading>traitement</Heading>
-            <Flex gap={4}>
-              <Button>Créer</Button>
-            </Flex>
+          <Flex gap={3} justifyContent={"center"} mb={4}>
+            <Heading>Traitement </Heading>
+            <Link to="">
+              <Button>
+                <AddIcon />
+              </Button>
+            </Link>
           </Flex>
           {traitements.length === 0 ? (
             <p>Aucun traitement à faire</p>

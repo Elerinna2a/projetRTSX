@@ -1,11 +1,13 @@
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { Link, useNavigate } from "react-router-dom";
 import { Collecte as Collectes } from "../store/collecte.store";
 
 export default function Collecte() {
+  const navigate = useNavigate();
   const [cookies] = useCookies(["sessionid"]);
   const [collectes, setCollectes] = useState<Collectes[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -30,16 +32,13 @@ export default function Collecte() {
     <div>
       <Flex>
         <Box>
-          <Flex
-            flexDirection={"column"}
-            gap={3}
-            justifyContent={"center"}
-            mb={4}
-          >
+          <Flex gap={3} justifyContent={"center"} mb={4}>
             <Heading>Collecte </Heading>
-            <Flex gap={4}>
-              <Button>Créer</Button>
-            </Flex>
+            <Link to="/create-collecte">
+              <Button>
+                <AddIcon />
+              </Button>
+            </Link>
           </Flex>
 
           {collectes.length === 0 ? (

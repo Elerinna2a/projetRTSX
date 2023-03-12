@@ -1,4 +1,4 @@
-import { Box, Flex, Spacer } from "@chakra-ui/react";
+import { Box, Flex, HStack } from "@chakra-ui/react";
 import { useStore } from "@nanostores/react";
 import Collecte from "../components/Collecte";
 import Traitement from "../components/Traitement";
@@ -13,13 +13,12 @@ export default function Home() {
   return (
     <div>
       {authedUser.role === "ADMIN" && (
-        <Box>
-          <Flex gap={4} padding={4}>
+        <HStack>
+          <Flex gap={"4"}>
             <Collecte />
-            <Spacer />
             <Traitement />
           </Flex>
-        </Box>
+        </HStack>
       )}
       {authedUser.role === "CHAUFFEUR" && (
         <Box>

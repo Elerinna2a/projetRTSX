@@ -54,36 +54,37 @@ export default function Navbar() {
       <Flex gap={4} fontSize={"20px"}>
         {authedEmploye?.role === "ADMIN" ? (
           <>
-            <Button>
-              <Link to="/">Home</Link>
-            </Button>
-            <Button>
-              <Link to="/tiers-collecte">Tiers Collecte</Link>
-            </Button>
+            <Link to="/">
+              <Button>Home</Button>
+            </Link>
+
+            <Link to="/tiers-collecte">
+              <Button>Tiers Collecte</Button>
+            </Link>
             {authedEmploye?.email ? (
               <>
-                <Button onClick={onClickLogout}>
-                  <Link to="/login">Déconnexion</Link>
-                </Button>
+                <Link to="/login">
+                  <Button onClick={onClickLogout}>Déconnexion</Button>
+                </Link>
               </>
             ) : (
               <>
-                <Button>
-                  <Link to="/login">Login</Link>
-                </Button>
+                <Link to="/login">
+                  <Button>Login</Button>
+                </Link>
               </>
             )}
           </>
         ) : (
           <>
             {authedEmploye?.email ? (
-              <Button onClick={onClickLogout}>
-                <Link to="/login">Déconnexion</Link>
-              </Button>
+              <Link to="/login">
+                <Button onClick={onClickLogout}>Déconnexion</Button>
+              </Link>
             ) : (
-              <Button>
-                <Link to="/login">Login</Link>
-              </Button>
+              <Link to="/login">
+                <Button>Login</Button>
+              </Link>
             )}
           </>
         )}
