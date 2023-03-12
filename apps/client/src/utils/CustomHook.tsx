@@ -11,6 +11,9 @@ export function useAuth() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!cookies.sessionid) {
+      navigate("/login");
+    }
     if (!authedUser?.email && cookies.sessionid) {
       axios
         .post("http://localhost:3000/auth/get-employe-infos", {
@@ -20,15 +23,15 @@ export function useAuth() {
     }
   }, [authedUser?.email, cookies.sessionid]);
 
-  // Vérifier que authedUser est défini et a une propriété "role" avant de retourner les informations de l'utilisateur.
-  if (!authedUser || !authedUser.role) {
-    return null;
-  }
+  // // Vérifier que authedUser est défini et a une propriété "role" avant de retourner les informations de l'utilisateur.
+  // if (!authedUser || !authedUser.role) {
+  //   return null;
+  // }
 
-  return {
-    isAuthenticated: !!authedUser.email,
-    role: authedUser.role,
-  };
+  // return {
+  //   isAuthenticated: !!authedUser.email,
+  //   role: authedUser.role,
+  // };
 }
 
 // import { useEffect } from "react";
