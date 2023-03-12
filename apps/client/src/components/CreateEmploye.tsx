@@ -27,10 +27,10 @@ export default function CreateEmploye() {
           <Input placeholder="Prénom" />
           <FormLabel>Role</FormLabel>
           <Select>
-            <option>ADMIN</option>
-            <option>CHAUFFEUR</option>
-            <option>OPERATEUR</option>
-            <option>CLIENT</option>
+            <option value="ADMIN">ADMIN</option>
+            <option value="CHAUFFEUR">CHAUFFEUR</option>
+            <option value="OPERATEUR">OPERATEUR</option>
+            <option value="CLIENT">CLIENT</option>
           </Select>
         </FormControl>
         <FormControl>

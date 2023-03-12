@@ -5,12 +5,12 @@ import Collecte from "./components/Collecte";
 import CreateCollecte from "./components/CreateCollecte";
 import CreateEmploye from "./components/CreateEmploye";
 import CreateTraitement from "./components/CreateTraitement";
+import Employes from "./components/Employes";
+import TiersCollecte from "./components/TiersCollecte";
 import Mainlayout from "./layouts/MainLayout";
-import Employes from "./pages/Employes";
 import Error from "./pages/Error";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import TiersCollecte from "./pages/TiersCollecte";
 import { employe } from "./store/employe.store";
 import { useAuth } from "./utils/CustomHook";
 
