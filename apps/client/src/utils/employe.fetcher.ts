@@ -21,7 +21,7 @@ export async function createEmploye(data: CreateEmploye) {
   const res = await axios({
     method: "POST",
     url: "/employes",
-    data: data,
+    data: { data },
   });
   return res.data;
 }

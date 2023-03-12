@@ -59,7 +59,10 @@ export default function Collecte() {
                             <p> Quantité : {collecte.quantite} KG</p>
                             <p> Forme :{collecte.formeCollecte}</p>
                             <p>
-                              Collecte fait par l'ID : {collecte.employeId}{" "}
+                              Collecte fait par l'ID :{" "}
+                              <Link to={`/employes/${collecte.employeId}`}>
+                                {collecte.employeId}{" "}
+                              </Link>
                             </p>
                           </Box>
                         </Box>

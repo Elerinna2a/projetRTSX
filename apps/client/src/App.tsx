@@ -1,16 +1,18 @@
 import { useStore } from "@nanostores/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Route, Routes } from "react-router-dom";
-import Collecte from "./components/Collecte";
 import CreateCollecte from "./components/CreateCollecte";
 import CreateEmploye from "./components/CreateEmploye";
+import CreateExpedition from "./components/CreateExpedition";
 import CreateTraitement from "./components/CreateTraitement";
-import Employes from "./components/Employes";
-import TiersCollecte from "./components/TiersCollecte";
 import Mainlayout from "./layouts/MainLayout";
+import CollecteDetails from "./components/CollecteDetails";
+import Collecte from "./pages/Collectes";
+import Employes from "./pages/Employes";
 import Error from "./pages/Error";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import TiersCollecte from "./pages/TiersCollecte";
 import { employe } from "./store/employe.store";
 import { useAuth } from "./utils/CustomHook";
 
@@ -32,15 +34,23 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <Routes>
         <Route path="/" element={<Mainlayout />}>
-          {/* Single page */}
+          {/*  page  route*/}
           <Route index element={<Home />} />
           <Route path="/collecte" element={authonly(<Collecte />)} />
           <Route path="/employes" element={authonly(<Employes />)} />
           <Route path="/tiers-collecte" element={<TiersCollecte />} />
           <Route path="/login" element={notAuthOnly(<Login />)} />
 
-          {/* create page */}
+          {/* Single page route */}
+
+          <Route path="/collecte/:id" element={<CollecteDetails />} />
+
+          {/* create page route */}
           <Route path="/create-employe" element={authonly(<CreateEmploye />)} />
+          <Route
+            path="/create-expedition"
+            element={authonly(<CreateExpedition />)}
+          />
           <Route
             path="/create-collecte"
             element={authonly(<CreateCollecte />)}

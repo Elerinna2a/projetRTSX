@@ -1,9 +1,10 @@
 import { Box, Flex, HStack } from "@chakra-ui/react";
 import { useStore } from "@nanostores/react";
-import Collecte from "../components/Collecte";
-import Traitement from "../components/Traitement";
 import { employe } from "../store/employe.store";
 import DebugCookies from "../utils/DebugCookie";
+import Collecte from "./Collectes";
+import Expeditions from "./Expeditions";
+import Traitement from "./Traitement";
 
 export default function Home() {
   const authedUser = useStore(employe);
@@ -14,9 +15,10 @@ export default function Home() {
     <div>
       {authedUser.role === "ADMIN" && (
         <HStack>
-          <Flex gap={4}>
+          <Flex gap={4} flexWrap={"wrap"}>
             <Collecte />
             <Traitement />
+            <Expeditions />
           </Flex>
         </HStack>
       )}
