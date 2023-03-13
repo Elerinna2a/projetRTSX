@@ -8,7 +8,10 @@ import CreateTraitement from "./components/create/CreateTraitement";
 import CollecteDetails from "./components/details/CollecteDetails";
 import EmployeDetails from "./components/details/EmployeDetails";
 import ExpeditionDetails from "./components/details/ExpeditionDetails";
+<<<<<<< HEAD
 import UpdateEmploye from "./components/update/UpdateEmploye";
+=======
+>>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
 import Mainlayout from "./layouts/MainLayout";
 import Collecte from "./pages/Collectes";
 import Employes from "./pages/Employes";
@@ -73,9 +76,12 @@ export default function App() {
             element={authonly(<CreateTraitement />)}
           />
 
+<<<<<<< HEAD
           {/* update page */}
           <Route path="/update-employes/:id" element={<UpdateEmploye />} />
 
+=======
+>>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
           {/* Error page */}
           <Route path="/*" element={<Error />} />
         </Route>

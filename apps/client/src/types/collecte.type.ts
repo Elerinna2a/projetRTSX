@@ -3,7 +3,11 @@ import { Forme, TierCollecte } from "@prisma/client";
 export type CreateCollecte = {
   quantite: number;
   nomTierCollecte: string;
+<<<<<<< HEAD
   formeCollecte: string;
+=======
+  formeCollecte: Forme;
+>>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
   dateCollecte: Date;
   traitementId?: number;
   employeId?: number;

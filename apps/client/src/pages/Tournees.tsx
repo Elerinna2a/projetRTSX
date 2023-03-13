@@ -38,7 +38,11 @@ export default function Tournees() {
           ) : (
             <>
               {tournees.map((tournee) => (
+<<<<<<< HEAD
                 <Flex key={tournee.idTournee}>
+=======
+                <>
+>>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
                   <Flex mb={"4"} border={"1px solid gray"} p={"4"}>
                     <Flex alignItems={"center"} gap={4} justifyContent="center">
                       <Flex>
@@ -58,15 +62,26 @@ export default function Tournees() {
                       </Flex>
                       <Flex gap={"4"} flexDirection="column">
                         <Button ml={6}>
+<<<<<<< HEAD
                           <EditIcon color="teal" />
                         </Button>
                         <Button ml={6}>
                           <DeleteIcon color="crimson" />
+=======
+                          <EditIcon />
+                        </Button>
+                        <Button ml={6}>
+                          <DeleteIcon />
+>>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
                         </Button>
                       </Flex>
                     </Flex>
                   </Flex>
+<<<<<<< HEAD
                 </Flex>
+=======
+                </>
+>>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
               ))}
             </>
           )}
