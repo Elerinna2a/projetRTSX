@@ -10,30 +10,12 @@ import {
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-<<<<<<< HEAD
 import { Employe } from "../../types/employe.types";
 
 export default function UpdateEmploye({}) {
   const navigate = useNavigate();
   const { id } = useParams();
 
-=======
-
-interface Employe {
-  id: number;
-  email: string;
-  password: string;
-  nom: string;
-  prenom: string;
-  adresse: string;
-  tel: string;
-  role: string;
-}
-
-export default function UpdateEmploye() {
-  const navigate = useNavigate();
-  const { id } = useParams();
->>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
   const [employe, setEmploye] = useState<Employe>();
 
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -62,14 +44,7 @@ export default function UpdateEmploye() {
         tel,
         role,
       });
-<<<<<<< HEAD
       navigate("/employes");
-=======
-      if (response.status === 200) {
-        navigate("/employes");
-      }
-      return;
->>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
     } catch (error) {
       console.error(error);
     }
@@ -95,7 +70,6 @@ export default function UpdateEmploye() {
         <Heading>Modifier un Employe:</Heading>
         <FormControl isRequired>
           <FormLabel>Email</FormLabel>
-<<<<<<< HEAD
           <Input
             placeholder={employe?.email}
             type="email"
@@ -143,21 +117,6 @@ export default function UpdateEmploye() {
             ref={roleRef}
             value={employe?.role}
           >
-=======
-          <Input type="email" ref={emailRef} />
-          <FormLabel>Password</FormLabel>
-          <Input type="password" ref={passwordRef} />
-          <FormLabel>Nom</FormLabel>
-          <Input type="text" ref={nomRef} />
-          <FormLabel>Prenom</FormLabel>
-          <Input type="text" ref={prenomRef} />
-          <FormLabel>Adresse</FormLabel>
-          <Input type="text" ref={adresseRef} />
-          <FormLabel>Telephone</FormLabel>
-          <Input type="text" ref={telRef} />
-          <FormLabel>Role</FormLabel>
-          <Select placeholder="Selection du rôle" ref={roleRef}>
->>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
             <option value={"ADMIN"}>ADMIN</option>
             <option value={"CLIENT"}>CLIENT</option>
             <option value={"OPERATEUR"}>OPERATEUR</option>
