@@ -15,18 +15,18 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { TierCollecte } from "../store/tierCollecte.store";
+import { Collecte as Collectes } from "../store/collecte.store";
 
-export default function TiersCollecte() {
-  const [tierCollectes, setTierCollectes] = useState<TierCollecte[]>([]);
+export default function Collecte() {
+  const [collectes, setCollectes] = useState<Collectes[]>([]);
   const [error, setError] = useState<string | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [idToDelete, setIdToDelete] = useState<number | null>(null);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/tierscollectes")
-      .then((res) => setTierCollectes(res.data))
+      .get("http://localhost:3000/collectes")
+      .then((res) => setCollectes(res.data))
       .catch((err) =>
         setError(
           "Impssible d'acceder a cette page car vos droit ne le permettant pas"
@@ -46,12 +46,12 @@ export default function TiersCollecte() {
   const confirmDelete = () => {
     if (idToDelete) {
       axios
-        .delete(`http://localhost:3000/tierscollectes/${idToDelete}`)
+        .delete(`http://localhost:3000/collectes/${idToDelete}`)
         .then(() => {
-          const updatedTierCollectes = tierCollectes.filter(
-            (tierCollecte) => tierCollecte.id !== idToDelete
+          const updatedCollecte = collectes.filter(
+            (collecte) => collecte.idNumLot !== idToDelete
           );
-          setTierCollectes(updatedTierCollectes);
+          setCollectes(updatedCollecte);
           setIdToDelete(null);
           onClose();
         })
@@ -66,63 +66,69 @@ export default function TiersCollecte() {
 
   return (
     <div>
-      <Flex>
+      <Flex justifyContent={"center"}>
         <Box>
-          <Flex gap={3} justifyContent={"center"} mb={4}>
-            <Heading>Tiers Collecte </Heading>
+          <Flex gap={3} mb={4}>
+            <Heading>Collecte </Heading>
             <Link to="/create-collecte">
               <Button>
                 <AddIcon />
               </Button>
             </Link>
           </Flex>
-
-          {tierCollectes.length === 0 ? (
+          {collectes.length === 0 ? (
             <p>Aucun collecte à faire</p>
           ) : (
-            <>
-              {tierCollectes.map((tierCollecte) => (
-                <div key={tierCollecte.id}>
+            <Flex flexWrap={"wrap"} gap={4}>
+              {collectes.map((collecte) => (
+                <Flex key={collecte.idNumLot}>
                   <Flex mb={"4"} border={"1px solid gray"} p={"4"}>
                     <Flex alignItems={"center"} gap={4} justifyContent="center">
                       <Flex>
                         <Box>
                           <Heading size={"md"} mb={4}>
-                            <Link to={`/collecte/${tierCollecte.id}`}>
-                              Collecte N°{tierCollecte.id}
+                            <Link to={`/collecte/${collecte.idNumLot}`}>
+                              Collecte N°{collecte.idNumLot}
                             </Link>
                           </Heading>
                           <Box>
                             <p>
                               {" "}
-                              <strong>Nom du tiers : </strong>{" "}
-                              {tierCollecte.nom}{" "}
+                              <strong>Date</strong> : {collecte.dateCollecte}{" "}
                             </p>
                             <p>
                               {" "}
-                              Score de facilité d'accès :{" "}
-                              {tierCollecte.scoringFacilite}
+                              <strong>Quantité</strong> : {collecte.quantite} KG
                             </p>
-                            <p> Type de tiers :{tierCollecte.typeEntreprise}</p>
+                            <p>
+                              {" "}
+                              <strong>Forme</strong> :{collecte.formeCollecte}
+                            </p>
+                            <p>
+                              <strong>Collecte fait par l'ID </strong>:
+                              <Link to={`/employes/${collecte.employeId}`}>
+                                {collecte.employeId}
+                              </Link>
+                            </p>
                           </Box>
                         </Box>
                       </Flex>
                       <Flex gap={"4"} flexDirection="column">
                         <Button ml={6}>
-                          <EditIcon />
+                          <EditIcon color={"teal"} />
                         </Button>
                         <Button
                           ml={6}
-                          onClick={() => handleDelete(tierCollecte.id)}
+                          onClick={() => handleDelete(collecte.idNumLot)}
                         >
-                          <DeleteIcon />
+                          <DeleteIcon color={"crimson"} />
                         </Button>
                       </Flex>
                     </Flex>
                   </Flex>
-                </div>
+                </Flex>
               ))}
-            </>
+            </Flex>
           )}
         </Box>
       </Flex>

@@ -8,7 +8,7 @@ const collecteController = new CollecteController();
 router.get(
   "/",
   //   (req, res, next) => checkPermissions(req, res, next, ["CLIENT"]),
-  collecteController.getcollectes
+  collecteController.getCollectes
 );
 router.get("/:id", collecteController.getCollecteById);
 

@@ -5,7 +5,7 @@ import { getIdOrVoid } from "../utils";
 const expeditionService = new ExpeditionService();
 
 export class ExpeditionController {
-  async getexpeditions(_req: Request, res: Response) {
+  async getExpeditions(_req: Request, res: Response) {
     try {
       const expeditions = await expeditionService.getExpedition();
       res.json(expeditions);
@@ -14,7 +14,7 @@ export class ExpeditionController {
     }
   }
 
-  async getexpeditionById(req: Request, res: Response) {
+  async getExpeditionById(req: Request, res: Response) {
     const id = getIdOrVoid(req.params.id, res);
     if (id) {
       try {

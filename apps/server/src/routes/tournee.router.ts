@@ -8,8 +8,8 @@ const tourneeController = new TourneeController();
 router.get("/", tourneeController.getTournees);
 router.get("/:id", tourneeController.getTourneeById);
 
-router.post("/", tourneeController.createtournee);
+router.post("/", tourneeController.createTournee);
 
-router.put("/:id", tourneeController.updatetournee);
+router.put("/:id", tourneeController.updateTournee);
 
-router.delete("/", tourneeController.deletetournee);
+router.delete("/", tourneeController.deleteTournee);

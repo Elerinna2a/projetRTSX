@@ -1,12 +1,14 @@
 import { Button, Flex } from "@chakra-ui/react";
+import { useStore } from "@nanostores/react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
-import { removeEmploye } from "../store/employe.store";
+import { employe, removeEmploye } from "../store/employe.store";
 
 export default function Error() {
   const [cookies, , removeCookie] = useCookies(["sessionid"]);
   const navigate = useNavigate();
+  const authedEmploye = useStore(employe);
 
   function onClickLogout() {
     axios
@@ -31,9 +33,19 @@ export default function Error() {
       height={"30vh"}
     >
       <p>Error 404 page not found...</p>
-      <Button onClick={onClickLogout}>
-        <Link to="/">Home Page</Link>
-      </Button>
+      {authedEmploye.email ? (
+        <>
+          <Link to="/">
+            <Button>Home page</Button>
+          </Link>
+        </>
+      ) : (
+        <>
+          <Link to="/">
+            <Button onClick={onClickLogout}>Home Page</Button>
+          </Link>
+        </>
+      )}
     </Flex>
   );
 }

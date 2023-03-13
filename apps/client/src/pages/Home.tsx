@@ -1,9 +1,11 @@
-import { Box, Flex, HStack } from "@chakra-ui/react";
+import { Box, Flex, HStack, Spacer } from "@chakra-ui/react";
 import { useStore } from "@nanostores/react";
-import Collecte from "../components/Collecte";
-import Traitement from "../components/Traitement";
 import { employe } from "../store/employe.store";
 import DebugCookies from "../utils/DebugCookie";
+import Collecte from "./Collectes";
+import Employes from "./Employes";
+import Expeditions from "./Expeditions";
+import Traitement from "./Traitement";
 
 export default function Home() {
   const authedUser = useStore(employe);
@@ -11,12 +13,18 @@ export default function Home() {
   DebugCookies();
 
   return (
-    <div>
+    <Flex justifyContent={"center"}>
       {authedUser.role === "ADMIN" && (
         <HStack>
-          <Flex gap={"4"}>
-            <Collecte />
-            <Traitement />
+          <Flex gap={4} alignItems={"center"} flexDirection={"column"}>
+            <Flex gap={4}>
+              <Collecte />
+              <Spacer />
+              <Expeditions />
+            </Flex>
+            <Flex>
+              <Employes />
+            </Flex>
           </Flex>
         </HStack>
       )}
@@ -46,6 +54,6 @@ export default function Home() {
           </Flex>
         </Box>
       )}
-    </div>
+    </Flex>
   );
 }

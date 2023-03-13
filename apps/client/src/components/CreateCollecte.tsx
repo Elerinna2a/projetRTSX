@@ -5,17 +5,6 @@ import { createCollecte } from "../utils/collecte.fetcher";
 
 export default function CreateCollecte() {
   const navigate = useNavigate();
-  const createCollecteMutation = useMutation(createCollecte, {
-    onSuccess: ({ idNumLot }) => {
-      queryClient.refetchQueries(["collectes"]);
-      if (idNumLot?.current?.value) idNumLot.current.value = "";
-    },
-    onError: () => {
-      console.log("Error fetching queries");
-    },
-  });
-
-  const queryClient = useQueryClient();
 
   return (
     <div>

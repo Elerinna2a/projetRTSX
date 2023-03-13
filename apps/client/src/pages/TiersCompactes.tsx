@@ -15,18 +15,18 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { TierCollecte } from "../store/tierCollecte.store";
+import { TiersCompacte } from "../types/tiersCompacte.type";
 
-export default function TiersCollecte() {
-  const [tierCollectes, setTierCollectes] = useState<TierCollecte[]>([]);
+export default function TiersCompactes() {
+  const [tiersCompactes, setTiersCompactes] = useState<TiersCompacte[]>([]);
   const [error, setError] = useState<string | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [idToDelete, setIdToDelete] = useState<number | null>(null);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/tierscollectes")
-      .then((res) => setTierCollectes(res.data))
+      .get("http://localhost:3000/tierscompactes")
+      .then((res) => setTiersCompactes(res.data))
       .catch((err) =>
         setError(
           "Impssible d'acceder a cette page car vos droit ne le permettant pas"
@@ -46,12 +46,12 @@ export default function TiersCollecte() {
   const confirmDelete = () => {
     if (idToDelete) {
       axios
-        .delete(`http://localhost:3000/tierscollectes/${idToDelete}`)
+        .delete(`http://localhost:3000/tierscompactes/${idToDelete}`)
         .then(() => {
-          const updatedTierCollectes = tierCollectes.filter(
-            (tierCollecte) => tierCollecte.id !== idToDelete
+          const updatedTiersCompactes = tiersCompactes.filter(
+            (tiersCompacte) => tiersCompacte.idTiersCompacte !== idToDelete
           );
-          setTierCollectes(updatedTierCollectes);
+          setTiersCompactes(updatedTiersCompactes);
           setIdToDelete(null);
           onClose();
         })
@@ -66,44 +66,48 @@ export default function TiersCollecte() {
 
   return (
     <div>
-      <Flex>
+      <Flex justifyContent={"center"}>
         <Box>
           <Flex gap={3} justifyContent={"center"} mb={4}>
-            <Heading>Tiers Collecte </Heading>
-            <Link to="/create-collecte">
+            <Heading>TiersCompactes </Heading>
+            <Link to="/create-TiersCompactes">
               <Button>
                 <AddIcon />
               </Button>
             </Link>
           </Flex>
 
-          {tierCollectes.length === 0 ? (
-            <p>Aucun collecte à faire</p>
+          {tiersCompactes.length === 0 ? (
+            <p>Aucun TiersCompactes à faire</p>
           ) : (
-            <>
-              {tierCollectes.map((tierCollecte) => (
-                <div key={tierCollecte.id}>
+            <Flex flexWrap={"wrap"} gap={4}>
+              {tiersCompactes.map((tiersCompacte) => (
+                <Flex key={tiersCompacte.idTiersCompacte}>
                   <Flex mb={"4"} border={"1px solid gray"} p={"4"}>
                     <Flex alignItems={"center"} gap={4} justifyContent="center">
                       <Flex>
                         <Box>
                           <Heading size={"md"} mb={4}>
-                            <Link to={`/collecte/${tierCollecte.id}`}>
-                              Collecte N°{tierCollecte.id}
+                            <Link
+                              to={`/tierscompactes/${tiersCompacte.idTiersCompacte}`}
+                            >
+                              Tiers Compacte N°{tiersCompacte.idTiersCompacte}
                             </Link>
                           </Heading>
                           <Box>
-                            <p>
-                              {" "}
-                              <strong>Nom du tiers : </strong>{" "}
-                              {tierCollecte.nom}{" "}
-                            </p>
-                            <p>
-                              {" "}
-                              Score de facilité d'accès :{" "}
-                              {tierCollecte.scoringFacilite}
-                            </p>
-                            <p> Type de tiers :{tierCollecte.typeEntreprise}</p>
+                            <p>Nom: {tiersCompacte.nom} </p>
+                            <p>Adresse: {tiersCompacte.adresse} </p>
+                            <p>Type: {tiersCompacte.typeTiers} </p>
+                            <p>Nom du contact: {tiersCompacte.contactNom} </p>
+                            <p>tel: {tiersCompacte.tel} </p>
+                            <p>mail: {tiersCompacte.mail} </p>
+                            {tiersCompacte.facture ? (
+                              <p>
+                                facture: {tiersCompacte.facture?.idFacture}{" "}
+                              </p>
+                            ) : (
+                              ""
+                            )}
                           </Box>
                         </Box>
                       </Flex>
@@ -113,16 +117,18 @@ export default function TiersCollecte() {
                         </Button>
                         <Button
                           ml={6}
-                          onClick={() => handleDelete(tierCollecte.id)}
+                          onClick={() =>
+                            handleDelete(tiersCompacte.idTiersCompacte)
+                          }
                         >
                           <DeleteIcon />
                         </Button>
                       </Flex>
                     </Flex>
                   </Flex>
-                </div>
+                </Flex>
               ))}
-            </>
+            </Flex>
           )}
         </Box>
       </Flex>

@@ -4,11 +4,15 @@ export type TierCollecte = {
   id?: number;
   nom?: string;
   adresse?: string;
-  type_tier?: string;
-  score_facilite_acces?: any;
-  contact_nom?: string;
-  contact_email?: string;
-  contact_num?: number;
+  typeEntreprise?: string;
+  scoringFacilite?: any;
+  nomContact?: string;
+  tel?: string;
+  mail?: string;
+  password?: string;
+  dateCreation?: string;
+  collecteId?: number;
+  factureId?: number;
 };
 
 export const tierCollecte = map<TierCollecte>({});

@@ -38,7 +38,13 @@ export default function Navbar() {
   // }
 
   return (
-    <Flex padding={4}>
+    <Flex
+      padding={4}
+      borderBottom={"1px"}
+      mb={"16"}
+      alignItems="center"
+      gap={4}
+    >
       <Box>
         <img src="/logo.png" alt="logo" width="200" height="200" />
         {authedEmploye?.email ? (
@@ -51,15 +57,36 @@ export default function Navbar() {
         )}
       </Box>
       <Spacer />
-      <Flex gap={4} fontSize={"20px"}>
+      <Flex gap={4} fontSize={"20px"} flexWrap={"wrap"}>
         {authedEmploye?.role === "ADMIN" ? (
           <>
             <Link to="/">
               <Button>Home</Button>
             </Link>
 
-            <Link to="/tiers-collecte">
+            {/* <Link to="/tiers-collecte">
               <Button>Tiers Collecte</Button>
+            </Link> */}
+            <Link to="/employes">
+              <Button>Employes</Button>
+            </Link>
+            <Link to="/tournees">
+              <Button>Tournees</Button>
+            </Link>
+            <Link to="/collecte">
+              <Button>Collecte</Button>
+            </Link>
+            <Link to="/expeditions">
+              <Button>Expéditions</Button>
+            </Link>
+            <Link to="/tiers-collectes">
+              <Button>Tiers Collecte</Button>
+            </Link>
+            <Link to="/tiers-compactes">
+              <Button>Tiers Compacte</Button>
+            </Link>
+            <Link to="/factures">
+              <Button>Factures</Button>
             </Link>
             {authedEmploye?.email ? (
               <>

@@ -15,18 +15,18 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { TierCollecte } from "../store/tierCollecte.store";
+import { Facture } from "../store/facture.store";
 
-export default function TiersCollecte() {
-  const [tierCollectes, setTierCollectes] = useState<TierCollecte[]>([]);
+export default function Factures() {
+  const [factures, setFactures] = useState<Facture[]>([]);
   const [error, setError] = useState<string | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [idToDelete, setIdToDelete] = useState<number | null>(null);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/tierscollectes")
-      .then((res) => setTierCollectes(res.data))
+      .get("http://localhost:3000/factures")
+      .then((res) => setFactures(res.data))
       .catch((err) =>
         setError(
           "Impssible d'acceder a cette page car vos droit ne le permettant pas"
@@ -46,12 +46,12 @@ export default function TiersCollecte() {
   const confirmDelete = () => {
     if (idToDelete) {
       axios
-        .delete(`http://localhost:3000/tierscollectes/${idToDelete}`)
+        .delete(`http://localhost:3000/factures/${idToDelete}`)
         .then(() => {
-          const updatedTierCollectes = tierCollectes.filter(
-            (tierCollecte) => tierCollecte.id !== idToDelete
+          const updatedFactures = factures.filter(
+            (factures) => factures.idFacture !== idToDelete
           );
-          setTierCollectes(updatedTierCollectes);
+          setFactures(updatedFactures);
           setIdToDelete(null);
           onClose();
         })
@@ -66,44 +66,38 @@ export default function TiersCollecte() {
 
   return (
     <div>
-      <Flex>
+      <Flex justifyContent={"center"}>
         <Box>
           <Flex gap={3} justifyContent={"center"} mb={4}>
-            <Heading>Tiers Collecte </Heading>
-            <Link to="/create-collecte">
+            <Heading>Factures </Heading>
+            <Link to="/create-Factures">
               <Button>
                 <AddIcon />
               </Button>
             </Link>
           </Flex>
 
-          {tierCollectes.length === 0 ? (
-            <p>Aucun collecte à faire</p>
+          {factures.length === 0 ? (
+            <p>Aucun Factures à faire</p>
           ) : (
-            <>
-              {tierCollectes.map((tierCollecte) => (
-                <div key={tierCollecte.id}>
+            <Flex flexWrap={"wrap"} gap={4}>
+              {factures.map((factures) => (
+                <Flex key={factures.idFacture}>
                   <Flex mb={"4"} border={"1px solid gray"} p={"4"}>
                     <Flex alignItems={"center"} gap={4} justifyContent="center">
                       <Flex>
                         <Box>
                           <Heading size={"md"} mb={4}>
-                            <Link to={`/collecte/${tierCollecte.id}`}>
-                              Collecte N°{tierCollecte.id}
+                            <Link to={`/factures/${factures.idFacture}`}>
+                              factures N°{factures.idFacture}
                             </Link>
                           </Heading>
                           <Box>
                             <p>
                               {" "}
-                              <strong>Nom du tiers : </strong>{" "}
-                              {tierCollecte.nom}{" "}
+                              <strong>Date</strong> : {factures.dateFacture}{" "}
                             </p>
-                            <p>
-                              {" "}
-                              Score de facilité d'accès :{" "}
-                              {tierCollecte.scoringFacilite}
-                            </p>
-                            <p> Type de tiers :{tierCollecte.typeEntreprise}</p>
+                            <p> Montant : {factures.montant} €</p>
                           </Box>
                         </Box>
                       </Flex>
@@ -113,16 +107,16 @@ export default function TiersCollecte() {
                         </Button>
                         <Button
                           ml={6}
-                          onClick={() => handleDelete(tierCollecte.id)}
+                          onClick={() => handleDelete(factures.idFacture)}
                         >
                           <DeleteIcon />
                         </Button>
                       </Flex>
                     </Flex>
                   </Flex>
-                </div>
+                </Flex>
               ))}
-            </>
+            </Flex>
           )}
         </Box>
       </Flex>

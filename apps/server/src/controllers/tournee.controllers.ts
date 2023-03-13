@@ -7,7 +7,7 @@ const tourneeService = new TourneeService();
 export class TourneeController {
   async getTournees(_req: Request, res: Response) {
     try {
-      const tournees = await tourneeService.gettournee();
+      const tournees = await tourneeService.getTournee();
       res.json(tournees);
     } catch (error: unknown) {
       console.log(error, res);
@@ -18,7 +18,7 @@ export class TourneeController {
     const id = getIdOrVoid(req.params.id, res);
     if (id) {
       try {
-        const tournee = await tourneeService.gettourneeById(id);
+        const tournee = await tourneeService.getTourneeById(id);
         if (tournee) {
           res.json(tournee);
         } else {
@@ -30,22 +30,22 @@ export class TourneeController {
     }
   }
 
-  async createtournee(req: Request, res: Response) {
+  async createTournee(req: Request, res: Response) {
     try {
-      const newtournee = await tourneeService.createtournee(req.body);
+      const newtournee = await tourneeService.createTournee(req.body);
       res.json(newtournee);
     } catch (error: unknown) {
       console.log(error, res);
     }
   }
 
-  async updatetournee(req: Request, res: Response) {
+  async updateTournee(req: Request, res: Response) {
     const id = getIdOrVoid(req.params.id, res);
     if (id) {
       try {
-        const doesTourneeExist = await tourneeService.checkIftourneeExists(id);
+        const doesTourneeExist = await tourneeService.checkIfTourneeExists(id);
         if (doesTourneeExist) {
-          const updatedTournee = await tourneeService.updatetournee(
+          const updatedTournee = await tourneeService.updateTournee(
             id,
             req.body
           );
@@ -59,13 +59,13 @@ export class TourneeController {
     }
   }
 
-  async deletetournee(req: Request, res: Response) {
+  async deleteTournee(req: Request, res: Response) {
     const id = getIdOrVoid(req.params.id, res);
     if (id) {
       try {
-        const doesTourneeExist = await tourneeService.checkIftourneeExists(id);
+        const doesTourneeExist = await tourneeService.checkIfTourneeExists(id);
         if (doesTourneeExist) {
-          const deleteTournee = await tourneeService.deletetournee(id);
+          const deleteTournee = await tourneeService.deleteTournee(id);
           res.json(deleteTournee);
         } else {
           res.json({ message: "tournee not found for this id..." });
