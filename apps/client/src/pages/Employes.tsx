@@ -97,7 +97,6 @@ export default function Employes() {
                             </Link>
                           </Heading>
                           <Box>
-<<<<<<< HEAD
                             <Text>
                               {" "}
                               <strong> Nom </strong>: {employe.nom}{" "}
@@ -110,16 +109,10 @@ export default function Employes() {
                               {" "}
                               <strong> Role</strong> : {employe.role}{" "}
                             </Text>
-=======
-                            <Text>Nom : {employe.nom} </Text>
-                            <Text>Prénom : {employe.prenom} </Text>
-                            <Text>Role : {employe.role} </Text>
->>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
                           </Box>
                         </Box>
                       </Flex>
                       <Flex gap={"4"} flexDirection="column">
-<<<<<<< HEAD
                         <Link to={`/update-employes/${employe.id}`}>
                           <Button ml={6}>
                             <EditIcon color="teal" />
@@ -127,13 +120,6 @@ export default function Employes() {
                         </Link>
                         <Button ml={6} onClick={() => handleDelete(employe.id)}>
                           <DeleteIcon color="crimson" />
-=======
-                        <Button ml={6}>
-                          <EditIcon />
-                        </Button>
-                        <Button ml={6} onClick={() => handleDelete(employe.id)}>
-                          <DeleteIcon />
->>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
                         </Button>
                       </Flex>
                     </Flex>

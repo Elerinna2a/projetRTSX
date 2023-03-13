@@ -44,11 +44,7 @@ export default function Expeditions() {
                 </Link>
               </Box>
             ) : (
-<<<<<<< HEAD
               <>
-=======
-              <Flex>
->>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
                 {expeditions.map((expedition) => (
                   <Flex
                     key={expedition.idNumBl}
@@ -66,7 +62,6 @@ export default function Expeditions() {
                           </Heading>
                           <Box>
                             <Text>
-<<<<<<< HEAD
                               <strong> Date d'expédition </strong>:{" "}
                               {expedition.dateExpedition}{" "}
                             </Text>
@@ -81,54 +76,22 @@ export default function Expeditions() {
                             <Text>
                               <strong>Poids Net total </strong>:{" "}
                               {expedition.poidNetTotal} kg{" "}
-=======
-                              Date d'expédition : {expedition.dateExpedition}{" "}
-                            </Text>
-                            <Text>
-                              Destinataire : {expedition.destinataire}{" "}
-                            </Text>
-                            <Text>
-                              Nom de palette : {expedition.nbPalette}{" "}
-                            </Text>
-                            <Text>
-                              Poids Net total : {expedition.poidNetTotal} kg{" "}
-                            </Text>
-                            <Text>
-                              ID tiers compacte : {expedition.tiersCompacteId}{" "}
-                            </Text>
-                            <Text>
-                              ID du traitement :{" "}
-                              <Link to={`expedition/${expedition.idNumBl}`}>
-                                {expedition.traitementId}
-                              </Link>{" "}
->>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
                             </Text>
                           </Box>
                         </Box>
                       </Flex>
                       <Flex gap={"4"} flexDirection="column">
                         <Button ml={6}>
-<<<<<<< HEAD
                           <EditIcon color="teal" />
                         </Button>
                         <Button ml={6}>
                           <DeleteIcon color="crimson" />
-=======
-                          <EditIcon />
-                        </Button>
-                        <Button ml={6}>
-                          <DeleteIcon />
->>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
                         </Button>
                       </Flex>
                     </Flex>
                   </Flex>
                 ))}
-<<<<<<< HEAD
               </>
-=======
-              </Flex>
->>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
             )}
           </Flex>
         </Box>

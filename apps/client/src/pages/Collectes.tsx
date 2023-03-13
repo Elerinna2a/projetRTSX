@@ -76,10 +76,6 @@ export default function Collecte() {
               </Button>
             </Link>
           </Flex>
-<<<<<<< HEAD
-=======
-
->>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
           {collectes.length === 0 ? (
             <p>Aucun collecte à faire</p>
           ) : (
@@ -100,7 +96,6 @@ export default function Collecte() {
                               {" "}
                               <strong>Date</strong> : {collecte.dateCollecte}{" "}
                             </p>
-<<<<<<< HEAD
                             <p>
                               {" "}
                               <strong>Quantité</strong> : {collecte.quantite} KG
@@ -111,12 +106,6 @@ export default function Collecte() {
                             </p>
                             <p>
                               <strong>Collecte fait par l'ID </strong>:
-=======
-                            <p> Quantité : {collecte.quantite} KG</p>
-                            <p> Forme :{collecte.formeCollecte}</p>
-                            <p>
-                              Collecte fait par l'ID :{" "}
->>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
                               <Link to={`/employes/${collecte.employeId}`}>
                                 {collecte.employeId}
                               </Link>
@@ -126,21 +115,13 @@ export default function Collecte() {
                       </Flex>
                       <Flex gap={"4"} flexDirection="column">
                         <Button ml={6}>
-<<<<<<< HEAD
                           <EditIcon color={"teal"} />
-=======
-                          <EditIcon />
->>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
                         </Button>
                         <Button
                           ml={6}
                           onClick={() => handleDelete(collecte.idNumLot)}
                         >
-<<<<<<< HEAD
                           <DeleteIcon color={"crimson"} />
-=======
-                          <DeleteIcon />
->>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
                         </Button>
                       </Flex>
                     </Flex>

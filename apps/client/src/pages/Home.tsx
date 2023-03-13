@@ -19,10 +19,7 @@ export default function Home() {
           <Flex gap={4} alignItems={"center"} flexDirection={"column"}>
             <Flex gap={4}>
               <Collecte />
-<<<<<<< HEAD
               <Spacer />
-=======
->>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
               <Expeditions />
             </Flex>
             <Flex>

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { TierCollecte } from "@prisma/client";
-=======
 import { Forme, TierCollecte } from "@prisma/client";
->>>>>>> f17e9281fb353b8adf6960965551f9d2dbe7aa9c
 import { map } from "nanostores";
 
 export type Collecte = {
