@@ -31,10 +31,10 @@ export default function employeDetails() {
             <Text>ID : {employe.id}</Text>
             <Text>Nom : {employe.nom}</Text>
             <Text>Prenom : {employe.prenom}</Text>
-            <Text>Adresse : {employe.adress}</Text>
+            <Text>Adresse : {employe.adresse}</Text>
             <Text>Téléphone : {employe.tel}</Text>
             <Text>Email : {employe.email}</Text>
-            <Text> Role: {employe.role}</Text>
+            <Text>Role: {employe.role}</Text>
           </Flex>
         )}
       </VStack>

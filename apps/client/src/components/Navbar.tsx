@@ -70,14 +70,23 @@ export default function Navbar() {
             <Link to="/employes">
               <Button>Employes</Button>
             </Link>
+            <Link to="/tournees">
+              <Button>Tournees</Button>
+            </Link>
             <Link to="/collecte">
               <Button>Collecte</Button>
             </Link>
             <Link to="/expeditions">
               <Button>Expéditions</Button>
             </Link>
-            <Link to="/tiers-collecte">
+            <Link to="/tiers-collectes">
               <Button>Tiers Collecte</Button>
+            </Link>
+            <Link to="/tiers-compactes">
+              <Button>Tiers Compacte</Button>
+            </Link>
+            <Link to="/factures">
+              <Button>Factures</Button>
             </Link>
             {authedEmploye?.email ? (
               <>

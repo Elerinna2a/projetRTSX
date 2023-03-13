@@ -10,35 +10,29 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Text,
   useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Employe } from "../store/employe.store";
+import { Facture } from "../store/facture.store";
 
-export default function Employes() {
-  const [employes, setEmployes] = useState<Employe[]>([]);
+export default function Factures() {
+  const [factures, setFactures] = useState<Facture[]>([]);
   const [error, setError] = useState<string | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [idToDelete, setIdToDelete] = useState<number | null>(null);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/employes")
-      .then((res) => setEmployes(res.data))
+      .get("http://localhost:3000/factures")
+      .then((res) => setFactures(res.data))
       .catch((err) =>
         setError(
           "Impssible d'acceder a cette page car vos droit ne le permettant pas"
         )
       );
   }, []);
-
-  const f = new Intl.DateTimeFormat("fr-fr", {
-    dateStyle: "short",
-    timeStyle: "short",
-  });
 
   const handleDelete = (id: number | undefined) => {
     if (id) {
@@ -52,12 +46,12 @@ export default function Employes() {
   const confirmDelete = () => {
     if (idToDelete) {
       axios
-        .delete(`http://localhost:3000/employes/${idToDelete}`)
+        .delete(`http://localhost:3000/factures/${idToDelete}`)
         .then(() => {
-          const updatedEmployes = employes.filter(
-            (employe) => employe.id !== idToDelete
+          const updatedFactures = factures.filter(
+            (factures) => factures.idFacture !== idToDelete
           );
-          setEmployes(updatedEmployes);
+          setFactures(updatedFactures);
           setIdToDelete(null);
           onClose();
         })
@@ -65,41 +59,45 @@ export default function Employes() {
     }
   };
 
+  const f = new Intl.DateTimeFormat("fr-fr", {
+    dateStyle: "short",
+    timeStyle: "short",
+  });
+
   return (
     <div>
-      <Flex flexDirection={"column"} justifyContent={"center"}>
-        <Flex gap={3} justifyContent={"center"} mb={4}>
-          <Heading>Employes </Heading>
-          <Link to="/create-employe">
-            <Button>
-              <AddIcon />
-            </Button>
-          </Link>
-        </Flex>
-        <Flex flexWrap={"wrap"} gap={4} justifyContent={"center"}>
-          {employes.length === 0 ? (
-            <>
-              <Text>Voulez vous en créer un ?</Text>
-              <AddIcon />
-            </>
+      <Flex justifyContent={"center"}>
+        <Box>
+          <Flex gap={3} justifyContent={"center"} mb={4}>
+            <Heading>Factures </Heading>
+            <Link to="/create-Factures">
+              <Button>
+                <AddIcon />
+              </Button>
+            </Link>
+          </Flex>
+
+          {factures.length === 0 ? (
+            <p>Aucun Factures à faire</p>
           ) : (
-            <>
-              {employes.map((employe) => (
-                <Flex key={employe.id} justifyContent={"center"}>
+            <Flex flexWrap={"wrap"} gap={4}>
+              {factures.map((factures) => (
+                <Flex key={factures.idFacture}>
                   <Flex mb={"4"} border={"1px solid gray"} p={"4"}>
                     <Flex alignItems={"center"} gap={4} justifyContent="center">
                       <Flex>
                         <Box>
                           <Heading size={"md"} mb={4}>
-                            <Link to={`/employes/${employe.id}`}>
-                              employe N°
-                              {employe.id}
+                            <Link to={`/factures/${factures.idFacture}`}>
+                              factures N°{factures.idFacture}
                             </Link>
                           </Heading>
                           <Box>
-                            <Text>Nom : {employe.nom} </Text>
-                            <Text>Prénom : {employe.prenom} </Text>
-                            <Text>Role : {employe.role} </Text>
+                            <p>
+                              {" "}
+                              <strong>Date</strong> : {factures.dateFacture}{" "}
+                            </p>
+                            <p> Montant : {factures.montant} €</p>
                           </Box>
                         </Box>
                       </Flex>
@@ -107,7 +105,10 @@ export default function Employes() {
                         <Button ml={6}>
                           <EditIcon />
                         </Button>
-                        <Button ml={6} onClick={() => handleDelete(employe.id)}>
+                        <Button
+                          ml={6}
+                          onClick={() => handleDelete(factures.idFacture)}
+                        >
                           <DeleteIcon />
                         </Button>
                       </Flex>
@@ -115,11 +116,10 @@ export default function Employes() {
                   </Flex>
                 </Flex>
               ))}
-            </>
+            </Flex>
           )}
-        </Flex>
+        </Box>
       </Flex>
-
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

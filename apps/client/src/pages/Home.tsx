@@ -3,8 +3,8 @@ import { useStore } from "@nanostores/react";
 import { employe } from "../store/employe.store";
 import DebugCookies from "../utils/DebugCookie";
 import Collecte from "./Collectes";
+import Employes from "./Employes";
 import Expeditions from "./Expeditions";
-import Tournees from "./Tournees";
 import Traitement from "./Traitement";
 
 export default function Home() {
@@ -16,11 +16,14 @@ export default function Home() {
     <div>
       {authedUser.role === "ADMIN" && (
         <HStack>
-          <Flex gap={4} flexWrap={"wrap"}>
-            <Collecte />
-            <Traitement />
-            <Expeditions />
-            <Tournees />
+          <Flex gap={4} alignItems={"center"} flexDirection={"column"}>
+            <Flex gap={4}>
+              <Collecte />
+              <Expeditions />
+            </Flex>
+            <Flex>
+              <Employes />
+            </Flex>
           </Flex>
         </HStack>
       )}

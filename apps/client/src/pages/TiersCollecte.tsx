@@ -69,7 +69,7 @@ export default function TiersCollecte() {
       <Flex>
         <Box>
           <Flex gap={3} justifyContent={"center"} mb={4}>
-            <Heading>Collecte </Heading>
+            <Heading>Tiers Collecte </Heading>
             <Link to="/create-collecte">
               <Button>
                 <AddIcon />

@@ -7,14 +7,18 @@ import CreateExpedition from "./components/create/CreateExpedition";
 import CreateTraitement from "./components/create/CreateTraitement";
 import CollecteDetails from "./components/details/CollecteDetails";
 import EmployeDetails from "./components/details/EmployeDetails";
+import ExpeditionDetails from "./components/details/ExpeditionDetails";
 import Mainlayout from "./layouts/MainLayout";
 import Collecte from "./pages/Collectes";
 import Employes from "./pages/Employes";
 import Error from "./pages/Error";
 import Expeditions from "./pages/Expeditions";
+import Factures from "./pages/Factures";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import TiersCollecte from "./pages/TiersCollecte";
+import TiersCompactes from "./pages/TiersCompactes";
+import Tournees from "./pages/Tournees";
 import { employe } from "./store/employe.store";
 import { useAuth } from "./utils/CustomHook";
 
@@ -41,13 +45,17 @@ export default function App() {
           <Route path="/collecte" element={authonly(<Collecte />)} />
           <Route path="/employes" element={authonly(<Employes />)} />
           <Route path="/expeditions" element={authonly(<Expeditions />)} />
-          <Route path="/tiers-collecte" element={<TiersCollecte />} />
+          <Route path="/tournees" element={authonly(<Tournees />)} />
+          <Route path="/factures" element={authonly(<Factures />)} />
+          <Route path="/tiers-compactes" element={<TiersCompactes />} />
+          <Route path="/tiers-collectes" element={<TiersCollecte />} />
           <Route path="/login" element={notAuthOnly(<Login />)} />
 
           {/* Single page route */}
 
           <Route path="/collecte/:id" element={<CollecteDetails />} />
           <Route path="/employes/:id" element={<EmployeDetails />} />
+          <Route path="/expeditions/:id" element={<ExpeditionDetails />} />
 
           {/* create page route */}
           <Route path="/create-employe" element={authonly(<CreateEmploye />)} />

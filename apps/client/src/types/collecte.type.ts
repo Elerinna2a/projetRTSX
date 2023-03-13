@@ -6,7 +6,7 @@ export type CreateCollecte = {
   formeCollecte: Forme;
   dateCollecte: Date;
   traitementId?: number;
-  employeeId?: number;
+  employeId?: number;
   tierCollecte?: TierCollecte;
 };
 

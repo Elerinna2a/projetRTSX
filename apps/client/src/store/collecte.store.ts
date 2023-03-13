@@ -8,7 +8,7 @@ export type Collecte = {
   formeCollecte?: Forme;
   dateCollecte?: string;
   traitementId?: number;
-  employeeId?: number;
+  employeId?: number;
   tierCollecte?: TierCollecte;
 };
 

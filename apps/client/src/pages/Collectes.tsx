@@ -66,9 +66,9 @@ export default function Collecte() {
 
   return (
     <div>
-      <Flex>
+      <Flex justifyContent={"center"}>
         <Box>
-          <Flex gap={3} justifyContent={"center"} mb={4}>
+          <Flex gap={3} mb={4}>
             <Heading>Collecte </Heading>
             <Link to="/create-collecte">
               <Button>
@@ -80,9 +80,9 @@ export default function Collecte() {
           {collectes.length === 0 ? (
             <p>Aucun collecte à faire</p>
           ) : (
-            <>
+            <Flex flexWrap={"wrap"} gap={4}>
               {collectes.map((collecte) => (
-                <div key={collecte.idNumLot}>
+                <Flex key={collecte.idNumLot}>
                   <Flex mb={"4"} border={"1px solid gray"} p={"4"}>
                     <Flex alignItems={"center"} gap={4} justifyContent="center">
                       <Flex>
@@ -121,9 +121,9 @@ export default function Collecte() {
                       </Flex>
                     </Flex>
                   </Flex>
-                </div>
+                </Flex>
               ))}
-            </>
+            </Flex>
           )}
         </Box>
       </Flex>

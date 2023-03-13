@@ -1,7 +1,7 @@
 import { Button, Flex, Heading, Text, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Collecte } from "../../store/collecte.store";
 
 export default function CollecteDetails() {
@@ -31,8 +31,12 @@ export default function CollecteDetails() {
             <Text>ID : {collecte.idNumLot}</Text>
             <Text>Quantite : {collecte.quantite}</Text>
             <Text>Forme de la collecte : {collecte.formeCollecte}</Text>
-            <Text>Id de l'opérateur : {collecte.traitementId}</Text>
-            <Text>Id de du chauffeur : {collecte.employeId}</Text>
+            <Link to={`/traitements/${collecte.traitementId}`}>
+              <Text>Id de l'opérateur : {collecte.traitementId}</Text>
+            </Link>
+            <Link to={`/employes/${collecte.employeId}`}>
+              <Text>Id de du chauffeur : {collecte.employeId}</Text>
+            </Link>
             <Text>Date de la collecte : {collecte.dateCollecte}</Text>
           </Flex>
         )}
