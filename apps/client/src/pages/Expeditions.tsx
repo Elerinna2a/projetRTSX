@@ -45,7 +45,7 @@ export default function Expeditions() {
           ) : (
             <>
               {expeditions.map((expedition) => (
-                <>
+                <div key={expedition.idNumBl}>
                   <Flex mb={"4"} border={"1px solid gray"} p={"4"}>
                     <Flex alignItems={"center"} gap={4} justifyContent="center">
                       <Flex>
@@ -88,7 +88,7 @@ export default function Expeditions() {
                       </Flex>
                     </Flex>
                   </Flex>
-                </>
+                </div>
               ))}
             </>
           )}

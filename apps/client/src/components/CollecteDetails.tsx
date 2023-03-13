@@ -32,6 +32,7 @@ export default function CollecteDetails() {
             <Text>Quantite : {collecte.quantite}</Text>
             <Text>Forme de la collecte : {collecte.formeCollecte}</Text>
             <Text>Id de l'opérateur : {collecte.traitementId}</Text>
+            <Text>Id de du chauffeur : {collecte.employeId}</Text>
             <Text>Date de la collecte : {collecte.dateCollecte}</Text>
           </Flex>
         )}
