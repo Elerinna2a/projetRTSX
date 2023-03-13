@@ -5,8 +5,8 @@ export const router = express.Router();
 
 const expeditionController = new ExpeditionController();
 
-router.get("/", expeditionController.getexpeditions);
-router.get("/:id", expeditionController.getexpeditionById);
+router.get("/", expeditionController.getExpeditions);
+router.get("/:id", expeditionController.getExpeditionById);
 
 router.post("/", expeditionController.createExpedition);
 

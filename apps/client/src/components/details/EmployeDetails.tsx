@@ -2,7 +2,7 @@ import { Button, Flex, Heading, Text, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Employe } from "../store/employe.store";
+import { Employe } from "../../store/employe.store";
 
 export default function employeDetails() {
   const [employe, setemploye] = useState<Employe>();

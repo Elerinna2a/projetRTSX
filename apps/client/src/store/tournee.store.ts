@@ -1,14 +1,11 @@
+import { Remorque, TypeVehicule } from "@prisma/client";
 import { map } from "nanostores";
 
 export type Tournee = {
-  id?: number;
-  nom?: string;
-  adresse?: string;
-  type_tier?: string;
-  score_facilite_acces?: any;
-  contact_nom?: string;
-  contact_email?: string;
-  contact_num?: number;
+  idTournee?: number;
+  dateTournee?: string;
+  typeVehicule?: TypeVehicule;
+  remorque?: Remorque;
 };
 
 export const tournee = map<Tournee>({});

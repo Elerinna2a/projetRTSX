@@ -22,10 +22,10 @@ app.use("/employes", employeRouter);
 app.use("/collectes", collecteRouter);
 app.use("/expeditions", expeditionRouter);
 app.use("/factures", factureRouter);
-app.use("/tierscompacte", tierCompacteRouter);
-app.use("/tierscollecte", tierCollecteRouter);
-app.use("/tournee", tourneeRouter);
-app.use("/traitement", traitementRouter);
+app.use("/tierscompactes", tierCompacteRouter);
+app.use("/tierscollectes", tierCollecteRouter);
+app.use("/tournees", tourneeRouter);
+app.use("/traitements", traitementRouter);
 
 // app.get("/", (_, res) => {
 //   res.send("Hello, World!");

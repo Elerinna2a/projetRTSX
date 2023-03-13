@@ -86,7 +86,7 @@ export default function Employes() {
           ) : (
             <>
               {employes.map((employe) => (
-                <div key={employe.id}>
+                <Flex key={employe.id}>
                   <Flex mb={"4"} border={"1px solid gray"} p={"4"}>
                     <Flex alignItems={"center"} gap={4} justifyContent="center">
                       <Flex>
@@ -114,7 +114,7 @@ export default function Employes() {
                       </Flex>
                     </Flex>
                   </Flex>
-                </div>
+                </Flex>
               ))}
             </>
           )}

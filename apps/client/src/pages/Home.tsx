@@ -4,6 +4,7 @@ import { employe } from "../store/employe.store";
 import DebugCookies from "../utils/DebugCookie";
 import Collecte from "./Collectes";
 import Expeditions from "./Expeditions";
+import Tournees from "./Tournees";
 import Traitement from "./Traitement";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
             <Collecte />
             <Traitement />
             <Expeditions />
+            <Tournees />
           </Flex>
         </HStack>
       )}

@@ -2,7 +2,7 @@ import { Button, Flex, Heading, Text, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Collecte } from "../store/collecte.store";
+import { Collecte } from "../../store/collecte.store";
 
 export default function CollecteDetails() {
   const [collecte, setCollecte] = useState<Collecte>();

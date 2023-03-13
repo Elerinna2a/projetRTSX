@@ -5,7 +5,7 @@ export type CreateEmploye = {
   prenom: string;
   adresse: string;
   tel: string;
-  role: string;
+  role: Role;
   email: string;
   password: string;
   tourneeId?: number;

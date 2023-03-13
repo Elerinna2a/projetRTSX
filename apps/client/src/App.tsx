@@ -1,21 +1,22 @@
 import { useStore } from "@nanostores/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Route, Routes } from "react-router-dom";
-import CreateCollecte from "./components/CreateCollecte";
-import CreateEmploye from "./components/CreateEmploye";
-import CreateExpedition from "./components/CreateExpedition";
-import CreateTraitement from "./components/CreateTraitement";
+import CreateCollecte from "./components/create/CreateCollecte";
+import CreateEmploye from "./components/create/CreateEmploye";
+import CreateExpedition from "./components/create/CreateExpedition";
+import CreateTraitement from "./components/create/CreateTraitement";
+import CollecteDetails from "./components/details/CollecteDetails";
+import EmployeDetails from "./components/details/EmployeDetails";
 import Mainlayout from "./layouts/MainLayout";
-import CollecteDetails from "./components/CollecteDetails";
 import Collecte from "./pages/Collectes";
 import Employes from "./pages/Employes";
 import Error from "./pages/Error";
+import Expeditions from "./pages/Expeditions";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import TiersCollecte from "./pages/TiersCollecte";
 import { employe } from "./store/employe.store";
 import { useAuth } from "./utils/CustomHook";
-import EmployeDetails from "./components/EmployeDetails";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="/collecte" element={authonly(<Collecte />)} />
           <Route path="/employes" element={authonly(<Employes />)} />
+          <Route path="/expeditions" element={authonly(<Expeditions />)} />
           <Route path="/tiers-collecte" element={<TiersCollecte />} />
           <Route path="/login" element={notAuthOnly(<Login />)} />
 

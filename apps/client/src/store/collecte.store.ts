@@ -1,14 +1,15 @@
+import { Forme, TierCollecte } from "@prisma/client";
 import { map } from "nanostores";
 
 export type Collecte = {
   idNumLot?: number;
+  nomTierCollecte?: string;
   quantite?: number;
-  formeCollecte?: string;
+  formeCollecte?: Forme;
   dateCollecte?: string;
-  TierCollecteId?: number;
-  employeId?: number;
-  expeditionId?: number;
   traitementId?: number;
+  employeeId?: number;
+  tierCollecte?: TierCollecte;
 };
 
 export const tierCollecte = map<Collecte>({});

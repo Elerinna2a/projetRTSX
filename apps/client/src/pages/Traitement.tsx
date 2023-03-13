@@ -13,7 +13,7 @@ export default function Traitement() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/traitement")
+      .get("http://localhost:3000/traitements")
       .then((res) => setTraitements(res.data))
       .catch((err) =>
         setError(

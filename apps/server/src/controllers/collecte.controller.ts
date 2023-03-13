@@ -5,7 +5,7 @@ import { getIdOrVoid } from "../utils";
 const collecteService = new CollecteService();
 
 export class CollecteController {
-  async getcollectes(_req: Request, res: Response) {
+  async getCollectes(_req: Request, res: Response) {
     try {
       const collectes = await collecteService.getCollectes();
       res.json(collectes);

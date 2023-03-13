@@ -50,7 +50,7 @@ export default function CreateCollecte() {
             <option value="palette">Palette</option>
           </Select>
         </FormControl>
-        <Button onClick={handleCreateCollecte}>Valider</Button>
+        <Button onClick={() => navigate("/")}>Valider</Button>
       </VStack>
     </div>
   );

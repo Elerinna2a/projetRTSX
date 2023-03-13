@@ -11,7 +11,7 @@ export default function Tournees() {
 
   useEffect(() => {
     axios
-      .get("localhost:3000/tournees")
+      .get("http://localhost:3000/tournees")
       .then((res) => {
         setTournees(res.data);
       })
@@ -25,8 +25,8 @@ export default function Tournees() {
       <Flex>
         <Box>
           <Flex gap={3} justifyContent={"center"} mb={4}>
-            <Heading>Collecte </Heading>
-            <Link to="/create-collecte">
+            <Heading>Tournees </Heading>
+            <Link to="/create-tournee">
               <Button>
                 <AddIcon />
               </Button>
@@ -51,8 +51,8 @@ export default function Tournees() {
                               {" "}
                               <strong>Date</strong> : {tournee.dateTournee}{" "}
                             </p>
-                            <p> Véhicule : {tournee.typeVehicule} KG</p>
-                            <p> Remorque :{tournee.remorque}</p>
+                            <p> Véhicule : {tournee.typeVehicule}</p>
+                            <p> Remorque : {tournee.remorque}</p>
                           </Box>
                         </Box>
                       </Flex>

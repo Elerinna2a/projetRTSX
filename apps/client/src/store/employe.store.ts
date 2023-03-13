@@ -5,12 +5,14 @@ export type Employe = {
   id?: number;
   nom?: string;
   prenom?: string;
+  adresse?: string;
   tel?: string;
-  adress?: string;
   role?: Role;
   email?: string;
   password?: string;
-  createdAt?: string;
+  dateCreation?: string;
+  tourneeId?: number;
+  traitementId?: number;
 };
 
 export const employe = map<Employe>({});

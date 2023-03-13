@@ -1,14 +1,16 @@
+import { Expedition, Facture } from "@prisma/client";
 import { map } from "nanostores";
 
 export type TierCompacte = {
-  id?: number;
+  idTiersCompacte?: number;
   nom?: string;
   adresse?: string;
-  type_tier?: string;
-  score_facilite_acces?: any;
-  contact_nom?: string;
-  contact_email?: string;
-  contact_num?: number;
+  typeTiers?: string;
+  contactNom?: string;
+  tel?: string;
+  mail?: string;
+  facture?: Facture;
+  expedition?: Expedition;
 };
 
 export const tierCompacte = map<TierCompacte>({});
