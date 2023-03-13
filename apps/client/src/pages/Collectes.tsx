@@ -71,8 +71,8 @@ export default function Collecte() {
           <Flex gap={3} mb={4}>
             <Heading>Collecte </Heading>
             <Link to="/create-collecte">
-              <Button>
-                <AddIcon />
+              <Button leftIcon={<AddIcon />} colorScheme="teal">
+                Créer une collecte
               </Button>
             </Link>
           </Flex>

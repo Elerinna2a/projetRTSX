@@ -68,11 +68,12 @@ export default function Employes() {
   return (
     <div>
       <Flex flexDirection={"column"} justifyContent={"center"}>
-        <Flex gap={3} justifyContent={"center"} mb={4}>
-          <Heading>Employes </Heading>
+        <Flex gap={3} justifyContent={"space-around"} mb={"10"}>
+          <Heading>Employés </Heading>
           <Link to="/create-employe">
-            <Button>
-              <AddIcon />
+            <Button leftIcon={<AddIcon />} colorScheme={"teal"}>
+              {" "}
+              Créer un employé
             </Button>
           </Link>
         </Flex>
@@ -86,7 +87,13 @@ export default function Employes() {
             <>
               {employes.map((employe) => (
                 <Flex key={employe.id} justifyContent={"center"}>
-                  <Flex mb={"4"} border={"1px solid gray"} p={"4"}>
+                  <Flex
+                    mb={"4"}
+                    border={"1px solid teal"}
+                    borderRadius={"xl"}
+                    p={"4"}
+                    boxShadow={"md"}
+                  >
                     <Flex alignItems={"center"} gap={4} justifyContent="center">
                       <Flex>
                         <Box>
