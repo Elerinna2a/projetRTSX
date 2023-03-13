@@ -82,7 +82,13 @@ export default function Collecte() {
             <Flex flexWrap={"wrap"} gap={4}>
               {collectes.map((collecte) => (
                 <Flex key={collecte.idNumLot}>
-                  <Flex mb={"4"} border={"1px solid gray"} p={"4"}>
+                  <Flex
+                    mb={"4"}
+                    border={"1px solid gray"}
+                    p={"4"}
+                    borderColor="teal"
+                    borderRadius={"xl"}
+                  >
                     <Flex alignItems={"center"} gap={4} justifyContent="center">
                       <Flex>
                         <Box>

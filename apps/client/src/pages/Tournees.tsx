@@ -25,10 +25,10 @@ export default function Tournees() {
       <Flex>
         <Box>
           <Flex gap={3} justifyContent={"center"} mb={4}>
-            <Heading>Tournees </Heading>
+            <Heading>Tournées </Heading>
             <Link to="/create-tournee">
-              <Button>
-                <AddIcon />
+              <Button leftIcon={<AddIcon />} colorScheme="teal">
+                Créer une tournée
               </Button>
             </Link>
           </Flex>
@@ -39,7 +39,13 @@ export default function Tournees() {
             <>
               {tournees.map((tournee) => (
                 <Flex key={tournee.idTournee}>
-                  <Flex mb={"4"} border={"1px solid gray"} p={"4"}>
+                  <Flex
+                    mb={"4"}
+                    border={"1px solid gray"}
+                    p={"4"}
+                    borderRadius={"xl"}
+                    borderColor="teal"
+                  >
                     <Flex alignItems={"center"} gap={4} justifyContent="center">
                       <Flex>
                         <Box>

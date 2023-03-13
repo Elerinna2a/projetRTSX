@@ -67,8 +67,8 @@ export default function Employes() {
 
   return (
     <div>
-      <Flex flexDirection={"column"} justifyContent={"center"}>
-        <Flex gap={3} justifyContent={"space-around"} mb={"10"}>
+      <Flex flexDirection={"column"}>
+        <Flex gap={3} mb={"10"} mr={"10"}>
           <Heading>Employés </Heading>
           <Link to="/create-employe">
             <Button leftIcon={<AddIcon />} colorScheme={"teal"}>
@@ -77,7 +77,7 @@ export default function Employes() {
             </Button>
           </Link>
         </Flex>
-        <Flex flexWrap={"wrap"} gap={4} justifyContent={"center"}>
+        <Flex flexWrap={"wrap"} gap={4}>
           {employes.length === 0 ? (
             <>
               <Text>Voulez vous en créer un ?</Text>

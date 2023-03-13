@@ -68,12 +68,10 @@ export default function TiersCompactes() {
     <div>
       <Flex justifyContent={"center"}>
         <Box>
-          <Flex gap={3} justifyContent={"center"} mb={4}>
-            <Heading>TiersCompactes </Heading>
+          <Flex gap={3} alignItems={"center"} mb={4} flexDirection="column">
+            <Heading>Tiers Compacteur </Heading>
             <Link to="/create-TiersCompactes">
-              <Button>
-                <AddIcon />
-              </Button>
+              <Button leftIcon={<AddIcon />}>Créer un tiers compacteur</Button>
             </Link>
           </Flex>
 

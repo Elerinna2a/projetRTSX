@@ -22,13 +22,13 @@ export default function Expeditions() {
 
   return (
     <div>
-      <Flex justifyContent="center">
+      <Flex>
         <Box>
           <Flex gap={3} mb={4}>
             <Heading>Expeditions </Heading>
             <Link to="/create-expedition">
-              <Button>
-                <AddIcon />
+              <Button leftIcon={<AddIcon />} colorScheme="teal">
+                Créer une expédition
               </Button>
             </Link>
           </Flex>
@@ -51,16 +51,23 @@ export default function Expeditions() {
                     mb={"4"}
                     border={"1px solid gray"}
                     p={"4"}
+                    borderColor="teal"
+                    borderRadius={"xl"}
                   >
-                    <Flex alignItems={"center"} gap={4} justifyContent="center">
-                      <Flex>
+                    <Flex
+                      key={expedition.idNumBl}
+                      alignItems={"center"}
+                      gap={4}
+                      justifyContent="center"
+                    >
+                      <Flex key={expedition.idNumBl}>
                         <Box>
                           <Heading size={"md"} mb={4}>
                             <Link to={`/expeditions/${expedition.idNumBl}`}>
                               BL N°{expedition.idNumBl}
                             </Link>
                           </Heading>
-                          <Box>
+                          <Box key={expedition.idNumBl}>
                             <Text>
                               <strong> Date d'expédition </strong>:{" "}
                               {expedition.dateExpedition}{" "}

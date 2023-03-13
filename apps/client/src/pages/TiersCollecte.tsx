@@ -71,8 +71,8 @@ export default function TiersCollecte() {
           <Flex gap={3} justifyContent={"center"} mb={4}>
             <Heading>Tiers Collecte </Heading>
             <Link to="/create-collecte">
-              <Button>
-                <AddIcon />
+              <Button leftIcon={<AddIcon />} colorScheme="teal">
+                Crée un tiers
               </Button>
             </Link>
           </Flex>
@@ -83,7 +83,13 @@ export default function TiersCollecte() {
             <>
               {tierCollectes.map((tierCollecte) => (
                 <div key={tierCollecte.id}>
-                  <Flex mb={"4"} border={"1px solid gray"} p={"4"}>
+                  <Flex
+                    mb={"4"}
+                    border={"1px solid gray"}
+                    p={"4"}
+                    borderColor="teal"
+                    borderRadius={"xl"}
+                  >
                     <Flex alignItems={"center"} gap={4} justifyContent="center">
                       <Flex>
                         <Box>

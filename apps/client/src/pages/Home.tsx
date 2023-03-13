@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Spacer } from "@chakra-ui/react";
+import { Box, Flex, HStack } from "@chakra-ui/react";
 import { useStore } from "@nanostores/react";
 import { employe } from "../store/employe.store";
 import DebugCookies from "../utils/DebugCookie";
@@ -16,15 +16,16 @@ export default function Home() {
     <Flex justifyContent={"center"}>
       {authedUser.role === "ADMIN" && (
         <HStack>
-          <Flex gap={4} alignItems={"center"} flexDirection={"column"}>
-            <Flex gap={4}>
+          <Flex gap={4} flexDirection={"column"}>
+            <Box>
               <Collecte />
-              <Spacer />
+            </Box>
+            <Box>
               <Expeditions />
-            </Flex>
-            <Flex>
+            </Box>
+            <Box>
               <Employes />
-            </Flex>
+            </Box>
           </Flex>
         </HStack>
       )}
