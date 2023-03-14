@@ -70,7 +70,7 @@ export default function Factures() {
         <Box>
           <Flex gap={3} justifyContent={"center"} mb={4}>
             <Heading>Factures </Heading>
-            <Link to="/create-Factures">
+            <Link to="/create-facture">
               <Button leftIcon={<AddIcon />} colorScheme="teal">
                 Créer une facture
               </Button>
