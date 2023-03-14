@@ -25,7 +25,7 @@ export type Collecte = {
   idNumLot: number;
   nomTierCollecte: string;
   quantite: number;
-  formeCollecte: string;
+  formeCollecte: Forme;
   dateCollecte: string;
   traitementId: number;
   employeId: number;
