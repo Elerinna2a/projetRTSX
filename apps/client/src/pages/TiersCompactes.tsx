@@ -70,7 +70,7 @@ export default function TiersCompactes() {
         <Box>
           <Flex gap={3} alignItems={"center"} mb={4} flexDirection="column">
             <Heading>Tiers Compacteur </Heading>
-            <Link to="/create-TiersCompactes">
+            <Link to="/create-tierscompacte">
               <Button leftIcon={<AddIcon />} colorScheme={"teal"}>
                 Créer un tiers compacteur
               </Button>

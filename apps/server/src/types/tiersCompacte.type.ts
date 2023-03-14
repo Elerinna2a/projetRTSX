@@ -1,5 +1,3 @@
-import { Expedition, Facture } from "@prisma/client";
-
 export type CreateTiersCompacte = {
   nom: string;
   adresse: string;
@@ -7,7 +5,8 @@ export type CreateTiersCompacte = {
   contactNom: string;
   tel: string;
   mail: string;
-  facture?: Facture;
+  expedtion?: number;
+  facture?: number;
 };
 
 export type UpdateTiersCompacte = {
@@ -18,7 +17,8 @@ export type UpdateTiersCompacte = {
   contactNom?: string;
   tel?: string;
   mail?: string;
-  facture?: Facture;
+  expedtion?: number;
+  facture?: number;
 };
 
 export type TiersCompacte = {
@@ -29,6 +29,6 @@ export type TiersCompacte = {
   contactNom?: string;
   tel?: string;
   mail?: string;
-  facture?: Facture;
-  expedition?: Expedition;
+  expedtion?: number;
+  facture?: number;
 };

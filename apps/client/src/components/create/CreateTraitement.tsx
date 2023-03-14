@@ -17,11 +17,13 @@ export default function CreateTraitement() {
   const qualiteRef = useRef<HTMLSelectElement | null>(null);
   const quantiteCeRef = useRef<HTMLInputElement | null>(null);
   const scoringBonMalRef = useRef<HTMLInputElement | null>(null);
+  const dateTraitementRef = useRef<HTMLInputElement | null>(null);
 
   const handleCreationTraitement = async () => {
     const qualite = qualiteRef.current?.value;
     const quantiteCorpsEtranger = quantiteCeRef.current?.value;
     const scoringBonusMalus = scoringBonMalRef.current?.value;
+    const dateTraitement = dateTraitementRef.current?.value;
     try {
       if (
         quantiteCorpsEtranger === undefined ||
@@ -33,6 +35,7 @@ export default function CreateTraitement() {
         qualite,
         quantiteCorpsEtranger: parseInt(quantiteCorpsEtranger),
         scoringBonusMalus: parseInt(scoringBonusMalus),
+        dateTraitement,
       });
       navigate("/traitements");
     } catch (error) {
@@ -63,15 +66,9 @@ export default function CreateTraitement() {
             placeholder="Scoring bonus/malus"
             ref={scoringBonMalRef}
           />
+          <FormLabel>Date du traitement</FormLabel>
+          <Input type={"date"} ref={dateTraitementRef} />
         </FormControl>
-        {/* <FormControl>
-          <FormLabel>Id de l'employé</FormLabel>
-          <Input placeholder="EmployeId" />
-          <FormLabel>Id de la collecte</FormLabel>
-          <Input placeholder="collecteId" />
-          <FormLabel>Id de l'employé</FormLabel>
-          <Input placeholder="EmployeId" />
-        </FormControl> */}
         <Button onClick={handleCreationTraitement}>Valider</Button>
       </VStack>
     </div>

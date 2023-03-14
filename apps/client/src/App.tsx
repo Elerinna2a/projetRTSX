@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Route, Routes } from "react-router-dom";
 import CreateCollecte from "./components/create/CreateCollecte";
 import CreateEmploye from "./components/create/CreateEmploye";
+import CreateTiersCompacte from "./components/create/CreateTiersCompacte";
 import CreateTournee from "./components/create/CreateTournee";
 import CreateTraitement from "./components/create/CreateTraitement";
 import CollecteDetails from "./components/details/CollecteDetails";
@@ -71,6 +72,10 @@ export default function App() {
             element={authonly(<CreateTraitement />)}
           />
           <Route path="/create-tournee" element={authonly(<CreateTournee />)} />
+          <Route
+            path="/create-tierscompacte"
+            element={authonly(<CreateTiersCompacte />)}
+          />
 
           {/* update page */}
           <Route path="/update-employes/:id" element={<UpdateEmploye />} />
