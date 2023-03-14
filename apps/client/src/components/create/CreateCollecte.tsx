@@ -47,7 +47,7 @@ export default function CreateCollecte() {
         dateCollecte,
       });
       console.log(response);
-      navigate("/collecte");
+      navigate("/collectes");
     } catch (err) {
       console.log(err);
     }

@@ -61,7 +61,7 @@ export default function Navbar() {
             {/* <Link to="/tiers-collecte">
               <Button>Tiers Collecte</Button>
             </Link> */}
-            <Link to="/collecte">
+            <Link to="/collectes">
               <Button>Collecte</Button>
             </Link>
             <Link to="/employes">
