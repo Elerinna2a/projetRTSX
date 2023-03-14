@@ -3,7 +3,6 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Route, Routes } from "react-router-dom";
 import CreateCollecte from "./components/create/CreateCollecte";
 import CreateEmploye from "./components/create/CreateEmploye";
-import CreateExpedition from "./components/create/CreateExpedition";
 import CreateTournee from "./components/create/CreateTournee";
 import CreateTraitement from "./components/create/CreateTraitement";
 import CollecteDetails from "./components/details/CollecteDetails";
@@ -63,10 +62,6 @@ export default function App() {
 
           {/* create page route */}
           <Route path="/create-employe" element={authonly(<CreateEmploye />)} />
-          <Route
-            path="/create-expedition"
-            element={authonly(<CreateExpedition />)}
-          />
           <Route
             path="/create-collecte"
             element={authonly(<CreateCollecte />)}

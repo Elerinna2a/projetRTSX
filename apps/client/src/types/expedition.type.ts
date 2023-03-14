@@ -1,5 +1,6 @@
 export type CreateExpedition = {
   nbPalette: number;
+  dateExpedition: string;
   destinataire: string;
   poidNetTotal: GLfloat;
   tiersCompacteId: number;
@@ -9,7 +10,7 @@ export type CreateExpedition = {
 
 export type UpdateExpedition = {
   idNumBl: number;
-  dateExpedition?: Date;
+  dateExpedition?: string;
   destinataire?: string;
   nbPalette?: number;
   poidNetTotal?: number;
@@ -20,7 +21,7 @@ export type UpdateExpedition = {
 
 export type Expedition = {
   idNumBl: number;
-  dateExpedition?: Date;
+  dateExpedition?: string;
   destinataire?: string;
   nbPalette?: number;
   poidNetTotal?: number;

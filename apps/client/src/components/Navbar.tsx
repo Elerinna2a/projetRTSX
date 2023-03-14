@@ -67,6 +67,12 @@ export default function Navbar() {
             <Link to="/employes">
               <Button>Employes</Button>
             </Link>
+            <Link to="/tournees">
+              <Button>Tournees</Button>
+            </Link>
+            <Link to="/traitements">
+              <Button>Traitements</Button>
+            </Link>
             <Link to="/expeditions">
               <Button>Expéditions</Button>
             </Link>
@@ -79,12 +85,7 @@ export default function Navbar() {
             <Link to="/tiers-compactes">
               <Button>Tiers Compacte</Button>
             </Link>
-            <Link to="/tournees">
-              <Button>Tournees</Button>
-            </Link>
-            <Link to="/traitements">
-              <Button>Traitements</Button>
-            </Link>
+
             {authedEmploye?.email ? (
               <>
                 <Link to="/login">

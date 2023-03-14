@@ -21,6 +21,7 @@ export default function CreateCollecte() {
   const formeCollecteRef = useRef<HTMLSelectElement | null>(null);
   const employeIdCollecteRef = useRef<HTMLInputElement | null>(null);
   const traitementIdCollecteRef = useRef<HTMLInputElement | null>(null);
+  const dateCollecteRef = useRef<HTMLInputElement | null>(null);
 
   const handleCreateCollecte = async () => {
     const quantite = quantiteRef.current?.value;
@@ -28,6 +29,7 @@ export default function CreateCollecte() {
     const formeCollecte = formeCollecteRef.current?.value;
     const employeId = employeIdCollecteRef.current?.value;
     const traitementId = traitementIdCollecteRef.current?.value;
+    const dateCollecte = dateCollecteRef.current?.value;
     try {
       if (
         quantite === undefined ||
@@ -42,6 +44,7 @@ export default function CreateCollecte() {
         formeCollecte,
         employeId: parseInt(employeId),
         traitementId: parseInt(traitementId),
+        dateCollecte,
       });
       console.log(response);
       navigate("/collecte");
@@ -60,6 +63,8 @@ export default function CreateCollecte() {
             <Input type="number" placeholder="Quantité" ref={quantiteRef} />
             <FormLabel>Nom du tiers</FormLabel>
             <Input type="text" placeholder="Nom du tiers" ref={nomTiersRef} />
+            <FormLabel>Date de la collecte</FormLabel>
+            <Input type="date" ref={dateCollecteRef} />
             <FormLabel>Forme de la collecte</FormLabel>
             <Select ref={formeCollecteRef}>
               <option value="SAC">Sac</option>

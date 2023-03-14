@@ -10,7 +10,7 @@ export type CreateTierCollecte = {
   role: Role;
   mail: string;
   password: string;
-  dateCreation: Date;
+  dateCreation: string;
   collecteId?: number;
   factureId?: number;
 };
@@ -25,7 +25,7 @@ export type UpdateTierCollecte = {
   tel?: string;
   mail?: string;
   password?: string;
-  dateCreation?: Date;
+  dateCreation?: string;
   collecteId?: number;
   factureId?: number;
 };
@@ -40,7 +40,7 @@ export type TierCollecte = {
   tel?: string;
   mail?: string;
   password?: string;
-  dateCreation?: Date;
+  dateCreation?: string;
   collecteId?: number;
   factureId?: number;
 };
