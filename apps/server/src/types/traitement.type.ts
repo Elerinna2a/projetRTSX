@@ -9,7 +9,7 @@ export type CreateTraitement = {
 
 export type UpdateTraitement = {
   idTraitement: number;
-  dateTraitement?: string;
+  dateTraitement?: Date;
   qualite?: Qualite;
   quantiteCorpsEtranger?: number;
   scoringBonusMalus?: number;
@@ -17,7 +17,7 @@ export type UpdateTraitement = {
 
 export type Traitement = {
   idTraitement: number;
-  dateTraitement?: string;
+  dateTraitement?: Date;
   qualite?: Qualite;
   quantiteCorpsEtranger?: number;
   scoringBonusMalus?: number;

@@ -21,7 +21,7 @@ export type UpdateEmploye = {
   role?: Role;
   email?: string;
   password?: string;
-  dateCreation?: string;
+  dateCreation?: Date;
   tourneeId?: number;
   traitementId?: number;
 };
@@ -35,7 +35,7 @@ export type Employe = {
   role: Role;
   email: string;
   password: string;
-  dateCreation: string;
+  dateCreation: Date;
   tourneeId: number;
   traitementId: number;
 };

@@ -1,16 +1,16 @@
 export type CreateFacture = {
-  dateFacture: string;
+  dateFacture: Date;
   montant: number;
 };
 
 export type UpdateFacture = {
   idFacture: number;
-  dateFacture?: string;
+  dateFacture?: Date;
   montant?: number;
 };
 
 export type Facture = {
   idFacture: number;
-  dateFacture?: string;
+  dateFacture?: Date;
   montant?: number;
 };

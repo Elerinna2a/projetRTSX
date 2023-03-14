@@ -15,7 +15,7 @@ export type UpdateCollecte = {
   nomTierCollecte?: string;
   quantite?: number;
   formeCollecte?: Forme;
-  dateCollecte?: string;
+  dateCollecte?: Date;
   traitementId?: number;
   employeId?: number;
   tierCollecte?: TierCollecte;
@@ -26,7 +26,7 @@ export type Collecte = {
   nomTierCollecte: string;
   quantite: number;
   formeCollecte: string;
-  dateCollecte: string;
+  dateCollecte: Date;
   traitementId: number;
   employeId: number;
   tierCollecte?: TierCollecte;
