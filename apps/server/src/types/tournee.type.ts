@@ -3,6 +3,7 @@ import { Remorque, TypeVehicule } from "@prisma/client";
 export type CreateTournee = {
   dateTournee: string;
   typeVehicule: TypeVehicule;
+  chauffeurId: number;
   remorque: Remorque;
 };
 
@@ -11,6 +12,7 @@ export type UpdateTournee = {
   dateTournee?: string;
   typeVehicule?: TypeVehicule;
   remorque?: Remorque;
+  chauffeurId?: number;
 };
 
 export type Tournee = {
@@ -18,4 +20,5 @@ export type Tournee = {
   dateTournee?: string;
   typeVehicule?: TypeVehicule;
   remorque?: Remorque;
+  chauffeurId?: number;
 };

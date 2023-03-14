@@ -38,13 +38,7 @@ export default function Navbar() {
   // }
 
   return (
-    <Flex
-      padding={4}
-      borderBottom={"1px"}
-      mb={"16"}
-      alignItems="center"
-      gap={4}
-    >
+    <Flex padding={4} mb={"16"} alignItems="center" gap={4} boxShadow={"lg"}>
       <Box>
         <img src="/logo.png" alt="logo" width="200" height="200" />
         {authedEmploye?.email ? (
@@ -67,17 +61,23 @@ export default function Navbar() {
             {/* <Link to="/tiers-collecte">
               <Button>Tiers Collecte</Button>
             </Link> */}
+            <Link to="/collecte">
+              <Button>Collecte</Button>
+            </Link>
             <Link to="/employes">
               <Button>Employes</Button>
             </Link>
             <Link to="/tournees">
               <Button>Tournees</Button>
             </Link>
-            <Link to="/collecte">
-              <Button>Collecte</Button>
+            <Link to="/traitements">
+              <Button>Traitements</Button>
             </Link>
             <Link to="/expeditions">
               <Button>Expéditions</Button>
+            </Link>
+            <Link to="/factures">
+              <Button>Factures</Button>
             </Link>
             <Link to="/tiers-collectes">
               <Button>Tiers Collecte</Button>
@@ -85,9 +85,7 @@ export default function Navbar() {
             <Link to="/tiers-compactes">
               <Button>Tiers Compacte</Button>
             </Link>
-            <Link to="/factures">
-              <Button>Factures</Button>
-            </Link>
+
             {authedEmploye?.email ? (
               <>
                 <Link to="/login">

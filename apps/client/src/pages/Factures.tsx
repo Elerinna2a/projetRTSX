@@ -25,7 +25,7 @@ export default function Factures() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/facturs")
+      .get("http://localhost:3000/factures")
       .then((res) => setFactures(res.data))
       .catch((err) =>
         setError(
@@ -66,11 +66,11 @@ export default function Factures() {
 
   return (
     <div>
-      <Flex justifyContent={"center"}>
+      <Flex>
         <Box>
           <Flex gap={3} justifyContent={"center"} mb={4}>
             <Heading>Factures </Heading>
-            <Link to="/create-Factures">
+            <Link to="/create-facture">
               <Button leftIcon={<AddIcon />} colorScheme="teal">
                 Créer une facture
               </Button>

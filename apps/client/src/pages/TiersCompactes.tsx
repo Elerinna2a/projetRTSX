@@ -66,12 +66,14 @@ export default function TiersCompactes() {
 
   return (
     <div>
-      <Flex justifyContent={"center"}>
+      <Flex>
         <Box>
           <Flex gap={3} alignItems={"center"} mb={4} flexDirection="column">
             <Heading>Tiers Compacteur </Heading>
-            <Link to="/create-TiersCompactes">
-              <Button leftIcon={<AddIcon />}>Créer un tiers compacteur</Button>
+            <Link to="/create-tierscompacte">
+              <Button leftIcon={<AddIcon />} colorScheme={"teal"}>
+                Créer un tiers compacteur
+              </Button>
             </Link>
           </Flex>
 
@@ -100,9 +102,7 @@ export default function TiersCompactes() {
                             <p>tel: {tiersCompacte.tel} </p>
                             <p>mail: {tiersCompacte.mail} </p>
                             {tiersCompacte.facture ? (
-                              <p>
-                                facture: {tiersCompacte.facture?.idFacture}{" "}
-                              </p>
+                              <p>facture: {tiersCompacte.facture} </p>
                             ) : (
                               ""
                             )}
@@ -110,7 +110,7 @@ export default function TiersCompactes() {
                         </Box>
                       </Flex>
                       <Flex gap={"4"} flexDirection="column">
-                        <Button ml={6}>
+                        <Button ml={6} color="teal">
                           <EditIcon />
                         </Button>
                         <Button
@@ -118,6 +118,7 @@ export default function TiersCompactes() {
                           onClick={() =>
                             handleDelete(tiersCompacte.idTiersCompacte)
                           }
+                          color={"crimson"}
                         >
                           <DeleteIcon />
                         </Button>

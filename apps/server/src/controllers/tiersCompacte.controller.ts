@@ -34,6 +34,7 @@ export class TiersCompacteController {
 
   async createTiersCompacte(req: Request, res: Response) {
     try {
+      console.log("yolo");
       const newTiersCompacte = await tierCompacteService.createTiersCompacte(
         req.body
       );

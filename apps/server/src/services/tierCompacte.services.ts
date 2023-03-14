@@ -21,6 +21,7 @@ export class TiersCompacteService {
   }
 
   async createTiersCompacte(data: CreateTiersCompacte): Promise<TiersCompacte> {
+    console.log("entré dans le creacte contact services");
     const newTiersCompacte = await prismaClient.tiersCompacte.create({
       data: data,
     });

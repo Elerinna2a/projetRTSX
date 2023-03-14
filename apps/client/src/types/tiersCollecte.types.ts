@@ -7,6 +7,7 @@ export type CreateTierCollecte = {
   scoringFacilite: Score;
   nomContact: string;
   tel: string;
+  role: Role;
   mail: string;
   password: string;
   dateCreation: string;

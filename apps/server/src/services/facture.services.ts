@@ -16,7 +16,9 @@ export class FactureService {
   }
 
   async createFacture(data: CreateFacture): Promise<Facture> {
-    const newFacture = await prismaClient.facture.create({ data: data });
+    const newFacture = await prismaClient.facture.create({
+      data: data,
+    });
     return newFacture;
   }
 

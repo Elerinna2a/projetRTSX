@@ -61,16 +61,21 @@ export class TourneeController {
 
   async deleteTournee(req: Request, res: Response) {
     const id = getIdOrVoid(req.params.id, res);
+    console.log(req.params.id);
+
     if (id) {
       try {
+        console.log("titi");
         const doesTourneeExist = await tourneeService.checkIfTourneeExists(id);
         if (doesTourneeExist) {
+          console.log("ezpz");
           const deleteTournee = await tourneeService.deleteTournee(id);
           res.json(deleteTournee);
         } else {
           res.json({ message: "tournee not found for this id..." });
         }
       } catch (error: unknown) {
+        console.log("tutu");
         console.log(error, res);
       }
     }

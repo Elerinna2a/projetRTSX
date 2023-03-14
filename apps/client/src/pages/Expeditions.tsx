@@ -35,14 +35,7 @@ export default function Expeditions() {
 
           <Flex justifyContent={"center"} flexWrap={"wrap"}>
             {expeditions.length === 0 ? (
-              <Box>
-                <Text>Voulez vous en créer un ?</Text>
-                <Link to="/create-expedition">
-                  <Button>
-                    <AddIcon />
-                  </Button>
-                </Link>
-              </Box>
+              ""
             ) : (
               <>
                 {expeditions.map((expedition) => (

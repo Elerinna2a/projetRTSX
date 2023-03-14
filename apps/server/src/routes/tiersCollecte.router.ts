@@ -12,4 +12,4 @@ router.post("/", tierCollecteController.createTiersCollecte);
 
 router.put("/:id", tierCollecteController.updateTiersCollecte);
 
-router.delete("/", tierCollecteController.deleteTiersCollecte);
+router.delete("/:id", tierCollecteController.deleteTiersCollecte);

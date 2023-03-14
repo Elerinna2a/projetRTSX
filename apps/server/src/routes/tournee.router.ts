@@ -12,4 +12,4 @@ router.post("/", tourneeController.createTournee);
 
 router.put("/:id", tourneeController.updateTournee);
 
-router.delete("/", tourneeController.deleteTournee);
+router.delete("/:id", tourneeController.deleteTournee);

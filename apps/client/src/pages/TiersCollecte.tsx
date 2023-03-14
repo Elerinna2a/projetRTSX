@@ -49,7 +49,7 @@ export default function TiersCollecte() {
         .delete(`http://localhost:3000/tierscollectes/${idToDelete}`)
         .then(() => {
           const updatedTierCollectes = tierCollectes.filter(
-            (tierCollecte) => tierCollecte.id !== idToDelete
+            (tierCollecte) => tierCollecte.idTierCollecte !== idToDelete
           );
           setTierCollectes(updatedTierCollectes);
           setIdToDelete(null);
@@ -82,7 +82,7 @@ export default function TiersCollecte() {
           ) : (
             <>
               {tierCollectes.map((tierCollecte) => (
-                <div key={tierCollecte.id}>
+                <div key={tierCollecte.idTierCollecte}>
                   <Flex
                     mb={"4"}
                     border={"1px solid gray"}
@@ -94,8 +94,10 @@ export default function TiersCollecte() {
                       <Flex>
                         <Box>
                           <Heading size={"md"} mb={4}>
-                            <Link to={`/collecte/${tierCollecte.id}`}>
-                              Collecte N°{tierCollecte.id}
+                            <Link
+                              to={`/collecte/${tierCollecte.idTierCollecte}`}
+                            >
+                              Collecte N°{tierCollecte.idTierCollecte}
                             </Link>
                           </Heading>
                           <Box>
@@ -119,7 +121,9 @@ export default function TiersCollecte() {
                         </Button>
                         <Button
                           ml={6}
-                          onClick={() => handleDelete(tierCollecte.id)}
+                          onClick={() =>
+                            handleDelete(tierCollecte.idTierCollecte)
+                          }
                         >
                           <DeleteIcon />
                         </Button>

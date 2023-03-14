@@ -3,7 +3,9 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Route, Routes } from "react-router-dom";
 import CreateCollecte from "./components/create/CreateCollecte";
 import CreateEmploye from "./components/create/CreateEmploye";
-import CreateExpedition from "./components/create/CreateExpedition";
+import CreateFacture from "./components/create/CreateFacture";
+import CreateTiersCompacte from "./components/create/CreateTiersCompacte";
+import CreateTournee from "./components/create/CreateTournee";
 import CreateTraitement from "./components/create/CreateTraitement";
 import CollecteDetails from "./components/details/CollecteDetails";
 import EmployeDetails from "./components/details/EmployeDetails";
@@ -21,6 +23,7 @@ import Login from "./pages/Login";
 import TiersCollecte from "./pages/TiersCollecte";
 import TiersCompactes from "./pages/TiersCompactes";
 import Tournees from "./pages/Tournees";
+import Traitement from "./pages/Traitement";
 import { employe } from "./store/employe.store";
 import { useAuth } from "./utils/CustomHook";
 
@@ -52,6 +55,7 @@ export default function App() {
           <Route path="/tiers-compactes" element={<TiersCompactes />} />
           <Route path="/tiers-collectes" element={<TiersCollecte />} />
           <Route path="/login" element={notAuthOnly(<Login />)} />
+          <Route path="/traitements" element={<Traitement />} />
 
           {/* Single page route */}
 
@@ -62,10 +66,6 @@ export default function App() {
           {/* create page route */}
           <Route path="/create-employe" element={authonly(<CreateEmploye />)} />
           <Route
-            path="/create-expedition"
-            element={authonly(<CreateExpedition />)}
-          />
-          <Route
             path="/create-collecte"
             element={authonly(<CreateCollecte />)}
           />
@@ -73,6 +73,12 @@ export default function App() {
             path="/create-traitement"
             element={authonly(<CreateTraitement />)}
           />
+          <Route path="/create-tournee" element={authonly(<CreateTournee />)} />
+          <Route
+            path="/create-tierscompacte"
+            element={authonly(<CreateTiersCompacte />)}
+          />
+          <Route path="/create-facture" element={authonly(<CreateFacture />)} />
 
           {/* update page */}
           <Route path="/update-employes/:id" element={<UpdateEmploye />} />
