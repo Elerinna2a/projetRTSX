@@ -63,14 +63,14 @@ export default function CreateCollecte() {
             <option value="VRAC">Vrac</option>
             <option value="PALETTE">Palette</option>
           </Select>
+        </FormControl>
+        <FormControl>
           <FormLabel>Id du Chauffeur</FormLabel>
           <Input
             type="number"
             placeholder="Id du Chauffeur"
             ref={employeIdCollecteRef}
           />
-        </FormControl>
-        <FormControl>
           <FormLabel>ID Traitement lié à la collecte</FormLabel>
           <Input
             type="number"

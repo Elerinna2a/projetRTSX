@@ -1,7 +1,7 @@
 import { map } from "nanostores";
 
 export type TierCollecte = {
-  id?: number;
+  idTierCollecte?: number;
   nom?: string;
   adresse?: string;
   typeEntreprise?: string;

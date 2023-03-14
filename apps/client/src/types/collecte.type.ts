@@ -7,7 +7,7 @@ export type CreateCollecte = {
   dateCollecte: Date;
   traitementId?: number;
   employeId?: number;
-  tierCollecte?: number;
+  tierCollecte?: TierCollecte;
 };
 
 export type UpdateCollecte = {
