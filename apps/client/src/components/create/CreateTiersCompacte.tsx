@@ -21,8 +21,8 @@ export default function CreateTiersCompacte() {
   const contactNomRef = useRef<HTMLInputElement | null>(null);
   const telRef = useRef<HTMLInputElement | null>(null);
   const mailRef = useRef<HTMLInputElement | null>(null);
-  const factureRef = useRef<HTMLInputElement | null>(null);
-  const expedtionRef = useRef<HTMLInputElement | null>(null);
+  //   const factureRef = useRef<HTMLInputElement | null>(null);
+  //   const expedtionRef = useRef<HTMLInputElement | null>(null);
 
   const handleCreateTiersCompacte = async () => {
     const nom = nomRef.current?.value;
@@ -31,13 +31,13 @@ export default function CreateTiersCompacte() {
     const contactNom = contactNomRef.current?.value;
     const tel = telRef.current?.value;
     const mail = mailRef.current?.value;
-    const expedition = expedtionRef.current?.value;
-    const factures = factureRef.current?.value;
+    // const expedition = expedtionRef.current?.value;
+    // const factures = factureRef.current?.value;
 
     try {
-      if (factures === undefined) {
-        return;
-      }
+      //   if (factures === undefined) {
+      //     return;
+      //   }
       const response = await axios.post(
         "http://localhost:3000/tierscompactes",
         {
@@ -47,8 +47,8 @@ export default function CreateTiersCompacte() {
           contactNom,
           tel,
           mail,
-          factures,
-          expedition,
+          //   factures,
+          //   expedition,
         }
       );
       console.log(response);

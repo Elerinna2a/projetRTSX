@@ -25,7 +25,7 @@ export default function Factures() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/facturs")
+      .get("http://localhost:3000/factures")
       .then((res) => setFactures(res.data))
       .catch((err) =>
         setError(

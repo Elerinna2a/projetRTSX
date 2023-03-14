@@ -102,9 +102,7 @@ export default function TiersCompactes() {
                             <p>tel: {tiersCompacte.tel} </p>
                             <p>mail: {tiersCompacte.mail} </p>
                             {tiersCompacte.facture ? (
-                              <p>
-                                facture: {tiersCompacte.facture?.idFacture}{" "}
-                              </p>
+                              <p>facture: {tiersCompacte.facture} </p>
                             ) : (
                               ""
                             )}
@@ -112,7 +110,7 @@ export default function TiersCompactes() {
                         </Box>
                       </Flex>
                       <Flex gap={"4"} flexDirection="column">
-                        <Button ml={6}>
+                        <Button ml={6} color="teal">
                           <EditIcon />
                         </Button>
                         <Button
@@ -120,6 +118,7 @@ export default function TiersCompactes() {
                           onClick={() =>
                             handleDelete(tiersCompacte.idTiersCompacte)
                           }
+                          color={"crimson"}
                         >
                           <DeleteIcon />
                         </Button>
