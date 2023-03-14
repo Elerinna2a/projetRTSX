@@ -17,19 +17,29 @@ export default function CreateCollecte() {
   const quantiteRef = useRef<HTMLInputElement | null>(null);
   const nomTiersRef = useRef<HTMLInputElement | null>(null);
   const formeCollecteRef = useRef<HTMLSelectElement | null>(null);
+  const employeIdCollecteRef = useRef<HTMLInputElement | null>(null);
+  const traitementIdCollecteRef = useRef<HTMLInputElement | null>(null);
 
   const handleCreateCollecte = async () => {
     const quantite = quantiteRef.current?.value;
     const nomTierCollecte = nomTiersRef.current?.value;
     const formeCollecte = formeCollecteRef.current?.value;
+    const employeId = employeIdCollecteRef.current?.value;
+    const traitementId = traitementIdCollecteRef.current?.value;
     try {
-      if (quantite === null || quantite === undefined) {
+      if (
+        quantite === undefined ||
+        employeId === undefined ||
+        traitementId === undefined
+      ) {
         return;
       }
       const response = await axios.post("http://localhost:3000/collectes", {
         quantite: parseInt(quantite),
         nomTierCollecte,
         formeCollecte,
+        employeId: parseInt(employeId),
+        traitementId: parseInt(traitementId),
       });
       console.log(response);
       navigate("/collecte");
@@ -53,6 +63,20 @@ export default function CreateCollecte() {
             <option value="VRAC">Vrac</option>
             <option value="PALETTE">Palette</option>
           </Select>
+          <FormLabel>Id du Chauffeur</FormLabel>
+          <Input
+            type="number"
+            placeholder="Id du Chauffeur"
+            ref={employeIdCollecteRef}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>ID Traitement lié à la collecte</FormLabel>
+          <Input
+            type="number"
+            placeholder="Traitement lié à la collecte"
+            ref={traitementIdCollecteRef}
+          />
         </FormControl>
         <Button onClick={() => handleCreateCollecte()}>Valider</Button>
       </VStack>

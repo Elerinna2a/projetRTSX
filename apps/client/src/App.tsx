@@ -20,6 +20,7 @@ import Login from "./pages/Login";
 import TiersCollecte from "./pages/TiersCollecte";
 import TiersCompactes from "./pages/TiersCompactes";
 import Tournees from "./pages/Tournees";
+import Traitement from "./pages/Traitement";
 import { employe } from "./store/employe.store";
 import { useAuth } from "./utils/CustomHook";
 
@@ -51,6 +52,7 @@ export default function App() {
           <Route path="/tiers-compactes" element={<TiersCompactes />} />
           <Route path="/tiers-collectes" element={<TiersCollecte />} />
           <Route path="/login" element={notAuthOnly(<Login />)} />
+          <Route path="/traitements" element={<Traitement />} />
 
           {/* Single page route */}
 
