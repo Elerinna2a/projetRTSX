@@ -68,7 +68,7 @@ export default function Employes() {
   return (
     <div>
       <Flex flexDirection={"column"}>
-        <Flex gap={3} mb={"10"} mr={"10"}>
+        <Flex gap={3} mb={"10"} mr={"10"} alignItems="center">
           <Heading>Employés </Heading>
           <Link to="/create-employe">
             <Button leftIcon={<AddIcon />} colorScheme={"teal"}>

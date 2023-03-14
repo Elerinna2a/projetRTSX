@@ -29,8 +29,8 @@ export default function Traitement() {
           <Flex gap={3} justifyContent={"center"} mb={4}>
             <Heading>Traitement </Heading>
             <Link to="/create-traitement">
-              <Button>
-                <AddIcon />
+              <Button leftIcon={<AddIcon />} colorScheme="teal">
+                Créer un traitement
               </Button>
             </Link>
           </Flex>
@@ -40,8 +40,13 @@ export default function Traitement() {
             <>
               {traitements.map((traitement) => (
                 <div key={traitement.idTraitement}>
-                  <Flex mb={"4"} border={"1px solid gray"} p={"4"}>
-                    <Flex alignItems={"center"} gap={4} justifyContent="center">
+                  <Flex
+                    mb={"4"}
+                    border={"1px solid gray"}
+                    p={"4"}
+                    justifyContent="center"
+                  >
+                    <Flex alignItems={"center"} gap={4}>
                       <Flex>
                         <Box>
                           <Heading size={"md"}>

@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import CreateCollecte from "./components/create/CreateCollecte";
 import CreateEmploye from "./components/create/CreateEmploye";
 import CreateExpedition from "./components/create/CreateExpedition";
+import CreateTournee from "./components/create/CreateTournee";
 import CreateTraitement from "./components/create/CreateTraitement";
 import CollecteDetails from "./components/details/CollecteDetails";
 import EmployeDetails from "./components/details/EmployeDetails";
@@ -74,6 +75,7 @@ export default function App() {
             path="/create-traitement"
             element={authonly(<CreateTraitement />)}
           />
+          <Route path="/create-tournee" element={authonly(<CreateTournee />)} />
 
           {/* update page */}
           <Route path="/update-employes/:id" element={<UpdateEmploye />} />
