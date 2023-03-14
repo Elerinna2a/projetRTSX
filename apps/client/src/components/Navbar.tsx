@@ -38,13 +38,7 @@ export default function Navbar() {
   // }
 
   return (
-    <Flex
-      padding={4}
-      borderBottom={"1px"}
-      mb={"16"}
-      alignItems="center"
-      gap={4}
-    >
+    <Flex padding={4} mb={"16"} alignItems="center" gap={4} boxShadow={"lg"}>
       <Box>
         <img src="/logo.png" alt="logo" width="200" height="200" />
         {authedEmploye?.email ? (

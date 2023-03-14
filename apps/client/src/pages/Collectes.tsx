@@ -66,7 +66,7 @@ export default function Collecte() {
 
   return (
     <div>
-      <Flex justifyContent={"center"}>
+      <Flex>
         <Box>
           <Flex gap={3} mb={4}>
             <Heading>Collecte </Heading>

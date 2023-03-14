@@ -66,7 +66,7 @@ export default function Factures() {
 
   return (
     <div>
-      <Flex justifyContent={"center"}>
+      <Flex>
         <Box>
           <Flex gap={3} justifyContent={"center"} mb={4}>
             <Heading>Factures </Heading>
