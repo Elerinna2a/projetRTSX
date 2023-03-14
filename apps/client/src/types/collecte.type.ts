@@ -22,12 +22,12 @@ export type UpdateCollecte = {
 };
 
 export type Collecte = {
-  idNumLot: number;
-  nomTierCollecte: string;
-  quantite: number;
-  formeCollecte: string;
-  dateCollecte: string;
-  traitementId: number;
-  employeeId: number;
+  idNumLot?: number;
+  nomTierCollecte?: string;
+  quantite?: number;
+  formeCollecte?: string;
+  dateCollecte?: string;
+  traitementId?: number;
+  employeeId?: number;
   tierCollecte?: TierCollecte;
 };

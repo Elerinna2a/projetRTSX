@@ -95,3 +95,36 @@ export class ExpeditionController {
   //   }
   // }
 }
+
+// const traitement = await prismaClient.traitement.findUnique({
+//   where: { id: traitementId },
+// });
+// const tiersCompacte = await prismaClient.tiersCompacte.findUnique({
+//   where: { id: tiersCompacteId },
+// });
+// const facture = await prismaClient.facture.findUnique({
+//   where: { num_expedition: numFacture },
+// });
+
+// const newExpedition = await prismaClient.expedition.create({
+//   data: {
+//     destinataire,
+//     nbPalette: parseInt(nbPalette),
+//     poidNetTotal: parseInt(poidNetTotal),
+//     traitement: {
+//       connect: {
+//         id: traitement.id,
+//       },
+//     },
+//     tiersCompacte: {
+//       connect: {
+//         id: tiersCompacte.id,
+//       },
+//     },
+//     facture: {
+//       connect: {
+//         num_expedition: facture.num_expedition,
+//       },
+//     },
+//   },
+// });

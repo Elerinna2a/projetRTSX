@@ -66,7 +66,7 @@ export default function Collecte() {
 
   return (
     <div>
-      <Flex justifyContent={"center"}>
+      <Flex>
         <Box>
           <Flex gap={3} mb={4}>
             <Heading>Collecte </Heading>
@@ -120,9 +120,11 @@ export default function Collecte() {
                         </Box>
                       </Flex>
                       <Flex gap={"4"} flexDirection="column">
-                        <Button ml={6}>
-                          <EditIcon color={"teal"} />
-                        </Button>
+                        <Link to={`/update-collectes/${collecte.idNumLot}`}>
+                          <Button ml={6}>
+                            <EditIcon color={"teal"} />
+                          </Button>
+                        </Link>
                         <Button
                           ml={6}
                           onClick={() => handleDelete(collecte.idNumLot)}
