@@ -11,8 +11,16 @@ export type CreateTierCollecte = {
   mail: string;
   password: string;
   dateCreation: string;
-  collecteId?: number;
-  factureId?: number;
+  collectes?: {
+    connect?: {
+      idNumLot: number;
+    }[];
+  };
+  factures?: {
+    connect?: {
+      idFacture: number;
+    }[];
+  };
 };
 
 export type UpdateTierCollecte = {
@@ -26,8 +34,28 @@ export type UpdateTierCollecte = {
   mail?: string;
   password?: string;
   dateCreation?: string;
-  collecteId?: number;
-  factureId?: number;
+  collectes?: {
+    connect?: {
+      idNumLot: number;
+    }[];
+    disconnect?: {
+      idNumLot: number;
+    }[];
+    set?: {
+      idNumLot: number;
+    }[];
+  };
+  factures?: {
+    connect?: {
+      idFacture: number;
+    }[];
+    disconnect?: {
+      idFacture: number;
+    }[];
+    set?: {
+      idFacture: number;
+    }[];
+  };
 };
 
 export type TierCollecte = {
@@ -41,6 +69,10 @@ export type TierCollecte = {
   mail?: string;
   password?: string;
   dateCreation?: string;
-  collecteId?: number;
-  factureId?: number;
+  collectes?: {
+    idNumLot: number;
+  }[];
+  factures?: {
+    idFacture: number;
+  }[];
 };

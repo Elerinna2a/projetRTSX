@@ -1,10 +1,10 @@
-import { Employe, Remorque, TypeVehicule } from "@prisma/client";
+import { Remorque, TypeVehicule } from "@prisma/client";
 
 export type CreateTournee = {
   dateTournee: string;
   typeVehicule: TypeVehicule;
-  chauffeurId: Employe;
   remorque: Remorque;
+  chauffeurId: number;
 };
 
 export type UpdateTournee = {
@@ -12,13 +12,13 @@ export type UpdateTournee = {
   dateTournee?: string;
   typeVehicule?: TypeVehicule;
   remorque?: Remorque;
-  chauffeurId?: Employe;
+  chauffeurId?: number;
 };
 
 export type Tournee = {
-  idTournee?: number;
+  idTournee: number;
   dateTournee?: string;
   typeVehicule?: TypeVehicule;
   remorque?: Remorque;
-  chauffeurId?: Employe;
+  chauffeurId?: number;
 };
