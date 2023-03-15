@@ -6,7 +6,7 @@ import {
   Heading,
   Input,
   Select,
-  Spacer,
+  Spacer
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useRef } from "react";
@@ -22,6 +22,7 @@ export default function CreateCollecte() {
   const employeIdCollecteRef = useRef<HTMLInputElement | null>(null);
   const traitementIdCollecteRef = useRef<HTMLInputElement | null>(null);
   const dateCollecteRef = useRef<HTMLInputElement | null>(null);
+  const tierCollecteIdRef = useRef<HTMLInputElement | null>(null);
 
   const handleCreateCollecte = async () => {
     const quantite = quantiteRef.current?.value;
@@ -30,11 +31,14 @@ export default function CreateCollecte() {
     const employeId = employeIdCollecteRef.current?.value;
     const traitementId = traitementIdCollecteRef.current?.value;
     const dateCollecte = dateCollecteRef.current?.value;
+    const tiercollecteId = tierCollecteIdRef.current?.value;
     try {
       if (
         quantite === undefined ||
         employeId === undefined ||
-        traitementId === undefined
+        traitementId === undefined ||
+        dateCollecte === undefined ||
+        tiercollecteId === undefined
       ) {
         return;
       }
@@ -45,6 +49,7 @@ export default function CreateCollecte() {
         employeId: parseInt(employeId),
         traitementId: parseInt(traitementId),
         dateCollecte,
+        tiercollecteId: parseInt(tiercollecteId)
       });
       console.log(response);
       navigate("/collectes");
@@ -84,6 +89,12 @@ export default function CreateCollecte() {
               type="number"
               placeholder="Traitement lié à la collecte"
               ref={traitementIdCollecteRef}
+            />
+            <FormLabel>ID TierCollecte lié à la collecte</FormLabel>
+            <Input
+              type="number"
+              placeholder="Collecte lié à la collecte"
+              ref={tierCollecteIdRef}
             />
           </FormControl>
           <Button onClick={() => handleCreateCollecte()}>Valider</Button>

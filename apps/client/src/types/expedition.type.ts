@@ -1,7 +1,7 @@
 export type CreateExpedition = {
-  nbPalette: number;
   dateExpedition: string;
   destinataire: string;
+  nbPalette: number;
   poidNetTotal: number;
   tiersCompacteId: number;
   traitementId: number;

@@ -29,7 +29,6 @@ async createTournee(data: CreateTournee): Promise<{
       };
     } catch (error) {
       console.log(error);
-
       return {
         status: "ERROR",
         message: "Problème lors de la création du tier collecté...",

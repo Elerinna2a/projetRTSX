@@ -24,13 +24,13 @@ export type CreateTierCollecte = {
 };
 
 export type UpdateTierCollecte = {
-  idTierCollecte: number;
   nom?: string;
   adresse?: string;
   typeEntreprise?: string;
   scoringFacilite?: Score;
   nomContact?: string;
   tel?: string;
+  role?: Role;
   mail?: string;
   password?: string;
   dateCreation?: string;
@@ -41,9 +41,6 @@ export type UpdateTierCollecte = {
     disconnect?: {
       idNumLot: number;
     }[];
-    set?: {
-      idNumLot: number;
-    }[];
   };
   factures?: {
     connect?: {
@@ -52,27 +49,5 @@ export type UpdateTierCollecte = {
     disconnect?: {
       idFacture: number;
     }[];
-    set?: {
-      idFacture: number;
-    }[];
   };
-};
-
-export type TierCollecte = {
-  idTierCollecte: number;
-  nom?: string;
-  adresse?: string;
-  typeEntreprise?: string;
-  scoringFacilite?: Score;
-  nomContact?: string;
-  tel?: string;
-  mail?: string;
-  password?: string;
-  dateCreation?: string;
-  collectes?: {
-    idNumLot: number;
-  }[];
-  factures?: {
-    idFacture: number;
-  }[];
 };

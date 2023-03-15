@@ -15,7 +15,7 @@ export class CollecteService {
     return Collecte;
   }
 
-async createCollecte(data: CreateCollecte): Promise<{
+  async createCollecte(data: CreateCollecte): Promise<{
     status: "SUCCESS" | "ERROR";
     message: string;
     data: Collecte | null;

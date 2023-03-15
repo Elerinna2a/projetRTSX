@@ -21,8 +21,8 @@ export default function CreateTiersCompacte() {
   const contactNomRef = useRef<HTMLInputElement | null>(null);
   const telRef = useRef<HTMLInputElement | null>(null);
   const mailRef = useRef<HTMLInputElement | null>(null);
-  //   const factureRef = useRef<HTMLInputElement | null>(null);
-  //   const expedtionRef = useRef<HTMLInputElement | null>(null);
+  const factureRef = useRef<HTMLInputElement | null>(null);
+  const expeditionRef = useRef<HTMLInputElement | null>(null);
 
   const handleCreateTiersCompacte = async () => {
     const nom = nomRef.current?.value;
@@ -31,25 +31,28 @@ export default function CreateTiersCompacte() {
     const contactNom = contactNomRef.current?.value;
     const tel = telRef.current?.value;
     const mail = mailRef.current?.value;
-    // const expedition = expedtionRef.current?.value;
-    // const factures = factureRef.current?.value;
+    const expedition = expeditionRef.current?.value;
+    const factures = factureRef.current?.value;
 
     try {
-      //   if (factures === undefined) {
-      //     return;
-      //   }
+      const createTiersCompacte = {
+        nom,
+        adresse,
+        typeTiers,
+        contactNom,
+        tel,
+        mail,
+        expeditions: expedition
+          ? { create: [{ dateExpedition: expedition }] }
+          : undefined,
+        factures: factures
+          ? { create: [{ numeroFacture: factures }] }
+          : undefined,
+      };
+
       const response = await axios.post(
         "http://localhost:3000/tierscompactes",
-        {
-          nom,
-          adresse,
-          typeTiers,
-          contactNom,
-          tel,
-          mail,
-          //   factures,
-          //   expedition,
-        }
+        createTiersCompacte
       );
       console.log(response);
       navigate("/tiers-compactes");
@@ -81,14 +84,20 @@ export default function CreateTiersCompacte() {
             <FormLabel>E-Mail</FormLabel>
             <Input type="email" placeholder="E-Mail" ref={mailRef} />
           </FormControl>
-          {/* <FormControl>
-            <FormLabel>Facture</FormLabel>
+          <FormControl>
+            <FormLabel>Facture n°</FormLabel>
             <Input
               type="number"
               placeholder="Facture lié à la collecte"
               ref={factureRef}
             />
-          </FormControl> */}
+            <FormLabel>Expedition n°</FormLabel>
+            <Input
+              type="number"
+              placeholder="Expedition n° lié à la collecte"
+              ref={expeditionRef}
+            />
+          </FormControl>
           <Button onClick={() => handleCreateTiersCompacte()}>Valider</Button>
         </Flex>
         <Spacer />

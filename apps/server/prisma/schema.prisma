@@ -32,8 +32,8 @@ model Employe {
 }
 
 model Tournee {
-  idTournee   Int      @id @default(autoincrement())
-  dateTournee DateTime @default(now())
+  idTournee   Int    @id @default(autoincrement())
+  dateTournee String
 
   chauffeur   Employe? @relation(fields: [chauffeurId], references: [id])
   chauffeurId Int?

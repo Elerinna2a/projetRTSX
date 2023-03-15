@@ -7,7 +7,7 @@ import {
   Heading,
   Input,
   Select,
-  VStack,
+  VStack
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useRef } from "react";
@@ -20,11 +20,14 @@ export default function CreateTournee() {
   const chauffeurRef = useRef<HTMLInputElement | null>(null);
   const typeVehiculeRef = useRef<HTMLSelectElement | null>(null);
   const remorqueRef = useRef<HTMLSelectElement | null>(null);
+  const dateTourneeRef = useRef<HTMLInputElement | null>(null);
 
   const handleCreateTournee = async () => {
     const chauffeur = chauffeurRef.current?.value;
     const typeVehicule = typeVehiculeRef.current?.value;
     const remorque = remorqueRef.current?.value;
+    const dateTournee = dateTourneeRef.current?.value;
+
     try {
       if (chauffeur === undefined) {
         return;
@@ -33,6 +36,7 @@ export default function CreateTournee() {
         chauffeurId: parseInt(chauffeur),
         typeVehicule,
         remorque,
+        dateTournee,
       });
       navigate("/tournees");
     } catch (error) {
@@ -49,6 +53,8 @@ export default function CreateTournee() {
           <FormControl>
             <FormLabel>ID du chauffeur</FormLabel>
             <Input type="number" placeholder="Quantité" ref={chauffeurRef} />
+            <FormLabel>Date de la tournée</FormLabel>
+            <Input type="date" placeholder="Quantité" ref={dateTourneeRef} />
             <FormLabel>Type du véhicule ?</FormLabel>
             <Select ref={typeVehiculeRef} mb={4}>
               <option value="FOURGON">Fourgon</option>
