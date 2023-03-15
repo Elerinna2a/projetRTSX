@@ -38,8 +38,8 @@ model Tournee {
   chauffeur   Employe? @relation(fields: [chauffeurId], references: [id])
   chauffeurId Int?
 
-  typeVehicule TypeVehicule
-  remorque     Remorque
+  typeVehicule String
+  remorque     String
 
   tierCollecte   TierCollecte? @relation(fields: [tierCollecteId], references: [idTierCollecte])
   tierCollecteId Int?
@@ -50,7 +50,7 @@ model TierCollecte {
   nom             String
   adresse         String
   typeEntreprise  String
-  scoringFacilite Score
+  scoringFacilite Int
   nomContact      String
   tel             String
   role            Role   @default(CLIENT)
@@ -67,7 +67,7 @@ model TierCollecte {
 model Collecte {
   idNumLot        Int    @id @default(autoincrement())
   quantite        Int
-  formeCollecte   Forme
+  formeCollecte   String
   dateCollecte    String
   nomTierCollecte String
 
@@ -83,7 +83,7 @@ model Collecte {
 model Traitement {
   idTraitement          Int         @id @default(autoincrement())
   dateTraitement        String
-  qualite               Qualite
+  qualite               String
   quantiteCorpsEtranger Int
   scoringBonusMalus     Int
   operateur             Employe?    @relation(fields: [operateurId], references: [id])
