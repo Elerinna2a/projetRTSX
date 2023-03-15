@@ -2,7 +2,7 @@ import { TierCollecte } from "@prisma/client";
 import { prismaClient } from "../prisma";
 import {
   CreateTierCollecte,
-  UpdateTierCollecte,
+  UpdateTierCollecte
 } from "../types/tiersCollecte.types";
 
 export class TiersCollecteService {
@@ -20,13 +20,27 @@ export class TiersCollecteService {
     return tierCollecte;
   }
 
-  async createTierCollectes(
-    data: CreateTierCollecte
-  ): Promise<TierCollecte | null> {
-    const newTierCollecte = await prismaClient.tierCollecte.create({
-      data: data,
-    });
-    return newTierCollecte;
+async createCollecte(data: CreateTierCollecte): Promise<{
+    status: "SUCCESS" | "ERROR";
+    message: string;
+    data: TierCollecte | null;
+  }> {
+    try {
+      const newCollecte = await prismaClient.tierCollecte.create({ data: data });
+      return {
+        status: "SUCCESS",
+        message: "Création réussie !",
+        data: newCollecte,
+      };
+    } catch (error) {
+      console.log(error);
+
+      return {
+        status: "ERROR",
+        message: "Problème lors de la création du tier collecté...",
+        data: null,
+      };
+    }
   }
 
   async updateTierCollectes(

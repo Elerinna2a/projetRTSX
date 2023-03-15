@@ -31,14 +31,23 @@ export class TierCollecteController {
     }
   }
 
-  async createTiersCollecte(req: Request, res: Response) {
-    try {
-      const newTiersCollecte = await tierCollecteService.createTierCollectes(
-        req.body
-      );
-      res.json(newTiersCollecte);
-    } catch (error: unknown) {
-      console.log("error on creating client");
+async createTierCollecte(req: Request, res: Response) {
+    const { status, message, data } = await tierCollecteService.createCollecte(
+      req.body
+    );
+
+    if (status === "ERROR") {
+      res.json({
+        status,
+        message,
+        newClient: null,
+      });
+    } else {
+      res.json({
+        status,
+        message,
+        newClient: data,
+      });
     }
   }
 
