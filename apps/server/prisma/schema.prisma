@@ -128,7 +128,7 @@ model Facture {
 
   TierCollecte    TierCollecte?  @relation(fields: [tiersCollecteId], references: [idTierCollecte])
   tiersCollecteId Int?
-  TiersTompacte   TiersCompacte? @relation(fields: [tierCompacteId], references: [idTiersCompacte])
+  TiersCompacte   TiersCompacte? @relation(fields: [tierCompacteId], references: [idTiersCompacte])
   tierCompacteId  Int?
 }
 

@@ -1,5 +1,3 @@
-
-
 export type CreateCollecte = {
   quantite: number;
   nomTierCollecte: string;
@@ -11,7 +9,6 @@ export type CreateCollecte = {
 };
 
 export type UpdateCollecte = {
-  idNumLot: number;
   nomTierCollecte?: string;
   quantite?: number;
   formeCollecte?: string;
