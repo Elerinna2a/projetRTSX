@@ -30,12 +30,23 @@ export class CollecteController {
     }
   }
 
-  async createCollecte(req: Request, res: Response) {
-    try {
-      const newCollecte = await collecteService.createCollecte(req.body);
-      res.json(newCollecte);
-    } catch (error: unknown) {
-      console.log(error, res);
+async createCollecte(req: Request, res: Response) {
+    const { status, message, data } = await collecteService.createCollecte(
+      req.body
+    );
+
+    if (status === "ERROR") {
+      res.json({
+        status,
+        message,
+        newClient: null,
+      });
+    } else {
+      res.json({
+        status,
+        message,
+        newClient: data,
+      });
     }
   }
 

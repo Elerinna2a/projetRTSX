@@ -15,9 +15,27 @@ export class EmployeService {
     return employe;
   }
 
-  async createEmploye(data: CreateEmploye): Promise<Employe> {
-    const newEmploye = await prismaClient.employe.create({ data: data });
-    return newEmploye;
+async createEmploye(data: CreateEmploye): Promise<{
+    status: "SUCCESS" | "ERROR";
+    message: string;
+    data: Employe | null;
+  }> {
+    try {
+      const newEmploye = await prismaClient.employe.create({ data: data });
+      return {
+        status: "SUCCESS",
+        message: "Création réussie !",
+        data: newEmploye,
+      };
+    } catch (error) {
+      console.log(error);
+
+      return {
+        status: "ERROR",
+        message: "Problème lors de la création du tier collecté...",
+        data: null,
+      };
+    }
   }
 
   async updateEmploye(

@@ -15,11 +15,27 @@ export class FactureService {
     return Facture;
   }
 
-  async createFacture(data: CreateFacture): Promise<Facture> {
-    const newFacture = await prismaClient.facture.create({
-      data: data,
-    });
-    return newFacture;
+async createFacture(data: CreateFacture): Promise<{
+    status: "SUCCESS" | "ERROR";
+    message: string;
+    data: Facture | null;
+  }> {
+    try {
+      const newFacture = await prismaClient.facture.create({ data: data });
+      return {
+        status: "SUCCESS",
+        message: "Création réussie !",
+        data: newFacture,
+      };
+    } catch (error) {
+      console.log(error);
+
+      return {
+        status: "ERROR",
+        message: "Problème lors de la création du tier collecté...",
+        data: null,
+      };
+    }
   }
 
   async updateFacture(

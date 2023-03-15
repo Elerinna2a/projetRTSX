@@ -30,12 +30,23 @@ export class FactureController {
     }
   }
 
-  async createFacture(req: Request, res: Response) {
-    try {
-      const newFacture = await factureService.createFacture(req.body);
-      res.json(newFacture);
-    } catch (error: unknown) {
-      console.log(error, res);
+async createFacture(req: Request, res: Response) {
+    const { status, message, data } = await factureService.createFacture(
+      req.body
+    );
+
+    if (status === "ERROR") {
+      res.json({
+        status,
+        message,
+        newClient: null,
+      });
+    } else {
+      res.json({
+        status,
+        message,
+        newClient: data,
+      });
     }
   }
 

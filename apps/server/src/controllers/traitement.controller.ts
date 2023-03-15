@@ -30,12 +30,23 @@ export class TraitementController {
     }
   }
 
-  async createTraitement(req: Request, res: Response) {
-    try {
-      const newTraitement = await traitementService.createTraitement(req.body);
-      res.json(newTraitement);
-    } catch (error: unknown) {
-      console.log(error, res);
+async createTraitement(req: Request, res: Response) {
+    const { status, message, data } = await traitementService.createTraitement(
+      req.body
+    );
+
+    if (status === "ERROR") {
+      res.json({
+        status,
+        message,
+        newClient: null,
+      });
+    } else {
+      res.json({
+        status,
+        message,
+        newClient: data,
+      });
     }
   }
 

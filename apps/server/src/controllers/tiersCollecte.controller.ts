@@ -32,7 +32,7 @@ export class TierCollecteController {
   }
 
 async createTierCollecte(req: Request, res: Response) {
-    const { status, message, data } = await tierCollecteService.createCollecte(
+    const { status, message, data } = await tierCollecteService.createTierCollecte(
       req.body
     );
 

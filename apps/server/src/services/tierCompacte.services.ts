@@ -2,7 +2,7 @@ import { TiersCompacte } from "@prisma/client";
 import { prismaClient } from "../prisma";
 import {
   CreateTiersCompacte,
-  UpdateTiersCompacte,
+  UpdateTiersCompacte
 } from "../types/tiersCompacte.type";
 
 export class TiersCompacteService {
@@ -20,12 +20,27 @@ export class TiersCompacteService {
     return tiersCompacte;
   }
 
-  async createTiersCompacte(data: CreateTiersCompacte): Promise<TiersCompacte> {
-    console.log("entré dans le creacte contact services");
-    const newTiersCompacte = await prismaClient.tiersCompacte.create({
-      data: data,
-    });
-    return newTiersCompacte;
+async createTierCompacte(data: CreateTiersCompacte): Promise<{
+    status: "SUCCESS" | "ERROR";
+    message: string;
+    data: TiersCompacte | null;
+  }> {
+    try {
+      const newTierCompacte = await prismaClient.tiersCompacte.create({ data: data });
+      return {
+        status: "SUCCESS",
+        message: "Création réussie !",
+        data: newTierCompacte,
+      };
+    } catch (error) {
+      console.log(error);
+
+      return {
+        status: "ERROR",
+        message: "Problème lors de la création du tier collecté...",
+        data: null,
+      };
+    }
   }
 
   async updateTiersCompacte(

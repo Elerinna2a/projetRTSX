@@ -15,9 +15,27 @@ export class ExpeditionService {
     return expedition;
   }
 
-  async createExpedition(data: CreateExpedition): Promise<Expedition> {
-    const newExpedition = await prismaClient.expedition.create({ data: data });
-    return newExpedition;
+async createExpedition(data: CreateExpedition): Promise<{
+    status: "SUCCESS" | "ERROR";
+    message: string;
+    data: Expedition | null;
+  }> {
+    try {
+      const newExpedition = await prismaClient.expedition.create({ data: data });
+      return {
+        status: "SUCCESS",
+        message: "Création réussie !",
+        data: newExpedition,
+      };
+    } catch (error) {
+      console.log(error);
+
+      return {
+        status: "ERROR",
+        message: "Problème lors de la création du tier collecté...",
+        data: null,
+      };
+    }
   }
 
   async updateExpedition(

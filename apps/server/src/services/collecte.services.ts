@@ -15,9 +15,27 @@ export class CollecteService {
     return Collecte;
   }
 
-  async createCollecte(data: CreateCollecte): Promise<Collecte> {
-    const newCollecte = await prismaClient.collecte.create({ data: data });
-    return newCollecte;
+async createCollecte(data: CreateCollecte): Promise<{
+    status: "SUCCESS" | "ERROR";
+    message: string;
+    data: Collecte | null;
+  }> {
+    try {
+      const newCollecte = await prismaClient.collecte.create({ data: data });
+      return {
+        status: "SUCCESS",
+        message: "Création réussie !",
+        data: newCollecte,
+      };
+    } catch (error) {
+      console.log(error);
+
+      return {
+        status: "ERROR",
+        message: "Problème lors de la création du tier collecté...",
+        data: null,
+      };
+    }
   }
 
   async updateCollecte(

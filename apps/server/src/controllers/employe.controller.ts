@@ -30,12 +30,23 @@ export class EmployeController {
     }
   }
 
-  async createEmploye(req: Request, res: Response) {
-    try {
-      const newEmploye = await employeService.createEmploye(req.body);
-      res.json(newEmploye);
-    } catch (error: unknown) {
-      console.log(error, res);
+async createEmploye(req: Request, res: Response) {
+    const { status, message, data } = await employeService.createEmploye(
+      req.body
+    );
+
+    if (status === "ERROR") {
+      res.json({
+        status,
+        message,
+        newClient: null,
+      });
+    } else {
+      res.json({
+        status,
+        message,
+        newClient: data,
+      });
     }
   }
 

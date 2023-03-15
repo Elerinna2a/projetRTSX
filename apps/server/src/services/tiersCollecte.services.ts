@@ -20,17 +20,17 @@ export class TiersCollecteService {
     return tierCollecte;
   }
 
-async createCollecte(data: CreateTierCollecte): Promise<{
+async createTierCollecte(data: CreateTierCollecte): Promise<{
     status: "SUCCESS" | "ERROR";
     message: string;
     data: TierCollecte | null;
   }> {
     try {
-      const newCollecte = await prismaClient.tierCollecte.create({ data: data });
+      const newTierCollecte = await prismaClient.tierCollecte.create({ data: data });
       return {
         status: "SUCCESS",
         message: "Création réussie !",
-        data: newCollecte,
+        data: newTierCollecte,
       };
     } catch (error) {
       console.log(error);

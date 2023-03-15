@@ -32,15 +32,23 @@ export class TiersCompacteController {
     }
   }
 
-  async createTiersCompacte(req: Request, res: Response) {
-    try {
-      console.log("yolo");
-      const newTiersCompacte = await tierCompacteService.createTiersCompacte(
-        req.body
-      );
-      res.json(newTiersCompacte);
-    } catch (error: unknown) {
-      console.log("error on creating client");
+async createTierCompacte(req: Request, res: Response) {
+    const { status, message, data } = await tierCompacteService.createTierCompacte(
+      req.body
+    );
+
+    if (status === "ERROR") {
+      res.json({
+        status,
+        message,
+        newClient: null,
+      });
+    } else {
+      res.json({
+        status,
+        message,
+        newClient: data,
+      });
     }
   }
 

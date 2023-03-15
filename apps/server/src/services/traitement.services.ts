@@ -15,9 +15,27 @@ export class TraitementService {
     return Traitement;
   }
 
-  async createTraitement(data: CreateTraitement): Promise<Traitement> {
-    const newTraitement = await prismaClient.traitement.create({ data: data });
-    return newTraitement;
+async createTraitement(data: CreateTraitement): Promise<{
+    status: "SUCCESS" | "ERROR";
+    message: string;
+    data: Traitement | null;
+  }> {
+    try {
+      const newTraitement = await prismaClient.traitement.create({ data: data });
+      return {
+        status: "SUCCESS",
+        message: "Création réussie !",
+        data: newTraitement,
+      };
+    } catch (error) {
+      console.log(error);
+
+      return {
+        status: "ERROR",
+        message: "Problème lors de la création du tier collecté...",
+        data: null,
+      };
+    }
   }
 
   async updateTraitement(

@@ -8,7 +8,7 @@ const tierCollecteController = new TierCollecteController();
 router.get("/", tierCollecteController.getTiercollectes);
 router.get("/:id", tierCollecteController.getTiersCollecteById);
 
-router.post("/", tierCollecteController.createTiersCollecte);
+router.post("/", tierCollecteController.createTierCollecte);
 
 router.put("/:id", tierCollecteController.updateTiersCollecte);
 

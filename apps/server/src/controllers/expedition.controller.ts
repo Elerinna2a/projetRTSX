@@ -30,12 +30,23 @@ export class ExpeditionController {
     }
   }
 
-  async createExpedition(req: Request, res: Response) {
-    try {
-      const newExpedition = await expeditionService.createExpedition(req.body);
-      res.json(newExpedition);
-    } catch (error: unknown) {
-      console.log(error, res);
+async createExpedition(req: Request, res: Response) {
+    const { status, message, data } = await expeditionService.createExpedition(
+      req.body
+    );
+
+    if (status === "ERROR") {
+      res.json({
+        status,
+        message,
+        newClient: null,
+      });
+    } else {
+      res.json({
+        status,
+        message,
+        newClient: data,
+      });
     }
   }
 

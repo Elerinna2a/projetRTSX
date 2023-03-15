@@ -8,7 +8,7 @@ const tierCompacteController = new TiersCompacteController();
 router.get("/", tierCompacteController.getTierCompactes);
 router.get("/:id", tierCompacteController.getTiersCompacteById);
 
-router.post("/", tierCompacteController.createTiersCompacte);
+router.post("/", tierCompacteController.createTierCompacte);
 
 router.put("/:id", tierCompacteController.updateTiersCompacte);
 

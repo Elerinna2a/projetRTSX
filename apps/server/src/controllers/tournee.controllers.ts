@@ -30,12 +30,23 @@ export class TourneeController {
     }
   }
 
-  async createTournee(req: Request, res: Response) {
-    try {
-      const newtournee = await tourneeService.createTournee(req.body);
-      res.json(newtournee);
-    } catch (error: unknown) {
-      console.log(error, res);
+async createTournee(req: Request, res: Response) {
+    const { status, message, data } = await tourneeService.createTournee(
+      req.body
+    );
+
+    if (status === "ERROR") {
+      res.json({
+        status,
+        message,
+        newClient: null,
+      });
+    } else {
+      res.json({
+        status,
+        message,
+        newClient: data,
+      });
     }
   }
 
