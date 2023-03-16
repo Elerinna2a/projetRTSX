@@ -2,6 +2,7 @@ import { Role } from "@prisma/client";
 import { map } from "nanostores";
 
 export type TierCollecte = {
+  idTierCollecte?: number;
   nom?: string;
   adresse?: string;
   typeEntreprise?: string;

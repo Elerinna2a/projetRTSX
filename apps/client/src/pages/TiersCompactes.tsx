@@ -101,8 +101,10 @@ export default function TiersCompactes() {
                             <p>Nom du contact: {tiersCompacte.contactNom} </p>
                             <p>tel: {tiersCompacte.tel} </p>
                             <p>mail: {tiersCompacte.mail} </p>
-                            {tiersCompacte.facture ? (
-                              <p>facture: {tiersCompacte.facture} </p>
+                            {tiersCompacte.factures ? (
+                              <>
+                                <p>facture: {tiersCompacte.factures} </p>
+                              </>
                             ) : (
                               ""
                             )}
