@@ -5,7 +5,6 @@ export type CreateExpedition = {
   poidNetTotal: number;
   tiersCompacteId: number;
   traitementId: number;
-  factureId?: number;
 };
 
 export type UpdateExpedition = {
@@ -27,5 +26,4 @@ export type Expedition = {
   poidNetTotal: number;
   tiersCompacteId: number;
   traitementId: number;
-  factureId?: number;
 };

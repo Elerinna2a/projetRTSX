@@ -1,30 +1,30 @@
 export type CreateCollecte = {
   quantite: number;
-  nomTierCollecte: string;
   formeCollecte: string;
   dateCollecte: string;
-  traitementId?: number;
+  nomTierCollecte: string;
   employeId?: number;
   tiercollecteId?: number;
+  traitementId?: number;
 };
 
 export type UpdateCollecte = {
-  nomTierCollecte?: string;
   quantite?: number;
   formeCollecte?: string;
   dateCollecte?: string;
-  traitementId?: number;
+  nomTierCollecte?: string;
   employeId?: number;
   tiercollecteId?: number;
+  traitementId?: number;
 };
 
 export type Collecte = {
   idNumLot: number;
-  nomTierCollecte: string;
   quantite: number;
   formeCollecte: string;
   dateCollecte: string;
-  traitementId: number;
+  nomTierCollecte: string;
   employeId: number;
-  tiercollecteId?: number;
+  tiercollecteId: number;
+  traitementId: number;
 };
