@@ -5,8 +5,8 @@ export type Facture = {
   dateFacture?: string;
   montant?: number;
   datePaiementFacture?: string;
-  tierCompacte?: number;
-  tiersCollecte?: number;
+  tierCompacteId?: number;
+  tiersCollecteId?: number;
 };
 
 export const facture = map<Facture>({});

@@ -7,7 +7,7 @@ export type Expedition = {
   nbPalette?: number;
   poidNetTotal?: number;
   tiersCompacteId?: number;
-  traitementId?: number;
+  traitementId?: number[];
   factureId?: number;
 };
 

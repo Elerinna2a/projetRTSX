@@ -31,12 +31,12 @@ export type TierCollecte = {
   };
 };
 
-export const tierCollecte = map<TierCollecte>({});
+export const tierCollecteStore = map<TierCollecte>({});
 
 export function setTierCollecte(tierCollecteInfo: TierCollecte) {
-  tierCollecte.set(tierCollecteInfo);
+  tierCollecteStore.set(tierCollecteInfo);
 }
 
 export function removeTierCollecte() {
-  tierCollecte.set({});
+  tierCollecteStore.set({});
 }

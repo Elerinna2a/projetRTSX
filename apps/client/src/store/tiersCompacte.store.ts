@@ -1,6 +1,6 @@
 import { map } from "nanostores";
 
-export type TierCompacte = {
+export type TiersCompacte = {
   idTiersCompacte?: number;
   nom?: string;
   adresse?: string;
@@ -20,9 +20,9 @@ export type TierCompacte = {
   };
 };
 
-export const tierCompacte = map<TierCompacte>({});
+export const tierCompacte = map<TiersCompacte>({});
 
-export function setTierCompacte(tierCompacteInfo: TierCompacte) {
+export function setTierCompacte(tierCompacteInfo: TiersCompacte) {
   tierCompacte.set(tierCompacteInfo);
 }
 

@@ -29,12 +29,12 @@ export type Employe = {
   };
 };
 
-export const employe = map<Employe>({});
+export const employeStore = map<Employe>({});
 
 export function setEmploye(employeInfo: Employe) {
-  employe.set(employeInfo);
+  employeStore.set(employeInfo);
 }
 
 export function removeEmploye() {
-  employe.set({});
+  employeStore.set({});
 }

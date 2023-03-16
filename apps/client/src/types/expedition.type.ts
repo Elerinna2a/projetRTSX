@@ -1,8 +1,11 @@
+import { TiersCompacte } from "./tiersCompacte.type";
+
 export type CreateExpedition = {
   dateExpedition: string;
   destinataire: string;
   nbPalette: number;
   poidNetTotal: number;
+  tiersCompacteId?: number;
 };
 
 export type UpdateExpedition = {
@@ -11,6 +14,7 @@ export type UpdateExpedition = {
   destinataire?: string;
   nbPalette?: number;
   poidNetTotal?: number;
+  tiersCompacteId?: number;
 };
 
 export type Expedition = {
@@ -19,4 +23,6 @@ export type Expedition = {
   destinataire: string;
   nbPalette: number;
   poidNetTotal: number;
+  traitementId: number[];
+  tiersCompacte?: TiersCompacte;
 };
