@@ -16,6 +16,7 @@ import TourneeDetails from "./components/details/TourneeDetails";
 import TraitementDetails from "./components/details/TraitementDetails";
 import UpdateCollecte from "./components/update/UpdateCollecte";
 import UpdateEmploye from "./components/update/UpdateEmploye";
+import UpdateExpedition from "./components/update/UpdateExpedition";
 import UpdateTournee from "./components/update/UpdateTournee";
 import UpdateTraitement from "./components/update/UpdateTraitement";
 import Mainlayout from "./layouts/MainLayout";
@@ -104,6 +105,7 @@ export default function App() {
             path="/update-traitements/:id"
             element={<UpdateTraitement />}
           />
+          <Route path="/update-expedition/:id" element={<UpdateExpedition />} />
 
           {/* Error page */}
           <Route path="/*" element={<Error />} />
