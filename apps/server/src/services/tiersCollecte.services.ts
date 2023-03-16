@@ -2,7 +2,7 @@ import { TierCollecte } from "@prisma/client";
 import { prismaClient } from "../prisma";
 import {
   CreateTierCollecte,
-  UpdateTierCollecte
+  UpdateTierCollecte,
 } from "../types/tiersCollecte.types";
 
 export class TiersCollecteService {
@@ -20,13 +20,15 @@ export class TiersCollecteService {
     return tierCollecte;
   }
 
-async createTierCollecte(data: CreateTierCollecte): Promise<{
+  async createTierCollecte(data: CreateTierCollecte): Promise<{
     status: "SUCCESS" | "ERROR";
     message: string;
     data: TierCollecte | null;
   }> {
     try {
-      const newTierCollecte = await prismaClient.tierCollecte.create({ data: data });
+      const newTierCollecte = await prismaClient.tierCollecte.create({
+        data: data,
+      });
       return {
         status: "SUCCESS",
         message: "Création réussie !",

@@ -7,9 +7,10 @@ export type CreateFacture = {
 };
 
 export type UpdateFacture = {
+  idFacture: number;
   dateFacture?: string;
   montant?: number;
   datePaiementFacture?: string;
-  tierCompacte?: number;
-  tiersCollecte?: number;
+  tierCompacteId?: number;
+  tiersCollecteId?: number;
 };

@@ -3,8 +3,6 @@ export type CreateExpedition = {
   destinataire: string;
   nbPalette: number;
   poidNetTotal: number;
-  tiersCompacteId: number;
-  traitementId: number;
 };
 
 export type UpdateExpedition = {
@@ -13,9 +11,6 @@ export type UpdateExpedition = {
   destinataire?: string;
   nbPalette?: number;
   poidNetTotal?: number;
-  tiersCompacteId?: number;
-  traitementId?: number;
-  factureId?: number;
 };
 
 export type Expedition = {
@@ -24,6 +19,4 @@ export type Expedition = {
   destinataire: string;
   nbPalette: number;
   poidNetTotal: number;
-  tiersCompacteId: number;
-  traitementId: number;
 };

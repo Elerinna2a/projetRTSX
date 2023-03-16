@@ -11,85 +11,82 @@ datasource db {
 }
 
 model Employe {
-  id       Int    @id @default(autoincrement())
-  nom      String
-  prenom   String
-  adresse  String
-  tel      String
-  role     Role
-  email    String @unique
-  password String
+  id        Int      @id @default(autoincrement())
+  nom       String
+  prenom    String
+  adresse   String
+  tel       String
+  role      Role
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
 
-  dateCreation DateTime @default(now())
-
-  session Session? //onetoOne
-
-  collecte Collecte[]
-
-  tournees Tournee[]
-
-  traitements Traitement[]
+  // Relations
+  session     Session? // One-to-one
+  collectes   Collecte[] // One-to-many
+  tournees    Tournee[] // One-to-many
+  traitements Traitement[] // One-to-many
 }
 
 model Tournee {
-  idTournee    Int    @id @default(autoincrement())
+  idTournee    Int          @id @default(autoincrement())
   dateTournee  String
-  typeVehicule String
-  remorque     String
+  typeVehicule TypeVehicule
+  remorque     Remorque
 
-  chauffeur   Employe? @relation(fields: [chauffeurId], references: [id])
-  chauffeurId Int?
-
-  tierCollecte   TierCollecte? @relation(fields: [tierCollecteId], references: [idTierCollecte])
+  chauffeur      Employe?      @relation(fields: [chauffeurId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  chauffeurId    Int?
+  tierCollecte   TierCollecte? @relation(fields: [tierCollecteId], references: [idTierCollecte], onDelete: SetNull, onUpdate: Cascade)
   tierCollecteId Int?
 }
 
 model TierCollecte {
-  idTierCollecte  Int    @id @default(autoincrement())
+  idTierCollecte  Int      @id @default(autoincrement())
   nom             String
   adresse         String
   typeEntreprise  String
-  scoringFacilite String
+  scoringFacilite Score
   nomContact      String
   tel             String
-  role            Role   @default(CLIENT)
-  mail            String @unique
+  role            Role     @default(CLIENT)
+  mail            String   @unique
   password        String
+  dateCreation    DateTime @default(now())
 
-  dateCreation String
-
-  collecte Collecte[]
-  tournees Tournee[]
-  factures Facture[]
+  // Relations
+  collectes Collecte[] // One-to-many
+  tournees  Tournee[] // One-to-many
+  factures  Facture[] // One-to-many
 }
 
 model Collecte {
   idNumLot        Int    @id @default(autoincrement())
   quantite        Int
-  formeCollecte   String
+  formeCollecte   Forme
   dateCollecte    String
   nomTierCollecte String
 
-  employe   Employe? @relation(fields: [employeId], references: [id])
-  employeId Int?
-
-  TierCollecte   TierCollecte? @relation(fields: [tiercollecteId], references: [idTierCollecte])
+  // Relations
+  employe        Employe?      @relation(fields: [employeId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  employeId      Int?
+  tierCollecte   TierCollecte? @relation(fields: [tiercollecteId], references: [idTierCollecte], onDelete: SetNull, onUpdate: Cascade)
   tiercollecteId Int?
-  traitement     Traitement?   @relation(fields: [traitementId], references: [idTraitement])
+  traitement     Traitement?   @relation(fields: [traitementId], references: [idTraitement], onDelete: SetNull, onUpdate: Cascade)
   traitementId   Int?
 }
 
 model Traitement {
-  idTraitement          Int         @id @default(autoincrement())
+  idTraitement          Int     @id @default(autoincrement())
   dateTraitement        String
-  qualite               String
+  qualite               Qualite
   quantiteCorpsEtranger Int
   scoringBonusMalus     Int
-  operateur             Employe?    @relation(fields: [operateurId], references: [id])
-  operateurId           Int?
-  collecte              Collecte[]
-  Expedition            Expedition? @relation(fields: [expeditionId], references: [idNumBl])
-  expeditionId          Int?
+
+  operateur    Employe?    @relation(fields: [operateurId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  operateurId  Int?
+  collecte     Collecte[]
+  expedition   Expedition? @relation(fields: [expeditionId], references: [idNumBl], onDelete: SetNull, onUpdate: Cascade)
+  expeditionId Int?
 }
 
 model Expedition {
@@ -99,10 +96,9 @@ model Expedition {
   nbPalette      Int
   poidNetTotal   Float
 
-  // relation one to many vers traitement
+  // Relations
   traitementId    Traitement[]
-  // relation one to many vers tierCompacte
-  tiersCompacte   TiersCompacte? @relation(fields: [tiersCompacteId], references: [idTiersCompacte])
+  tiersCompacte   TiersCompacte? @relation(fields: [tiersCompacteId], references: [idTiersCompacte], onDelete: SetNull, onUpdate: Cascade)
   tiersCompacteId Int?
 }
 
@@ -125,9 +121,10 @@ model Facture {
   montant             Float
   datePaiementFacture String
 
-  TierCollecte    TierCollecte?  @relation(fields: [tiersCollecteId], references: [idTierCollecte])
+  // Relations
+  tiersCollecte   TierCollecte?  @relation(fields: [tiersCollecteId], references: [idTierCollecte], onDelete: SetNull, onUpdate: Cascade)
   tiersCollecteId Int?
-  TiersCompacte   TiersCompacte? @relation(fields: [tierCompacteId], references: [idTiersCompacte])
+  tiersCompacte   TiersCompacte? @relation(fields: [tierCompacteId], references: [idTiersCompacte], onDelete: SetNull, onUpdate: Cascade)
   tierCompacteId  Int?
 }
 

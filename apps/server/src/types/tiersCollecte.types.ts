@@ -1,53 +1,27 @@
-import { Role } from "@prisma/client";
+import { Role, Score } from "@prisma/client";
 
 export type CreateTierCollecte = {
   nom: string;
   adresse: string;
   typeEntreprise: string;
-  scoringFacilite: string;
+  scoringFacilite: Score;
   nomContact: string;
   tel: string;
   role: Role;
   mail: string;
   password: string;
-  dateCreation: string;
-  collectes?: {
-    connect?: {
-      idNumLot: number;
-    }[];
-  };
-  factures?: {
-    connect?: {
-      idFacture: number;
-    }[];
-  };
+  dateCreation: Date;
 };
 
 export type UpdateTierCollecte = {
   nom?: string;
   adresse?: string;
   typeEntreprise?: string;
-  scoringFacilite?: string;
+  scoringFacilite?: Score;
   nomContact?: string;
   tel?: string;
   role?: Role;
   mail?: string;
   password?: string;
-  dateCreation?: string;
-  collectes?: {
-    connect?: {
-      idNumLot: number;
-    }[];
-    disconnect?: {
-      idNumLot: number;
-    }[];
-  };
-  factures?: {
-    connect?: {
-      idFacture: number;
-    }[];
-    disconnect?: {
-      idFacture: number;
-    }[];
-  };
+  dateCreation?: Date;
 };
