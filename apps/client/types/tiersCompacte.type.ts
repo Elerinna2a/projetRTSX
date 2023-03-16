@@ -9,12 +9,12 @@ export type CreateTiersCompacte = {
   mail: string;
   expedition?: {
     connect?: {
-      idNumBl: number;
+      idNumBl?: number;
     }[];
   };
   factures?: {
     connect?: {
-      idFacture: number;
+      idFacture?: number;
     }[];
   };
 };

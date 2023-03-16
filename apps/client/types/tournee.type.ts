@@ -1,7 +1,9 @@
+import { Remorque, TypeVehicule } from "@prisma/client";
+
 export type CreateTournee = {
   dateTournee: string;
-  typeVehicule: string;
-  remorque: string;
+  typeVehicule: TypeVehicule;
+  remorque: Remorque;
   chauffeurId?: number;
   tierCollecteId?: number;
 };
@@ -9,8 +11,8 @@ export type CreateTournee = {
 export type UpdateTournee = {
   idTournee: number;
   dateTournee?: string;
-  typeVehicule?: string;
-  remorque?: string;
+  typeVehicule?: TypeVehicule;
+  remorque?: Remorque;
   chauffeurId?: number;
   tierCollecteId?: number;
 };
@@ -18,8 +20,8 @@ export type UpdateTournee = {
 export type Tournee = {
   idTournee: number;
   dateTournee: string;
-  typeVehicule: string;
-  remorque: string;
-  chauffeurId: number;
-  tierCollecteId: number;
+  typeVehicule: TypeVehicule;
+  remorque: Remorque;
+  chauffeurId?: number;
+  tierCollecteId?: number;
 };

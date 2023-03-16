@@ -1,6 +1,8 @@
+import { Forme } from "@prisma/client";
+
 export type CreateCollecte = {
   quantite: number;
-  formeCollecte: string;
+  formeCollecte: Forme;
   dateCollecte: string;
   nomTierCollecte: string;
   employeId?: number;
@@ -10,7 +12,7 @@ export type CreateCollecte = {
 
 export type UpdateCollecte = {
   quantite?: number;
-  formeCollecte?: string;
+  formeCollecte?: Forme;
   dateCollecte?: string;
   nomTierCollecte?: string;
   employeId?: number;
@@ -21,7 +23,7 @@ export type UpdateCollecte = {
 export type Collecte = {
   idNumLot: number;
   quantite: number;
-  formeCollecte: string;
+  formeCollecte: Forme;
   dateCollecte: string;
   nomTierCollecte: string;
   employeId: number;
