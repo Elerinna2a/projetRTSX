@@ -24,7 +24,6 @@ export default function CreateTiersCollecte() {
   const telRef = useRef<HTMLInputElement | null>(null);
   const mailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const dateCreationRef = useRef<HTMLInputElement | null>(null);
   const collectesRef = useRef<HTMLInputElement | null>(null);
   const factureRef = useRef<HTMLInputElement | null>(null);
 
@@ -37,7 +36,6 @@ export default function CreateTiersCollecte() {
     const tel = telRef.current?.value;
     const mail = mailRef.current?.value;
     const password = passwordRef.current?.value;
-    const dateCreation = dateCreationRef.current?.value;
     const collectes = collectesRef.current?.value;
     const facture = factureRef.current?.value;
 
@@ -51,7 +49,6 @@ export default function CreateTiersCollecte() {
         tel,
         mail,
         password,
-        dateCreation,
         collectess: collectes
           ? { create: [{ dateCollectes: collectes }] }
           : undefined,
@@ -81,15 +78,12 @@ export default function CreateTiersCollecte() {
             <Input type="text" placeholder="Nom" ref={nomRef} />
             <FormLabel>Adresse</FormLabel>
             <Input type="text" placeholder="Adresse" ref={adresseRef} />
-            <FormLabel>Date</FormLabel>
-            <Input type="date" placeholder="date" ref={dateCreationRef} />
             <FormLabel>Type de tiers</FormLabel>
             <Input
               type="text"
               placeholder="Type de tiers"
               ref={typeEntrepriseRef}
             />
-            <FormLabel>Type de tiers</FormLabel>
             <FormLabel>Scoring facilité</FormLabel>
             <Select ref={scoringFaciliteRef}>
               <option value="UN">UN</option>
