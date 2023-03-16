@@ -108,9 +108,13 @@ export default function Traitement() {
                         </Box>
                       </Flex>
                       <Flex gap={"4"} flexDirection="column">
-                        <Button ml={6}>
-                          <EditIcon color={"teal"} />
-                        </Button>
+                        <Link
+                          to={`/update-traitements/${traitement.idTraitement}`}
+                        >
+                          <Button ml={6}>
+                            <EditIcon color={"teal"} />
+                          </Button>
+                        </Link>
                         <Button
                           ml={6}
                           onClick={() => handleDelete(traitement.idTraitement)}

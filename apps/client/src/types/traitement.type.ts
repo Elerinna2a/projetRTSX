@@ -1,4 +1,3 @@
-
 export type CreateTraitement = {
   dateTraitement: string;
   qualite: string;
@@ -7,6 +6,7 @@ export type CreateTraitement = {
 };
 
 export type UpdateTraitement = {
+  idTraitement?: number;
   dateTraitement?: string;
   qualite?: string;
   quantiteCorpsEtranger?: number;
@@ -14,6 +14,7 @@ export type UpdateTraitement = {
 };
 
 export type Traitement = {
+  idTraitement?: number;
   dateTraitement?: string;
   qualite?: string;
   quantiteCorpsEtranger?: number;

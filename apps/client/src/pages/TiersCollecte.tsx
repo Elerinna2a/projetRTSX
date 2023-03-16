@@ -70,7 +70,7 @@ export default function TiersCollecte() {
         <Box>
           <Flex gap={3} justifyContent={"center"} mb={4}>
             <Heading>Tiers Collecte </Heading>
-            <Link to="/create-collecte">
+            <Link to="/create-tierscollecte">
               <Button leftIcon={<AddIcon />} colorScheme="teal">
                 Crée un tiers
               </Button>

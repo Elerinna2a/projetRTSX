@@ -50,7 +50,7 @@ model TierCollecte {
   nom             String
   adresse         String
   typeEntreprise  String
-  scoringFacilite Int
+  scoringFacilite String
   nomContact      String
   tel             String
   role            Role   @default(CLIENT)

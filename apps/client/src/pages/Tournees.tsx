@@ -95,18 +95,31 @@ export default function Tournees() {
                           </Heading>
                           <Box>
                             <p>
-                              {" "}
-                              <strong>Date</strong> : {tournee.dateTournee}{" "}
+                              <strong>Id du chauffeur:</strong>{" "}
+                              {tournee.chauffeurId}
                             </p>
-                            <p> Véhicule : {tournee.typeVehicule}</p>
-                            <p> Remorque : {tournee.remorque}</p>
+                            <p>
+                              {" "}
+                              <strong>Date : </strong> {tournee.dateTournee}{" "}
+                            </p>
+                            <p>
+                              <strong> Véhicule :</strong>{" "}
+                              {tournee.typeVehicule}
+                            </p>
+                            <p>
+                              {" "}
+                              <strong> Remorque : </strong>
+                              {tournee.remorque}
+                            </p>
                           </Box>
                         </Box>
                       </Flex>
                       <Flex gap={"4"} flexDirection="column">
-                        <Button ml={6}>
-                          <EditIcon color="teal" />
-                        </Button>
+                        <Link to={`/update-tournees/${tournee.idTournee}`}>
+                          <Button ml={6}>
+                            <EditIcon color="teal" />
+                          </Button>
+                        </Link>
                         <Button
                           ml={6}
                           onClick={() => handleDelete(tournee.idTournee)}

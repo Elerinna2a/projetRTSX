@@ -33,7 +33,6 @@ export default function UpdateTournee({}) {
       if (chauffeurId === undefined || chauffeurId === null) {
         return alert("Veuillez choisir un chauffeur");
       }
-
       const response = await axios.put(`http://localhost:3000/tournees/${id}`, {
         typeVehicule,
         dateTournee,
@@ -64,6 +63,12 @@ export default function UpdateTournee({}) {
       <VStack width={"30%"} m={"auto"}>
         <Heading>Modifier une tournee:</Heading>
         <FormControl isRequired>
+          <FormLabel>Id du chauffeur </FormLabel>
+          <Input
+            type="number"
+            ref={chauffeurIdRef}
+            defaultValue={tournee?.chauffeurId}
+          />
           <FormLabel>Date tournée </FormLabel>
           <Input
             placeholder={tournee?.dateTournee}

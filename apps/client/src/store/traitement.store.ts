@@ -1,10 +1,9 @@
-import { Qualite } from "@prisma/client";
 import { map } from "nanostores";
 
 export type Traitement = {
   idTraitement?: number;
   dateTraitement?: string;
-  qualite?: Qualite;
+  qualite?: string;
   quantiteCorpsEtranger?: string;
   scoringBonusMalus?: any;
 };

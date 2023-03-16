@@ -99,7 +99,7 @@ export default function Employes() {
                         <Box>
                           <Heading size={"md"} mb={4}>
                             <Link to={`/employes/${employe.id}`}>
-                              employe N°
+                              Employe N°
                               {employe.id}
                             </Link>
                           </Heading>

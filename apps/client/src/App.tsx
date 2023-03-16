@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import CreateCollecte from "./components/create/CreateCollecte";
 import CreateEmploye from "./components/create/CreateEmploye";
 import CreateFacture from "./components/create/CreateFacture";
+import CreateTiersCollecte from "./components/create/CreateTiersCollecte";
 import CreateTiersCompacte from "./components/create/CreateTiersCompacte";
 import CreateTournee from "./components/create/CreateTournee";
 import CreateTraitement from "./components/create/CreateTraitement";
@@ -15,6 +16,7 @@ import TraitementDetails from "./components/details/TraitementDetails";
 import UpdateCollecte from "./components/update/UpdateCollecte";
 import UpdateEmploye from "./components/update/UpdateEmploye";
 import UpdateTournee from "./components/update/UpdateTournee";
+import UpdateTraitement from "./components/update/UpdateTraitement";
 import Mainlayout from "./layouts/MainLayout";
 import Collecte from "./pages/Collectes";
 import Employes from "./pages/Employes";
@@ -84,11 +86,19 @@ export default function App() {
             element={authonly(<CreateTiersCompacte />)}
           />
           <Route path="/create-facture" element={authonly(<CreateFacture />)} />
+          <Route
+            path="/create-tierscollecte"
+            element={authonly(<CreateTiersCollecte />)}
+          />
 
           {/* update page */}
           <Route path="/update-employes/:id" element={<UpdateEmploye />} />
           <Route path="/update-collectes/:id" element={<UpdateCollecte />} />
           <Route path="/update-tournees/:id" element={<UpdateTournee />} />
+          <Route
+            path="/update-traitements/:id"
+            element={<UpdateTraitement />}
+          />
 
           {/* Error page */}
           <Route path="/*" element={<Error />} />
