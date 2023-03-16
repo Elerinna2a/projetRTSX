@@ -10,8 +10,11 @@ import CreateTraitement from "./components/create/CreateTraitement";
 import CollecteDetails from "./components/details/CollecteDetails";
 import EmployeDetails from "./components/details/EmployeDetails";
 import ExpeditionDetails from "./components/details/ExpeditionDetails";
+import TourneeDetails from "./components/details/TourneeDetails";
+import TraitementDetails from "./components/details/TraitementDetails";
 import UpdateCollecte from "./components/update/UpdateCollecte";
 import UpdateEmploye from "./components/update/UpdateEmploye";
+import UpdateTournee from "./components/update/UpdateTournee";
 import Mainlayout from "./layouts/MainLayout";
 import Collecte from "./pages/Collectes";
 import Employes from "./pages/Employes";
@@ -62,6 +65,8 @@ export default function App() {
           <Route path="/collectes/:id" element={<CollecteDetails />} />
           <Route path="/employes/:id" element={<EmployeDetails />} />
           <Route path="/expeditions/:id" element={<ExpeditionDetails />} />
+          <Route path="/traitements/:id" element={<TraitementDetails />} />
+          <Route path="/tournees/:id" element={<TourneeDetails />} />
 
           {/* create page route */}
           <Route path="/create-employe" element={authonly(<CreateEmploye />)} />
@@ -83,6 +88,7 @@ export default function App() {
           {/* update page */}
           <Route path="/update-employes/:id" element={<UpdateEmploye />} />
           <Route path="/update-collectes/:id" element={<UpdateCollecte />} />
+          <Route path="/update-tournees/:id" element={<UpdateTournee />} />
 
           {/* Error page */}
           <Route path="/*" element={<Error />} />

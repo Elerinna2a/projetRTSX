@@ -89,7 +89,9 @@ export default function Tournees() {
                       <Flex>
                         <Box>
                           <Heading size={"md"} mb={4}>
-                            Collecte N°{tournee.idTournee}
+                            <Link to={`/tournees/${tournee.idTournee}`}>
+                              Tournée N°{tournee.idTournee}
+                            </Link>
                           </Heading>
                           <Box>
                             <p>

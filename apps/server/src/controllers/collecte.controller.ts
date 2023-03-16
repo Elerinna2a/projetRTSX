@@ -30,7 +30,7 @@ export class CollecteController {
     }
   }
 
-async createCollecte(req: Request, res: Response) {
+  async createCollecte(req: Request, res: Response) {
     const { status, message, data } = await collecteService.createCollecte(
       req.body
     );

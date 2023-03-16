@@ -93,7 +93,7 @@ export default function Collecte() {
                       <Flex>
                         <Box>
                           <Heading size={"md"} mb={4}>
-                            <Link to={`/collecte/${collecte.idNumLot}`}>
+                            <Link to={`/collectes/${collecte.idNumLot}`}>
                               Collecte N°{collecte.idNumLot}
                             </Link>
                           </Heading>

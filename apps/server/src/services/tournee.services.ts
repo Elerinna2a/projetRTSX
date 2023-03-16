@@ -15,23 +15,31 @@ export class TourneeService {
     return tournee;
   }
 
-async createTournee(data: CreateTournee): Promise<{
+  async createTournee(data: CreateTournee): Promise<{
     status: "SUCCESS" | "ERROR";
     message: string;
     data: Tournee | null;
   }> {
     try {
       const newTournee = await prismaClient.tournee.create({ data: data });
-      return {
-        status: "SUCCESS",
-        message: "Création réussie !",
-        data: newTournee,
-      };
+      if (newTournee) {
+        return {
+          status: "SUCCESS",
+          message: "Tournee créé avec succès",
+          data: newTournee,
+        };
+      } else {
+        return {
+          status: "ERROR",
+          message: "Erreur lors de la création de la tournee",
+          data: null,
+        };
+      }
     } catch (error) {
       console.log(error);
       return {
         status: "ERROR",
-        message: "Problème lors de la création du tier collecté...",
+        message: "Problème lors de la création tournée",
         data: null,
       };
     }

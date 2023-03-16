@@ -18,7 +18,6 @@ export default function UpdateCollecte({}) {
 
   const [collecte, setCollecte] = useState<Collectes>();
 
-  const idNumLotRef = useRef<HTMLInputElement | null>(null);
   const nomTierCollecteRef = useRef<HTMLInputElement | null>(null);
   const quantiteRef = useRef<HTMLInputElement | null>(null);
   const formeRef = useRef<HTMLSelectElement | null>(null);
@@ -28,31 +27,38 @@ export default function UpdateCollecte({}) {
   const tiersCollecteRef = useRef<HTMLInputElement | null>(null);
 
   const handleUpdateCollecte = async () => {
-    const idNumLot = idNumLotRef.current?.value;
     const nomTierCollecte = nomTierCollecteRef.current?.value;
     const quantite = quantiteRef.current?.value;
     const formeCollecte = formeRef.current?.value;
-    // const traitementId = traitementIdRef.current?.value;
-    // const employeId = employeIdRef.current?.value;
-    // const TierCollecte = tiersCollecteRef.current?.value;
+    const traitementId = traitementIdRef.current?.value;
+    const employeId = employeIdRef.current?.value;
+    const tiercollecteId = tiersCollecteRef.current?.value;
+    const dateCollecte = dateCollecteRef.current?.value;
     try {
-      if (quantite === null || quantite === undefined) {
+      if (
+        quantite === undefined ||
+        employeId === undefined ||
+        tiercollecteId === undefined ||
+        traitementId === undefined ||
+        quantite === null ||
+        employeId === null ||
+        tiercollecteId === null ||
+        traitementId === null
+      ) {
         return;
       }
       const parsedQuantite = parseInt(quantite);
-      if (isNaN(parsedQuantite)) {
-        return;
-      }
+
       const response = await axios.put(
         `http://localhost:3000/collectes/${id}`,
         {
-          idNumLot,
           nomTierCollecte,
           quantite: parsedQuantite,
           formeCollecte,
-          // traitementId,
-          // employeId,
-          // TierCollecte,
+          dateCollecte,
+          traitementId: parseInt(traitementId),
+          employeId: parseInt(employeId),
+          tiercollecteId: parseInt(tiercollecteId),
         }
       );
       navigate("/collectes");
@@ -102,7 +108,14 @@ export default function UpdateCollecte({}) {
             <option value="VRAC">Vrac</option>
             <option value="PALETTE">Palette</option>
           </Select>
-          {/* <FormLabel>ID du traitement</FormLabel>
+          <FormLabel>Date Collecte</FormLabel>
+          <Input
+            placeholder={collecte?.dateCollecte}
+            type="date"
+            ref={dateCollecteRef}
+            defaultValue={collecte?.dateCollecte}
+          />
+          <FormLabel>ID du traitement</FormLabel>
           <Input
             type="number"
             ref={traitementIdRef}
@@ -112,13 +125,10 @@ export default function UpdateCollecte({}) {
           <Input
             type="text"
             ref={employeIdRef}
-            defaultValue={collecte?.employeeId}
+            defaultValue={collecte?.employeId}
           />
           <FormLabel>Tier collecté</FormLabel>
-          <Input
-            ref={tiersCollecteRef}
-            value={collecte?.tierCollecte?.toString()}
-          /> */}
+          <Input ref={tiersCollecteRef} value={collecte?.tiercollecteId} />
         </FormControl>
         <Button onClick={handleUpdateCollecte}>Modifier collecte</Button>
       </VStack>

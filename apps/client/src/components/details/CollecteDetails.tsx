@@ -29,10 +29,11 @@ export default function CollecteDetails() {
         {collecte && (
           <Flex flexDirection={"column"}>
             <Text>ID : {collecte.idNumLot}</Text>
+            <Text>Nom du tiers : {collecte.nomTierCollecte}</Text>
             <Text>Quantite : {collecte.quantite}</Text>
             <Text>Forme de la collecte : {collecte.formeCollecte}</Text>
             <Link to={`/traitements/${collecte.traitementId}`}>
-              <Text>Id de l'opérateur : {collecte.traitementId}</Text>
+              <Text>Id du traitement lié : {collecte.traitementId}</Text>
             </Link>
             <Link to={`/employes/${collecte.employeId}`}>
               <Text>Id de du chauffeur : {collecte.employeId}</Text>

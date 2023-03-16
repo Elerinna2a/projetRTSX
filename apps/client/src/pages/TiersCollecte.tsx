@@ -97,7 +97,7 @@ export default function TiersCollecte() {
                             <Link
                               to={`/collecte/${tierCollecte.idTierCollecte}`}
                             >
-                              Collecte N°{tierCollecte.idTierCollecte}
+                              Tier Collecte N°{tierCollecte.idTierCollecte}
                             </Link>
                           </Heading>
                           <Box>
