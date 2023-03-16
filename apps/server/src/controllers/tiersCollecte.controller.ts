@@ -31,10 +31,9 @@ export class TierCollecteController {
     }
   }
 
-async createTierCollecte(req: Request, res: Response) {
-    const { status, message, data } = await tierCollecteService.createTierCollecte(
-      req.body
-    );
+  async createTierCollecte(req: Request, res: Response) {
+    const { status, message, data } =
+      await tierCollecteService.createTierCollecte(req.body);
 
     if (status === "ERROR") {
       res.json({

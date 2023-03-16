@@ -5,6 +5,11 @@ export type CreateTraitement = {
   scoringBonusMalus: number;
   operateurId?: number;
   expeditionId?: number;
+  collecte?: {
+    connect?: {
+      idNumLot: number;
+    }[];
+  };
 };
 
 export type UpdateTraitement = {

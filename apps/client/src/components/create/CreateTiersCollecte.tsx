@@ -5,6 +5,7 @@ import {
   FormLabel,
   Heading,
   Input,
+  Select,
   Spacer,
 } from "@chakra-ui/react";
 import axios from "axios";
@@ -18,10 +19,11 @@ export default function CreateTiersCollecte() {
   const nomRef = useRef<HTMLInputElement | null>(null);
   const adresseRef = useRef<HTMLInputElement | null>(null);
   const typeEntrepriseRef = useRef<HTMLInputElement | null>(null);
-  const scoringFaciliteRef = useRef<HTMLInputElement | null>(null);
+  const scoringFaciliteRef = useRef<HTMLSelectElement | null>(null);
   const nomContactRef = useRef<HTMLInputElement | null>(null);
   const telRef = useRef<HTMLInputElement | null>(null);
   const mailRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
   const dateCreationRef = useRef<HTMLInputElement | null>(null);
   const collectesRef = useRef<HTMLInputElement | null>(null);
   const factureRef = useRef<HTMLInputElement | null>(null);
@@ -34,6 +36,7 @@ export default function CreateTiersCollecte() {
     const nomContact = nomContactRef.current?.value;
     const tel = telRef.current?.value;
     const mail = mailRef.current?.value;
+    const password = passwordRef.current?.value;
     const dateCreation = dateCreationRef.current?.value;
     const collectes = collectesRef.current?.value;
     const facture = factureRef.current?.value;
@@ -47,6 +50,7 @@ export default function CreateTiersCollecte() {
         nomContact,
         tel,
         mail,
+        password,
         dateCreation,
         collectess: collectes
           ? { create: [{ dateCollectes: collectes }] }
@@ -85,6 +89,13 @@ export default function CreateTiersCollecte() {
               placeholder="Type de tiers"
               ref={typeEntrepriseRef}
             />
+            <FormLabel>Type de tiers</FormLabel>
+            <FormLabel>Scoring facilité</FormLabel>
+            <Select ref={scoringFaciliteRef}>
+              <option value="UN">UN</option>
+              <option value="DEUX">DEUX</option>
+              <option value="TROIS">TROIS</option>
+            </Select>
             <FormLabel>Nom du contact</FormLabel>
             <Input
               ref={nomContactRef}
@@ -95,6 +106,8 @@ export default function CreateTiersCollecte() {
             <Input type="tel" placeholder="Tel du contact" ref={telRef} />
             <FormLabel>E-Mail</FormLabel>
             <Input type="email" placeholder="E-Mail" ref={mailRef} />
+            <FormLabel>Password</FormLabel>
+            <Input ref={passwordRef} placeholder="Nom du contact" type="text" />
           </FormControl>
           <FormControl>
             <FormLabel>Facture n°</FormLabel>

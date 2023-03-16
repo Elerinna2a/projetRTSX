@@ -4,8 +4,8 @@ export type CreateFacture = {
   dateFacture: string;
   montant: number;
   datePaiementFacture: string;
-  tierCompacte: TiersCompacte;
-  tiersCollecte: TierCollecte;
+  tierCompacteId?: number;
+  tiersCollecteId?: number;
 };
 
 export type UpdateFacture = {

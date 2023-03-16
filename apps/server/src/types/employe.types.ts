@@ -8,6 +8,21 @@ export type CreateEmploye = {
   role: Role;
   email: string;
   password: string;
+  collectes?: {
+    connect?: {
+      idNumLot: number;
+    }[];
+  };
+  traitements?: {
+    connect?: {
+      idTraitement: number;
+    }[];
+  };
+  tournees?: {
+    connect?: {
+      idTournee: number;
+    }[];
+  };
 };
 
 export type UpdateEmploye = {

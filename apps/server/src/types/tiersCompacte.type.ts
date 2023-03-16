@@ -7,11 +7,15 @@ export type CreateTiersCompacte = {
   contactNom: string;
   tel: string;
   mail: string;
-  expeditions?: {
-    create: Expedition[];
+  expedition?: {
+    connect?: {
+      idNumBl: number;
+    }[];
   };
   factures?: {
-    create: Facture[];
+    connect?: {
+      idFacture: number;
+    }[];
   };
 };
 

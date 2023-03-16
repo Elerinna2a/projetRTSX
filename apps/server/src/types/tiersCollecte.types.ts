@@ -1,10 +1,10 @@
-import { Role, Score } from "@prisma/client";
+import { Role } from "@prisma/client";
 
 export type CreateTierCollecte = {
   nom: string;
   adresse: string;
   typeEntreprise: string;
-  scoringFacilite: Score;
+  scoringFacilite: string;
   nomContact: string;
   tel: string;
   role: Role;
@@ -27,7 +27,7 @@ export type UpdateTierCollecte = {
   nom?: string;
   adresse?: string;
   typeEntreprise?: string;
-  scoringFacilite?: Score;
+  scoringFacilite?: string;
   nomContact?: string;
   tel?: string;
   role?: Role;
