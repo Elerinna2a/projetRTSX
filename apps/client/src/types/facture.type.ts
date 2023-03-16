@@ -1,5 +1,3 @@
-import { TierCollecte, TiersCompacte } from "@prisma/client";
-
 export type CreateFacture = {
   dateFacture: string;
   montant: number;
@@ -11,7 +9,7 @@ export type CreateFacture = {
 export type UpdateFacture = {
   dateFacture?: string;
   montant?: number;
-  datePaiementFacture: string;
-  tierCompacte?: TiersCompacte;
-  tiersCollecte?: TierCollecte;
+  datePaiementFacture?: string;
+  tierCompacte?: number;
+  tiersCollecte?: number;
 };

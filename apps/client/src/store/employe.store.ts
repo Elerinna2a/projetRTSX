@@ -10,9 +10,23 @@ export type Employe = {
   role?: Role;
   email?: string;
   password?: string;
-  dateCreation?: string;
-  tourneeId?: number;
-  traitementId?: number;
+  dateCreation?: Date;
+  session?: string;
+  collectes?: {
+    connect?: {
+      idNumLot: number;
+    }[];
+  };
+  traitements?: {
+    connect?: {
+      idTraitement: number;
+    }[];
+  };
+  tournees?: {
+    connect?: {
+      idTournee: number;
+    }[];
+  };
 };
 
 export const employe = map<Employe>({});

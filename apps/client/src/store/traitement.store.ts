@@ -4,8 +4,15 @@ export type Traitement = {
   idTraitement?: number;
   dateTraitement?: string;
   qualite?: string;
-  quantiteCorpsEtranger?: string;
-  scoringBonusMalus?: any;
+  quantiteCorpsEtranger?: number;
+  scoringBonusMalus?: number;
+  operateurId?: number;
+  expeditionId?: number;
+  collecte?: {
+    connect?: {
+      idNumLot: number;
+    }[];
+  };
 };
 
 export const traitement = map<Traitement>({});

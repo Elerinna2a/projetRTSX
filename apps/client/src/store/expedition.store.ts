@@ -2,7 +2,7 @@ import { map } from "nanostores";
 
 export type Expedition = {
   idNumBl?: number;
-  dateExpedition?: Date;
+  dateExpedition?: string;
   destinataire?: string;
   nbPalette?: number;
   poidNetTotal?: number;

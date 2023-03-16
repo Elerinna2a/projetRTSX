@@ -6,6 +6,7 @@ export type Tournee = {
   typeVehicule?: string;
   remorque?: string;
   chauffeurId?: number;
+  tierCollecteId?: number;
 };
 
 export const tournee = map<Tournee>({});

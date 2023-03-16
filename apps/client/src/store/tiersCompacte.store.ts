@@ -1,4 +1,3 @@
-import { Expedition, Facture } from "@prisma/client";
 import { map } from "nanostores";
 
 export type TierCompacte = {
@@ -9,8 +8,16 @@ export type TierCompacte = {
   contactNom?: string;
   tel?: string;
   mail?: string;
-  facture?: Facture;
-  expedition?: Expedition;
+  expedition?: {
+    connect?: {
+      idNumBl: number;
+    }[];
+  };
+  factures?: {
+    connect?: {
+      idFacture: number;
+    }[];
+  };
 };
 
 export const tierCompacte = map<TierCompacte>({});

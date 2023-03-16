@@ -1,18 +1,33 @@
+import { Role } from "@prisma/client";
 import { map } from "nanostores";
 
 export type TierCollecte = {
-  idTierCollecte?: number;
   nom?: string;
   adresse?: string;
   typeEntreprise?: string;
-  scoringFacilite?: any;
+  scoringFacilite?: string;
   nomContact?: string;
   tel?: string;
+  role?: Role;
   mail?: string;
   password?: string;
   dateCreation?: string;
-  collecteId?: number;
-  factureId?: number;
+  collectes?: {
+    connect?: {
+      idNumLot: number;
+    }[];
+    disconnect?: {
+      idNumLot: number;
+    }[];
+  };
+  factures?: {
+    connect?: {
+      idFacture: number;
+    }[];
+    disconnect?: {
+      idFacture: number;
+    }[];
+  };
 };
 
 export const tierCollecte = map<TierCollecte>({});
