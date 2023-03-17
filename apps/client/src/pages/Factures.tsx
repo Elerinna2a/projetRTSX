@@ -102,12 +102,13 @@ export default function Factures() {
                         </Box>
                       </Flex>
                       <Flex gap={"4"} flexDirection="column">
-                        <Button ml={6}>
+                        <Button ml={6} color="teal">
                           <EditIcon />
                         </Button>
                         <Button
                           ml={6}
                           onClick={() => handleDelete(factures.idFacture)}
+                          color="crimson"
                         >
                           <DeleteIcon />
                         </Button>

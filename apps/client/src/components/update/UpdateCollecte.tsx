@@ -80,6 +80,7 @@ export default function UpdateCollecte({}) {
     };
     getCollecte();
   }, [id]);
+
   return (
     <div>
       <VStack width={"30%"} m={"auto"}>

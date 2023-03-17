@@ -33,18 +33,21 @@ export default function ExpeditionDetails() {
             <Text>Destinataire : {expedition.destinataire}</Text>
             <Text>Nombre de palettes : {expedition.nbPalette}</Text>
             <Text>Poids net Total : {expedition.poidNetTotal}kg</Text>
-            <Link to={`traitements/${expedition.traitementId}`}>
-              <Text>ID du traitement : {expedition.traitementId}</Text>
-            </Link>
-            <Link to={`tierscompactes/${expedition.tiersCompacteId}`}>
-              <Text>ID du tiers Compacte : {expedition.tiersCompacteId}</Text>
-            </Link>
-            {expedition.factureId ? (
+            {/* si {expedition.traitementId} est vide alors n'affiche rien  */}
+            {expedition.traitementId && (
+              <Link to={`traitements/${expedition.traitementId}`}>
+                <Text>ID du traitement : {expedition.traitementId}</Text>
+              </Link>
+            )}
+            {expedition.tiersCompacteId && (
+              <Link to={`tierscompactes/${expedition.tiersCompacteId}`}>
+                <Text>ID du tiers Compacte : {expedition.tiersCompacteId}</Text>
+              </Link>
+            )}
+            {expedition.factureId && (
               <Link to={`factures/${expedition.factureId}`}>
                 <Text>ID de la facture : {expedition.factureId}</Text>
               </Link>
-            ) : (
-              ""
             )}
           </Flex>
         )}

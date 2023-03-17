@@ -15,26 +15,30 @@ export default function CreateFacture() {
 
   const dateFactureRef = useRef<HTMLInputElement | null>(null);
   const montantRef = useRef<HTMLInputElement | null>(null);
-  const nomTierCollecteRef = useRef<HTMLInputElement | null>(null);
-  const nomTiersTompacteRef = useRef<HTMLInputElement | null>(null);
-  const num_expeditionRef = useRef<HTMLInputElement | null>(null);
+  const datePaiementFactureRef = useRef<HTMLInputElement | null>(null);
+  const tierCompacteIdRef = useRef<HTMLInputElement | null>(null);
+  const tiersCollecteIdRef = useRef<HTMLInputElement | null>(null);
 
   const handleCreateFacture = async () => {
     const dateFacture = dateFactureRef.current?.value;
     const montant = montantRef.current?.value;
-    const nomTierCollecte = nomTierCollecteRef.current?.value;
-    const nomTiersTompacte = nomTiersTompacteRef.current?.value;
-    const num_expedition = num_expeditionRef.current?.value;
+    const datePaiementFacture = datePaiementFactureRef.current?.value;
+    const tierCompacteId = tierCompacteIdRef.current?.value;
+    const tiersCollecteId = tiersCollecteIdRef.current?.value;
     try {
-      if (montant === undefined) {
+      if (
+        montant === undefined ||
+        tierCompacteId === undefined ||
+        tiersCollecteId === undefined
+      ) {
         return;
       }
       const response = await axios.post("http://localhost:3000/factures", {
         dateFacture,
         montant: parseFloat(montant),
-        nomTierCollecte,
-        nomTiersTompacte,
-        num_expedition,
+        datePaiementFacture,
+        tierCompacteId: parseInt(tierCompacteId),
+        tiersCollecteId: parseInt(tiersCollecteId),
       });
       navigate("/factures");
     } catch (error) {
@@ -47,16 +51,16 @@ export default function CreateFacture() {
       <VStack width={"30%"} m={"auto"}>
         <Heading>Creer une facture</Heading>
         <FormControl isRequired>
-          <FormLabel>Date </FormLabel>
+          <FormLabel>Date création de la facture</FormLabel>
           <Input type="date" ref={dateFactureRef} />
           <FormLabel>Montant</FormLabel>
           <Input type="float" ref={montantRef} />
-          <FormLabel>Id du tiers collecte</FormLabel>
-          <Input type="text" ref={nomTierCollecteRef} />
+          <FormLabel>Date paiement de la facture</FormLabel>
+          <Input type="date" ref={datePaiementFactureRef} />
           <FormLabel>Id du tiers compacte</FormLabel>
-          <Input type="text" ref={nomTiersTompacteRef} />
+          <Input type="number" ref={tierCompacteIdRef} />
           <FormLabel>Id Num BL</FormLabel>
-          <Input type="text" ref={num_expeditionRef} />
+          <Input type="number" ref={tiersCollecteIdRef} />
         </FormControl>
         <Button onClick={handleCreateFacture}>Creer Facture</Button>
       </VStack>
