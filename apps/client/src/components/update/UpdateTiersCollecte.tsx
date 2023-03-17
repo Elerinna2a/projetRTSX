@@ -9,12 +9,16 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Employes from "../../pages/Employes";
+import { TierCollecte } from "../../store/tierCollecte.store";
 
-export default function CreateTiersCollecte() {
+export default function UpdateTiersCollecte({}) {
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const [tiersCollecte, setTiersCollecte] = useState<TierCollecte>();
 
   const nomRef = useRef<HTMLInputElement | null>(null);
   const adresseRef = useRef<HTMLInputElement | null>(null);
@@ -27,7 +31,7 @@ export default function CreateTiersCollecte() {
   const collectesRef = useRef<HTMLInputElement | null>(null);
   const factureRef = useRef<HTMLInputElement | null>(null);
 
-  const handleCreateTiersCollecte = async () => {
+  const handleUpdateTiersCollecte = async () => {
     const nom = nomRef.current?.value;
     const adresse = adresseRef.current?.value;
     const typeEntreprise = typeEntrepriseRef.current?.value;
@@ -40,33 +44,40 @@ export default function CreateTiersCollecte() {
     const facture = factureRef.current?.value;
 
     try {
-      const createTiersCollecte = {
-        nom,
-        adresse,
-        typeEntreprise,
-        scoringFacilite,
-        nomContact,
-        tel,
-        mail,
-        password,
-        collectess: collectes
-          ? { create: [{ dateCollectes: collectes }] }
-          : undefined,
-        factures: facture
-          ? { connect: [{ idFacture: parseInt(facture) }] }
-          : undefined,
-      };
-
-      const response = await axios.post(
-        "http://localhost:3000/tierscollectes",
-        createTiersCollecte
+      const response = await axios.put(
+        `http://localhost:3000/tierscollectes/${id}`,
+        {
+          nom,
+          adresse,
+          typeEntreprise,
+          scoringFacilite,
+          nomContact,
+          tel,
+          mail,
+          password,
+          collectes,
+          facture,
+        }
       );
-      console.log(response);
-      navigate("/tiers-collectes");
-    } catch (err) {
-      console.log(err);
+      navigate("/factures");
+    } catch (error) {
+      console.error(error);
     }
   };
+
+  useEffect(() => {
+    const getTierCollecte = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/tierscollectes/${id}`
+        );
+        setTiersCollecte(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getTierCollecte();
+  }, [id]);
 
   return (
     <div>
@@ -75,17 +86,24 @@ export default function CreateTiersCollecte() {
           <Heading>Créer un tiers Collecte:</Heading>
           <FormControl isRequired>
             <FormLabel>Nom</FormLabel>
-            <Input type="text" placeholder="Nom" ref={nomRef} />
+            <Input type="text" defaultValue={tiersCollecte?.nom} ref={nomRef} />
             <FormLabel>Adresse</FormLabel>
-            <Input type="text" placeholder="Adresse" ref={adresseRef} />
+            <Input
+              type="text"
+              defaultValue={tiersCollecte?.adresse}
+              ref={adresseRef}
+            />
             <FormLabel>Type de tiers</FormLabel>
             <Input
               type="text"
-              placeholder="Type de tiers"
+              defaultValue={tiersCollecte?.typeEntreprise}
               ref={typeEntrepriseRef}
             />
             <FormLabel>Scoring facilité</FormLabel>
-            <Select ref={scoringFaciliteRef}>
+            <Select
+              ref={scoringFaciliteRef}
+              defaultValue={tiersCollecte?.scoringFacilite}
+            >
               <option value="UN">UN</option>
               <option value="DEUX">DEUX</option>
               <option value="TROIS">TROIS</option>
@@ -93,31 +111,39 @@ export default function CreateTiersCollecte() {
             <FormLabel>Nom du contact</FormLabel>
             <Input
               ref={nomContactRef}
-              placeholder="Nom du contact"
+              defaultValue={tiersCollecte?.nomContact}
               type="text"
             />
             <FormLabel>Tel du contact</FormLabel>
-            <Input type="tel" placeholder="Tel du contact" ref={telRef} />
+            <Input type="tel" defaultValue={tiersCollecte?.tel} ref={telRef} />
             <FormLabel>E-Mail</FormLabel>
-            <Input type="email" placeholder="E-Mail" ref={mailRef} />
+            <Input
+              type="email"
+              defaultValue={tiersCollecte?.mail}
+              ref={mailRef}
+            />
             <FormLabel>Password</FormLabel>
-            <Input ref={passwordRef} placeholder="Nom du contact" type="text" />
+            <Input
+              ref={passwordRef}
+              defaultValue={tiersCollecte?.password}
+              type="password"
+            />
           </FormControl>
-          <FormControl>
+          {/* <FormControl>
             <FormLabel>Facture n°</FormLabel>
             <Input
               type="number"
-              placeholder="Facture liée à la collecte"
+              defaultValue={tiersCollecte?.factures?.connect[0].idFacture}
               ref={factureRef}
             />
-            {/* <FormLabel>Collectes n°</FormLabel>
+            <FormLabel>Collectes n°</FormLabel>
             <Input
               type="number"
-              placeholder="Collectes n° lié à la collecte"
+              defaultValue={tiersCollecte?.collectes?.connect[0].idCollecte}
               ref={collectesRef}
-            /> */}
-          </FormControl>
-          <Button onClick={() => handleCreateTiersCollecte()}>Valider</Button>
+            />
+          </FormControl> */}
+          <Button onClick={() => handleUpdateTiersCollecte()}>Valider</Button>
         </Flex>
         <Spacer />
         <Flex flexDirection={"column"}>

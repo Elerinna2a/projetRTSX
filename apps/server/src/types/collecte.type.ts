@@ -5,9 +5,9 @@ export type CreateCollecte = {
   formeCollecte: Forme;
   dateCollecte: string;
   nomTierCollecte: string;
-  employeId?: number;
-  tiercollecteId?: number;
-  traitementId?: number;
+  employeId?: number | null;
+  tiercollecteId?: number | null;
+  traitementId?: number | null;
 };
 
 export type UpdateCollecte = {
@@ -15,9 +15,9 @@ export type UpdateCollecte = {
   formeCollecte?: Forme;
   dateCollecte?: string;
   nomTierCollecte?: string;
-  employeId?: number;
-  tiercollecteId?: number;
-  traitementId?: number;
+  employeId?: number | null;
+  tiercollecteId?: number | null;
+  traitementId?: number | null;
 };
 
 export type Collecte = {
@@ -26,7 +26,7 @@ export type Collecte = {
   formeCollecte: Forme;
   dateCollecte: string;
   nomTierCollecte: string;
-  employeId: number;
-  tiercollecteId: number;
-  traitementId: number;
+  employeId?: number | null;
+  tiercollecteId?: number | null;
+  traitementId?: number | null;
 };

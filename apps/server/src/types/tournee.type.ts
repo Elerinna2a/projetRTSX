@@ -9,12 +9,11 @@ export type CreateTournee = {
 };
 
 export type UpdateTournee = {
-  idTournee: number;
   dateTournee?: string;
   typeVehicule?: TypeVehicule;
   remorque?: Remorque;
-  chauffeurId?: number;
-  tierCollecteId?: number;
+  chauffeurId?: number | null;
+  tierCollecteId?: number | null;
 };
 
 export type Tournee = {

@@ -59,7 +59,7 @@ export default function CreateFacture() {
           <Input type="date" ref={datePaiementFactureRef} />
           <FormLabel>Id du tiers compacte</FormLabel>
           <Input type="number" ref={tierCompacteIdRef} />
-          <FormLabel>Id Num BL</FormLabel>
+          <FormLabel>Id du tiers Collecte</FormLabel>
           <Input type="number" ref={tiersCollecteIdRef} />
         </FormControl>
         <Button onClick={handleCreateFacture}>Creer Facture</Button>

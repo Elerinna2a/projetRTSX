@@ -15,13 +15,12 @@ export type CreateTraitement = {
 };
 
 export type UpdateTraitement = {
-  idTraitement: number;
   dateTraitement?: string;
   qualite?: Qualite;
   quantiteCorpsEtranger?: number;
   scoringBonusMalus?: number;
-  operateurId?: number;
-  expeditionId?: number;
+  operateurId?: number | null;
+  expeditionId?: number | null;
 };
 
 export type Traitement = {

@@ -17,6 +17,8 @@ import TraitementDetails from "./components/details/TraitementDetails";
 import UpdateCollecte from "./components/update/UpdateCollecte";
 import UpdateEmploye from "./components/update/UpdateEmploye";
 import UpdateExpedition from "./components/update/UpdateExpedition";
+import UpdateFacture from "./components/update/UpdateFacture";
+import UpdateTiersTiersCollecte from "./components/update/UpdateTiersCollecte";
 import UpdateTournee from "./components/update/UpdateTournee";
 import UpdateTraitement from "./components/update/UpdateTraitement";
 import Mainlayout from "./layouts/MainLayout";
@@ -106,6 +108,11 @@ export default function App() {
             element={<UpdateTraitement />}
           />
           <Route path="/update-expedition/:id" element={<UpdateExpedition />} />
+          <Route path="/update-facture/:id" element={<UpdateFacture />} />
+          <Route
+            path="/update-tierscollecte/:id"
+            element={<UpdateTiersTiersCollecte />}
+          />
 
           {/* Error page */}
           <Route path="/*" element={<Error />} />

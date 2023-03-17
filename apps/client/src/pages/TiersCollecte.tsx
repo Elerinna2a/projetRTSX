@@ -116,9 +116,13 @@ export default function TiersCollecte() {
                         </Box>
                       </Flex>
                       <Flex gap={"4"} flexDirection="column">
-                        <Button ml={6}>
-                          <EditIcon />
-                        </Button>
+                        <Link
+                          to={`/update-tierscollecte/${tierCollecte.idTierCollecte}`}
+                        >
+                          <Button ml={6}>
+                            <EditIcon />
+                          </Button>
+                        </Link>
                         <Button
                           ml={6}
                           onClick={() =>

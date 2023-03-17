@@ -84,7 +84,7 @@ export default function CreateTiersCompacte() {
             <FormLabel>E-Mail</FormLabel>
             <Input type="email" placeholder="E-Mail" ref={mailRef} />
           </FormControl>
-          <FormControl>
+          {/* <FormControl>
             <FormLabel>Facture n°</FormLabel>
             <Input
               type="number"
@@ -97,7 +97,7 @@ export default function CreateTiersCompacte() {
               placeholder="Expedition n° lié à la collecte"
               ref={expeditionRef}
             />
-          </FormControl>
+          </FormControl> */}
           <Button onClick={() => handleCreateTiersCompacte()}>Valider</Button>
         </Flex>
         <Spacer />
