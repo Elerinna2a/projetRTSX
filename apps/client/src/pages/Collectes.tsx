@@ -15,20 +15,13 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import CollecteDetails from "../components/details/CollecteDetails";
 import { Collecte as Collectes } from "../store/collecte.store";
 
 export default function Collecte() {
   const [collectes, setCollectes] = useState<Collectes[]>([]);
   const [error, setError] = useState<string | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const {
-    isOpen: isOpenSingle,
-    onOpen: onOpenSigle,
-    onClose: onCloseSingle,
-  } = useDisclosure();
   const [idToDelete, setIdToDelete] = useState<number | null>(null);
-  const [idCollecte, setidCollecte] = useState<number | null>(null);
 
   useEffect(() => {
     axios
@@ -50,15 +43,6 @@ export default function Collecte() {
     }
   };
 
-  const handleCollecte = (id: number) => {
-    if (id) {
-      setidCollecte(id);
-      onOpenSigle();
-    } else {
-      console.log("id to collecte is undefined");
-    }
-  };
-
   const confirmDelete = () => {
     if (idToDelete) {
       axios
@@ -74,20 +58,6 @@ export default function Collecte() {
         .catch((err) => console.error(err));
     }
   };
-
-  const singleCollecte = () => {
-    if (idCollecte) {
-      axios.get(`http://localhost:3000/collectes/${idCollecte}`).then((res) => {
-        setidCollecte(res.data.idNumLot);
-        onCloseSingle();
-      });
-    }
-  };
-
-  const f = new Intl.DateTimeFormat("fr-fr", {
-    dateStyle: "short",
-    timeStyle: "short",
-  });
 
   return (
     <div>
@@ -118,13 +88,9 @@ export default function Collecte() {
                       <Flex>
                         <Box>
                           <Heading size={"md"} mb={4}>
-                            {/* <Link to={`/collectes/${collecte.idNumLot}`}> */}
-                            <Button
-                            // onClick={() => handleCollecte(collecte.idNumLot)}
-                            >
-                              Collecte N°{collecte.idNumLot}
-                            </Button>
-                            {/* </Link> */}
+                            <Link to={`/collectes/${collecte.idNumLot}`}>
+                              <Button>Collecte N°{collecte.idNumLot}</Button>
+                            </Link>
                           </Heading>
                           <Box>
                             <p>
@@ -182,20 +148,6 @@ export default function Collecte() {
             </Button>
             <Button variant="ghost" onClick={onClose}>
               Annuler
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-      <Modal isOpen={isOpenSingle} onClose={onCloseSingle}>
-        <ModalOverlay />
-        <ModalContent>
-          {/* <ModalHeader>Confirmer la suppression</ModalHeader> */}
-          <ModalBody>
-            <CollecteDetails />
-          </ModalBody>
-          <ModalFooter>
-            <Button variant="ghost" onClick={onCloseSingle}>
-              Fermer
             </Button>
           </ModalFooter>
         </ModalContent>
