@@ -3,25 +3,63 @@ import {
   Box,
   Button,
   Flex,
+  FormControl,
+  FormLabel,
   Heading,
+  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Select,
   useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Tournee } from "../types/tournee.type";
 
 export default function Tournees() {
   const [tournees, setTournees] = useState<Tournee[]>([]);
   const [error, setError] = useState<string | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenCreateFacture,
+    onOpen: onOpenCreateFacture,
+    onClose: onCloseCreateFacture,
+  } = useDisclosure();
   const [idToDelete, setIdToDelete] = useState<number | null>(null);
+  const navigate = useNavigate();
+
+  const chauffeurRef = useRef<HTMLInputElement | null>(null);
+  const typeVehiculeRef = useRef<HTMLSelectElement | null>(null);
+  const remorqueRef = useRef<HTMLSelectElement | null>(null);
+  const dateTourneeRef = useRef<HTMLInputElement | null>(null);
+
+  const handleCreateTournee = async () => {
+    const chauffeur = chauffeurRef.current?.value;
+    const typeVehicule = typeVehiculeRef.current?.value;
+    const remorque = remorqueRef.current?.value;
+    const dateTournee = dateTourneeRef.current?.value;
+
+    try {
+      if (chauffeur === undefined) {
+        return;
+      }
+      const response = await axios.post("http://localhost:3000/tournees", {
+        chauffeurId: parseInt(chauffeur),
+        typeVehicule,
+        remorque,
+        dateTournee,
+      });
+      onCloseCreateFacture();
+    } catch (error) {
+      alert("Chauffeur déja assigné");
+      console.log(error);
+    }
+  };
 
   const handleDelete = (id: number | undefined) => {
     if (id) {
@@ -57,7 +95,7 @@ export default function Tournees() {
       .catch((err) => {
         setError(err.message);
       });
-  }, []);
+  }, ["", handleCreateTournee]);
 
   return (
     <div>
@@ -65,11 +103,13 @@ export default function Tournees() {
         <Box>
           <Flex gap={3} justifyContent={"center"} mb={4}>
             <Heading>Tournées </Heading>
-            <Link to="/create-tournee">
-              <Button leftIcon={<AddIcon />} colorScheme="teal">
-                Créer une tournée
-              </Button>
-            </Link>
+            <Button
+              leftIcon={<AddIcon />}
+              colorScheme="teal"
+              onClick={onOpenCreateFacture}
+            >
+              Créer une tournée
+            </Button>
           </Flex>
 
           {tournees.length === 0 ? (
@@ -90,7 +130,7 @@ export default function Tournees() {
                         <Box>
                           <Heading size={"md"} mb={4}>
                             <Link to={`/tournees/${tournee.idTournee}`}>
-                              Tournée N°{tournee.idTournee}
+                              <Button>Tournée N°{tournee.idTournee}</Button>
                             </Link>
                           </Heading>
                           <Box>
@@ -134,6 +174,45 @@ export default function Tournees() {
             </>
           )}
         </Box>
+        <Modal isOpen={isOpenCreateFacture} onClose={onCloseCreateFacture}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Créer une tournée</ModalHeader>
+            <ModalBody>
+              <FormControl>
+                <FormLabel>ID du chauffeur</FormLabel>
+                <Input
+                  type="number"
+                  placeholder="Quantité"
+                  ref={chauffeurRef}
+                />
+                <FormLabel>Date de la tournée</FormLabel>
+                <Input
+                  type="date"
+                  placeholder="Quantité"
+                  ref={dateTourneeRef}
+                />
+                <FormLabel>Type du véhicule ?</FormLabel>
+                <Select ref={typeVehiculeRef} mb={4}>
+                  <option value="FOURGON">Fourgon</option>
+                  <option value="NONARTICULE">Non-articule</option>
+                  <option value="SEMIREMORQUE">Semi-remorque</option>
+                </Select>
+                <FormLabel>Remorque ?</FormLabel>
+                <Select ref={remorqueRef}>
+                  <option value="OUI">Oui</option>
+                  <option value="NON">Non</option>
+                </Select>
+              </FormControl>
+              <Button onClick={handleCreateTournee}>Valider</Button>
+            </ModalBody>
+            <ModalFooter>
+              <Button variant="ghost" onClick={onCloseCreateFacture}>
+                Annuler
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
       </Flex>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

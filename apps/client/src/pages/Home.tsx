@@ -4,7 +4,6 @@ import { employe } from "../store/employe.store";
 import DebugCookies from "../utils/DebugCookie";
 import Collecte from "./Collectes";
 import Employes from "./Employes";
-import Expeditions from "./Expeditions";
 import Traitement from "./Traitement";
 
 export default function Home() {
@@ -16,14 +15,6 @@ export default function Home() {
     <Flex>
       {authedUser.role === "ADMIN" && (
         <VStack>
-          <Flex gap={4}>
-            <Flex>
-              <Collecte />
-            </Flex>
-            <Flex>
-              <Expeditions />
-            </Flex>
-          </Flex>
           <Flex>
             <Employes />
           </Flex>

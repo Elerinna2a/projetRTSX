@@ -3,19 +3,23 @@ import {
   Box,
   Button,
   Flex,
+  FormControl,
+  FormLabel,
   Heading,
+  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Select,
   useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Traitement as Traitements } from "../types/traitement.type";
 
 export default function Traitement() {
@@ -23,7 +27,42 @@ export default function Traitement() {
   const [traitements, setTraitements] = useState<Traitements[]>([]);
   const [error, setError] = useState<string | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenCreateTraitement,
+    onOpen: onOpenCreateTraitement,
+    onClose: onCloseCreateTraitement,
+  } = useDisclosure();
   const [idToDelete, setIdToDelete] = useState<number | null>(null);
+  const navigate = useNavigate();
+
+  const qualiteRef = useRef<HTMLSelectElement | null>(null);
+  const quantiteCeRef = useRef<HTMLInputElement | null>(null);
+  const scoringBonMalRef = useRef<HTMLInputElement | null>(null);
+  const dateTraitementRef = useRef<HTMLInputElement | null>(null);
+
+  const handleCreationTraitement = async () => {
+    const qualite = qualiteRef.current?.value;
+    const quantiteCorpsEtranger = quantiteCeRef.current?.value;
+    const scoringBonusMalus = scoringBonMalRef.current?.value;
+    const dateTraitement = dateTraitementRef.current?.value;
+    try {
+      if (
+        quantiteCorpsEtranger === undefined ||
+        scoringBonusMalus === undefined
+      ) {
+        return;
+      }
+      const response = await axios.post("http://localhost:3000/traitements", {
+        qualite,
+        quantiteCorpsEtranger: parseInt(quantiteCorpsEtranger),
+        scoringBonusMalus: parseInt(scoringBonusMalus),
+        dateTraitement,
+      });
+      onCloseCreateTraitement();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleDelete = (id: number | undefined) => {
     if (id) {
@@ -59,7 +98,7 @@ export default function Traitement() {
           "Impssible d'acceder a cette page car vos droit ne le permettant pas"
         )
       );
-  }, []);
+  }, ["", handleCreationTraitement]);
 
   return (
     <div>
@@ -67,11 +106,13 @@ export default function Traitement() {
         <Box>
           <Flex gap={3} justifyContent={"center"} mb={4}>
             <Heading>Traitement </Heading>
-            <Link to="/create-traitement">
-              <Button leftIcon={<AddIcon />} colorScheme="teal">
-                Créer un traitement
-              </Button>
-            </Link>
+            <Button
+              leftIcon={<AddIcon />}
+              colorScheme="teal"
+              onClick={onOpenCreateTraitement}
+            >
+              Créer un traitement
+            </Button>
           </Flex>
           {traitements.length === 0 ? (
             <p>Aucun traitement à faire</p>
@@ -83,13 +124,16 @@ export default function Traitement() {
                     mb={"4"}
                     border={"1px solid gray"}
                     p={"4"}
-                    justifyContent="center"
+                    borderColor="teal"
+                    borderRadius={"xl"}
                   >
                     <Flex alignItems={"center"} gap={4}>
                       <Flex>
                         <Box>
                           <Heading size={"md"}>
-                            Traitement N°{traitement.idTraitement}
+                            <Button>
+                              Traitement N°{traitement.idTraitement}
+                            </Button>
                           </Heading>
                           <Box>
                             <p>
@@ -130,6 +174,44 @@ export default function Traitement() {
           )}
         </Box>
       </Flex>
+      <Modal isOpen={isOpenCreateTraitement} onClose={onCloseCreateTraitement}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Créer un traitement</ModalHeader>
+          <ModalBody>
+            <FormControl isRequired>
+              <FormLabel>Qualité</FormLabel>
+              <Select ref={qualiteRef}>
+                <option value="PURE">Pure</option>
+                <option value="POLLUEE">Poluée</option>
+                <option value="NONRECYCLABLE">Non recyclable</option>
+              </Select>
+              <FormLabel>Quantite de corps étranger</FormLabel>
+              <Input
+                type="number"
+                placeholder="Quantite de corps étranger"
+                ref={quantiteCeRef}
+              />
+              <FormLabel>Scoring bonus/malus</FormLabel>
+              <Input
+                type="number"
+                placeholder="Scoring bonus/malus"
+                ref={scoringBonMalRef}
+                min={1}
+                max={10}
+              />
+              <FormLabel>Date du traitement</FormLabel>
+              <Input type={"date"} ref={dateTraitementRef} />
+            </FormControl>
+            <Button onClick={handleCreationTraitement}>Valider</Button>
+          </ModalBody>
+          <ModalFooter>
+            <Button variant="ghost" onClick={onCloseCreateTraitement}>
+              Annuler
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

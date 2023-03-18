@@ -3,7 +3,10 @@ import {
   Box,
   Button,
   Flex,
+  FormControl,
+  FormLabel,
   Heading,
+  Input,
   Modal,
   ModalBody,
   ModalContent,
@@ -13,7 +16,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { TiersCompacte } from "../types/tiersCompacte.type";
 
@@ -21,7 +24,57 @@ export default function TiersCompactes() {
   const [tiersCompactes, setTiersCompactes] = useState<TiersCompacte[]>([]);
   const [error, setError] = useState<string | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenCreateTiersCollecte,
+    onOpen: onOpenCreateTiersCollecte,
+    onClose: onCloseCreateTiersCollecte,
+  } = useDisclosure();
   const [idToDelete, setIdToDelete] = useState<number | null>(null);
+  const nomRef = useRef<HTMLInputElement | null>(null);
+  const adresseRef = useRef<HTMLInputElement | null>(null);
+  const typeTiersRef = useRef<HTMLInputElement | null>(null);
+  const contactNomRef = useRef<HTMLInputElement | null>(null);
+  const telRef = useRef<HTMLInputElement | null>(null);
+  const mailRef = useRef<HTMLInputElement | null>(null);
+  const factureRef = useRef<HTMLInputElement | null>(null);
+  const expeditionRef = useRef<HTMLInputElement | null>(null);
+
+  const handleCreateTiersCompacte = async () => {
+    const nom = nomRef.current?.value;
+    const adresse = adresseRef.current?.value;
+    const typeTiers = typeTiersRef.current?.value;
+    const contactNom = contactNomRef.current?.value;
+    const tel = telRef.current?.value;
+    const mail = mailRef.current?.value;
+    const expedition = expeditionRef.current?.value;
+    const factures = factureRef.current?.value;
+
+    try {
+      const createTiersCompacte = {
+        nom,
+        adresse,
+        typeTiers,
+        contactNom,
+        tel,
+        mail,
+        expeditions: expedition
+          ? { create: [{ dateExpedition: expedition }] }
+          : undefined,
+        factures: factures
+          ? { create: [{ numeroFacture: factures }] }
+          : undefined,
+      };
+
+      const response = await axios.post(
+        "http://localhost:3000/tierscompactes",
+        createTiersCompacte
+      );
+      console.log(response);
+      onCloseCreateTiersCollecte();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     axios
@@ -32,7 +85,7 @@ export default function TiersCompactes() {
           "Impssible d'acceder a cette page car vos droit ne le permettant pas"
         )
       );
-  }, []);
+  }, ["", handleCreateTiersCompacte]);
 
   const handleDelete = (id: number | undefined) => {
     if (id) {
@@ -59,22 +112,19 @@ export default function TiersCompactes() {
     }
   };
 
-  const f = new Intl.DateTimeFormat("fr-fr", {
-    dateStyle: "short",
-    timeStyle: "short",
-  });
-
   return (
     <div>
       <Flex>
         <Box>
           <Flex gap={3} alignItems={"center"} mb={4} flexDirection="column">
             <Heading>Tiers Compacteur </Heading>
-            <Link to="/create-tierscompacte">
-              <Button leftIcon={<AddIcon />} colorScheme={"teal"}>
-                Créer un tiers compacteur
-              </Button>
-            </Link>
+            <Button
+              leftIcon={<AddIcon />}
+              colorScheme={"teal"}
+              onClick={onOpenCreateTiersCollecte}
+            >
+              Créer un tiers compacteur
+            </Button>
           </Flex>
 
           {tiersCompactes.length === 0 ? (
@@ -83,7 +133,13 @@ export default function TiersCompactes() {
             <Flex flexWrap={"wrap"} gap={4}>
               {tiersCompactes.map((tiersCompacte) => (
                 <Flex key={tiersCompacte.idTiersCompacte}>
-                  <Flex mb={"4"} border={"1px solid gray"} p={"4"}>
+                  <Flex
+                    mb={"4"}
+                    border={"1px solid gray"}
+                    p={"4"}
+                    borderColor="teal"
+                    borderRadius={"xl"}
+                  >
                     <Flex alignItems={"center"} gap={4} justifyContent="center">
                       <Flex>
                         <Box>
@@ -91,7 +147,9 @@ export default function TiersCompactes() {
                             <Link
                               to={`/tierscompactes/${tiersCompacte.idTiersCompacte}`}
                             >
-                              Tiers Compacte N°{tiersCompacte.idTiersCompacte}
+                              <Button>
+                                Tiers Compacte N°{tiersCompacte.idTiersCompacte}
+                              </Button>
                             </Link>
                           </Heading>
                           <Box>
@@ -101,13 +159,11 @@ export default function TiersCompactes() {
                             <p>Nom du contact: {tiersCompacte.contactNom} </p>
                             <p>tel: {tiersCompacte.tel} </p>
                             <p>mail: {tiersCompacte.mail} </p>
-                            {tiersCompacte.factures ? (
-                              <>
-                                <p>facture: {tiersCompacte.factures} </p>
-                              </>
-                            ) : (
-                              ""
-                            )}
+                            {tiersCompacte.factures?.map((facture) => (
+                              <p key={facture.idFacture}>
+                                Facture N°{facture.idFacture}
+                              </p>
+                            ))}
                           </Box>
                         </Box>
                       </Flex>
@@ -133,6 +189,59 @@ export default function TiersCompactes() {
           )}
         </Box>
       </Flex>
+      <Modal
+        isOpen={isOpenCreateTiersCollecte}
+        onClose={onCloseCreateTiersCollecte}
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Création d'un tiers compacte</ModalHeader>
+          <ModalBody>
+            <FormControl isRequired>
+              <FormLabel>Nom</FormLabel>
+              <Input type="text" placeholder="Nom" ref={nomRef} />
+              <FormLabel>Adresse</FormLabel>
+              <Input type="text" placeholder="Nom du tiers" ref={adresseRef} />
+              <FormLabel>Type de tiers</FormLabel>
+              <Input
+                type="text"
+                placeholder="Type de tiers"
+                ref={typeTiersRef}
+              />
+              <FormLabel>Nom du contact</FormLabel>
+              <Input
+                ref={contactNomRef}
+                placeholder="Forme de la collecte"
+                type="text"
+              />
+              <FormLabel>Tel du contact</FormLabel>
+              <Input type="tel" placeholder="Tel du contact" ref={telRef} />
+              <FormLabel>E-Mail</FormLabel>
+              <Input type="email" placeholder="E-Mail" ref={mailRef} />
+            </FormControl>
+            {/* <FormControl>
+            <FormLabel>Facture n°</FormLabel>
+            <Input
+              type="number"
+              placeholder="Facture lié à la collecte"
+              ref={factureRef}
+            />
+            <FormLabel>Expedition n°</FormLabel>
+            <Input
+              type="number"
+              placeholder="Expedition n° lié à la collecte"
+              ref={expeditionRef}
+            />
+          </FormControl> */}
+            <Button onClick={() => handleCreateTiersCompacte()}>Valider</Button>
+          </ModalBody>
+          <ModalFooter>
+            <Button variant="ghost" onClick={onCloseCreateTiersCollecte}>
+              Annuler
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

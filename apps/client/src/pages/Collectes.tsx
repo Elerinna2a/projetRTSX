@@ -3,43 +3,106 @@ import {
   Box,
   Button,
   Flex,
+  FormControl,
+  FormLabel,
   Heading,
+  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Select,
+  Text,
   useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Collecte as Collectes } from "../store/collecte.store";
 
 export default function Collecte() {
   const [collectes, setCollectes] = useState<Collectes[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const [idToDelete, setIdToDelete] = useState<number | null>(null);
+  const [idToTake, setIdToTake] = useState<number | null>(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenSingleCollecte,
+    onOpen: onOpenSingleCollecte,
+    onClose: onCloseSingleCollecte,
+  } = useDisclosure();
+  const {
+    isOpen: isOpenCreateCollecte,
+    onOpen: onOpenCreateCollecte,
+    onClose: onCloseCreateCollecte,
+  } = useDisclosure();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/collectes")
-      .then((res) => setCollectes(res.data))
-      .catch((err) =>
-        setError(
-          "Impssible d'acceder a cette page car vos droit ne le permettant pas"
-        )
-      );
-  }, []);
+  // useRef
+  const quantiteRef = useRef<HTMLInputElement | null>(null);
+  const nomTiersRef = useRef<HTMLInputElement | null>(null);
+  const formeCollecteRef = useRef<HTMLSelectElement | null>(null);
+  const employeIdCollecteRef = useRef<HTMLInputElement | null>(null);
+  const traitementIdCollecteRef = useRef<HTMLInputElement | null>(null);
+  const dateCollecteRef = useRef<HTMLInputElement | null>(null);
+  const tierCollecteIdRef = useRef<HTMLInputElement | null>(null);
 
+  // constant attritubtion
+  const quantite = quantiteRef.current?.value;
+  const nomTierCollecte = nomTiersRef.current?.value;
+  const formeCollecte = formeCollecteRef.current?.value;
+  const employeId = employeIdCollecteRef.current?.value;
+  const traitementId = traitementIdCollecteRef.current?.value;
+  const dateCollecte = dateCollecteRef.current?.value;
+  const tiercollecteId = tierCollecteIdRef.current?.value;
+
+  // Create Collecte
+  const handleCreateCollecte = async () => {
+    try {
+      if (
+        quantite === undefined ||
+        employeId === undefined ||
+        traitementId === undefined ||
+        dateCollecte === undefined ||
+        tiercollecteId === undefined
+      ) {
+        return;
+      }
+      const response = await axios.post("http://localhost:3000/collectes", {
+        quantite: parseInt(quantite),
+        nomTierCollecte,
+        formeCollecte,
+        employeId: parseInt(employeId),
+        traitementId: parseInt(traitementId),
+        dateCollecte,
+        tiercollecteId: parseInt(tiercollecteId),
+      });
+      console.log(response);
+      onCloseCreateCollecte();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // delete part
   const handleDelete = (id: number | undefined) => {
     if (id) {
       setIdToDelete(id);
       onOpen();
     } else {
       console.log("id to delete is undefined");
+    }
+  };
+
+  // fonction pour ouvrir avec le modal toute les informations d'une collecte
+  const handleOpenSingleCollecte = (id: number | undefined) => {
+    if (id) {
+      setIdToTake(id);
+      onOpenSingleCollecte();
+    } else {
+      console.log("id to take is undefined");
     }
   };
 
@@ -59,17 +122,30 @@ export default function Collecte() {
     }
   };
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/collectes")
+      .then((res) => setCollectes(res.data))
+      .catch((err) =>
+        setError(
+          "Impssible d'acceder a cette page car vos droit ne le permettant pas"
+        )
+      );
+  }, ["", handleCreateCollecte, onOpenSingleCollecte]);
+
   return (
     <div>
       <Flex>
         <Box>
           <Flex gap={3} mb={4}>
             <Heading>Collecte </Heading>
-            <Link to="/create-collecte">
-              <Button leftIcon={<AddIcon />} colorScheme="teal">
-                Créer une collecte
-              </Button>
-            </Link>
+            <Button
+              leftIcon={<AddIcon />}
+              colorScheme="teal"
+              onClick={onOpenCreateCollecte}
+            >
+              Créer une collecte
+            </Button>
           </Flex>
           {collectes.length === 0 ? (
             <p>Aucun collecte à faire</p>
@@ -88,9 +164,15 @@ export default function Collecte() {
                       <Flex>
                         <Box>
                           <Heading size={"md"} mb={4}>
-                            <Link to={`/collectes/${collecte.idNumLot}`}>
-                              <Button>Collecte N°{collecte.idNumLot}</Button>
-                            </Link>
+                            {/* <Link to={`/collectes/${collecte.idNumLot}`}> */}
+                            <Button
+                              onClick={() =>
+                                handleOpenSingleCollecte(collecte.idNumLot)
+                              }
+                            >
+                              Collecte N°{collecte.idNumLot}
+                            </Button>
+                            {/* </Link> */}
                           </Heading>
                           <Box>
                             <p>
@@ -129,12 +211,117 @@ export default function Collecte() {
                       </Flex>
                     </Flex>
                   </Flex>
+                  <Modal
+                    isOpen={isOpenSingleCollecte}
+                    onClose={onCloseSingleCollecte}
+                  >
+                    <ModalOverlay />
+                    <ModalContent>
+                      <ModalHeader>Details de la collecte</ModalHeader>
+                      <ModalBody>
+                        {collecte && (
+                          <Flex flexDirection={"column"}>
+                            <Text>ID : {collecte.idNumLot}</Text>
+                            <Text>
+                              Nom du tiers : {collecte.nomTierCollecte}
+                            </Text>
+                            <Text>Quantite : {collecte.quantite}</Text>
+                            <Text>
+                              Forme de la collecte : {collecte.formeCollecte}
+                            </Text>
+                            <Link to={`/traitements/${collecte.traitementId}`}>
+                              <Text>
+                                Id du traitement lié : {collecte.traitementId}
+                              </Text>
+                            </Link>
+                            <Link to={`/employes/${collecte.employeId}`}>
+                              <Text>
+                                Id de du chauffeur : {collecte.employeId}
+                              </Text>
+                            </Link>
+                            <Text>
+                              Date de la collecte : {collecte.dateCollecte}
+                            </Text>
+                          </Flex>
+                        )}
+                      </ModalBody>
+                      <ModalFooter>
+                        <Button variant="ghost" onClick={onCloseSingleCollecte}>
+                          Annuler
+                        </Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
                 </Flex>
               ))}
             </Flex>
           )}
         </Box>
       </Flex>
+      {/* Modal Create */}
+      <Modal isOpen={isOpenCreateCollecte} onClose={onCloseCreateCollecte}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Création d'un employé</ModalHeader>
+          <ModalBody>
+            <Flex gap={4} flexDirection={"column"}>
+              <Flex m={"auto"} flexDirection={"column"} gap={3}>
+                <Heading>Creer une collecte:</Heading>
+                <FormControl isRequired>
+                  <FormLabel>Quantité</FormLabel>
+                  <Input
+                    type="number"
+                    placeholder="Quantité"
+                    ref={quantiteRef}
+                  />
+                  <FormLabel>Nom du tiers</FormLabel>
+                  <Input
+                    type="text"
+                    placeholder="Nom du tiers"
+                    ref={nomTiersRef}
+                  />
+                  <FormLabel>Date de la collecte</FormLabel>
+                  <Input type="date" ref={dateCollecteRef} />
+                  <FormLabel>Forme de la collecte</FormLabel>
+                  <Select ref={formeCollecteRef}>
+                    <option value="SAC">Sac</option>
+                    <option value="VRAC">Vrac</option>
+                    <option value="PALETTE">Palette</option>
+                  </Select>
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Id du Chauffeur</FormLabel>
+                  <Input
+                    type="number"
+                    placeholder="Id du Chauffeur"
+                    ref={employeIdCollecteRef}
+                  />
+                  <FormLabel>ID Traitement lié à la collecte</FormLabel>
+                  <Input
+                    type="number"
+                    placeholder="Traitement lié à la collecte"
+                    ref={traitementIdCollecteRef}
+                  />
+                  <FormLabel>ID TierCollecte lié à la collecte</FormLabel>
+                  <Input
+                    type="number"
+                    placeholder="Collecte lié à la collecte"
+                    ref={tierCollecteIdRef}
+                  />
+                </FormControl>
+                <Button onClick={() => handleCreateCollecte()}>Valider</Button>
+              </Flex>
+            </Flex>
+          </ModalBody>
+          <ModalFooter>
+            <Button variant="ghost" onClick={onCloseCreateCollecte}>
+              Fermer
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      {/* Modal DELETE */}
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

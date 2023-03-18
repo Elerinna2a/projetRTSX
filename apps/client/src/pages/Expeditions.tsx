@@ -3,7 +3,10 @@ import {
   Box,
   Button,
   Flex,
+  FormControl,
+  FormLabel,
   Heading,
+  Input,
   Modal,
   ModalBody,
   ModalContent,
@@ -14,7 +17,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Expedition } from "../types/expedition.type";
 
@@ -23,6 +26,50 @@ export default function Expeditions() {
   const [error, setError] = useState<string | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [idToDelete, setIdToDelete] = useState<number | null>(null);
+  const {
+    isOpen: isOpenCreateExpedition,
+    onOpen: onOpenCreateExpedition,
+    onClose: onCloseCreateExpedition,
+  } = useDisclosure();
+
+  const dateExpeditionRef = useRef<HTMLInputElement | null>(null);
+  const destinataireRef = useRef<HTMLInputElement | null>(null);
+  const nbPaletteRef = useRef<HTMLInputElement | null>(null);
+  const poidNetTotalRef = useRef<HTMLInputElement | null>(null);
+  const tiersCompacteIdRef = useRef<HTMLInputElement | null>(null);
+
+  const handleCreateExpedition = async () => {
+    try {
+      const dateExpedition = dateExpeditionRef.current?.value;
+      const destinataire = destinataireRef.current?.value;
+      const nbPalette = nbPaletteRef.current?.value;
+      const poidNetTotal = poidNetTotalRef.current?.value;
+      const tiersCompacteId = tiersCompacteIdRef.current?.value;
+      if (
+        nbPalette === undefined ||
+        nbPalette === null ||
+        poidNetTotal === undefined ||
+        poidNetTotal === null ||
+        tiersCompacteId === undefined ||
+        tiersCompacteId === null
+      ) {
+        alert("Veuillez remplir tous les champs");
+        return;
+      }
+
+      const response = await axios.post("http://localhost:3000/expeditions", {
+        dateExpedition,
+        destinataire,
+        nbPalette: parseFloat(nbPalette),
+        poidNetTotal: parseInt(poidNetTotal),
+        tiersCompacteId: parseInt(tiersCompacteId),
+      });
+      console.log(response);
+      onCloseCreateExpedition();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleDelete = (id: number | undefined) => {
     if (id) {
@@ -58,7 +105,7 @@ export default function Expeditions() {
       .catch((err) => {
         setError(err.message);
       });
-  }, []);
+  }, ["", handleCreateExpedition]);
 
   return (
     <div>
@@ -66,11 +113,13 @@ export default function Expeditions() {
         <Box>
           <Flex gap={3} mb={4}>
             <Heading>Expeditions </Heading>
-            <Link to="/create-expedition">
-              <Button leftIcon={<AddIcon />} colorScheme="teal">
-                Créer une expédition
-              </Button>
-            </Link>
+            <Button
+              leftIcon={<AddIcon />}
+              colorScheme="teal"
+              onClick={onOpenCreateExpedition}
+            >
+              Créer une expédition
+            </Button>
           </Flex>
 
           <Flex justifyContent={"center"} flexWrap={"wrap"}>
@@ -97,7 +146,7 @@ export default function Expeditions() {
                         <Box>
                           <Heading size={"md"} mb={4}>
                             <Link to={`/expeditions/${expedition.idNumBl}`}>
-                              BL N°{expedition.idNumBl}
+                              <Button>BL N°{expedition.idNumBl}</Button>
                             </Link>
                           </Heading>
                           <Box key={expedition.idNumBl}>
@@ -141,6 +190,36 @@ export default function Expeditions() {
           </Flex>
         </Box>
       </Flex>
+      <Modal isOpen={isOpenCreateExpedition} onClose={onCloseCreateExpedition}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Créer une expédition</ModalHeader>
+          <ModalBody>
+            <FormControl isRequired>
+              <FormLabel>dateExpedition</FormLabel>
+              <Input type="date" ref={dateExpeditionRef} />
+              <FormLabel>destinataire</FormLabel>
+              <Input
+                type="text"
+                placeholder="destinataire"
+                ref={destinataireRef}
+              />
+              <FormLabel>nbPalette</FormLabel>
+              <Input type="number" ref={nbPaletteRef} />
+              <FormLabel>poidNetTotal</FormLabel>
+              <Input type="number" ref={poidNetTotalRef} />
+              <FormLabel>Tiers compacte ID</FormLabel>
+              <Input type="number" ref={tiersCompacteIdRef} />
+            </FormControl>
+            <Button onClick={() => handleCreateExpedition()}>Valider</Button>
+          </ModalBody>
+          <ModalFooter>
+            <Button variant="ghost" onClick={onCloseCreateExpedition}>
+              Annuler
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

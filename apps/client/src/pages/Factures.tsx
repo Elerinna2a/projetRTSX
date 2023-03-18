@@ -3,7 +3,10 @@ import {
   Box,
   Button,
   Flex,
+  FormControl,
+  FormLabel,
   Heading,
+  Input,
   Modal,
   ModalBody,
   ModalContent,
@@ -13,15 +16,54 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Facture } from "../store/facture.store";
 
 export default function Factures() {
   const [factures, setFactures] = useState<Facture[]>([]);
   const [error, setError] = useState<string | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenCreateFacture,
+    onOpen: onOpenCreateFacture,
+    onClose: onCloseCreateFacture,
+  } = useDisclosure();
   const [idToDelete, setIdToDelete] = useState<number | null>(null);
+  const navigate = useNavigate();
+
+  const dateFactureRef = useRef<HTMLInputElement | null>(null);
+  const montantRef = useRef<HTMLInputElement | null>(null);
+  const datePaiementFactureRef = useRef<HTMLInputElement | null>(null);
+  const tierCompacteIdRef = useRef<HTMLInputElement | null>(null);
+  const tiersCollecteIdRef = useRef<HTMLInputElement | null>(null);
+
+  const handleCreateFacture = async () => {
+    const dateFacture = dateFactureRef.current?.value;
+    const montant = montantRef.current?.value;
+    const datePaiementFacture = datePaiementFactureRef.current?.value;
+    const tierCompacteId = tierCompacteIdRef.current?.value;
+    const tiersCollecteId = tiersCollecteIdRef.current?.value;
+    try {
+      if (
+        montant === undefined ||
+        tierCompacteId === undefined ||
+        tiersCollecteId === undefined
+      ) {
+        return;
+      }
+      const response = await axios.post("http://localhost:3000/factures", {
+        dateFacture,
+        montant: parseFloat(montant),
+        datePaiementFacture,
+        tierCompacteId: parseInt(tierCompacteId),
+        tiersCollecteId: parseInt(tiersCollecteId),
+      });
+      navigate("/factures");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     axios
@@ -32,7 +74,7 @@ export default function Factures() {
           "Impssible d'acceder a cette page car vos droit ne le permettant pas"
         )
       );
-  }, []);
+  }, ["", handleCreateFacture]);
 
   const handleDelete = (id: number | undefined) => {
     if (id) {
@@ -59,22 +101,19 @@ export default function Factures() {
     }
   };
 
-  const f = new Intl.DateTimeFormat("fr-fr", {
-    dateStyle: "short",
-    timeStyle: "short",
-  });
-
   return (
     <div>
       <Flex>
         <Box>
           <Flex gap={3} justifyContent={"center"} mb={4}>
             <Heading>Factures </Heading>
-            <Link to="/create-facture">
-              <Button leftIcon={<AddIcon />} colorScheme="teal">
-                Créer une facture
-              </Button>
-            </Link>
+            <Button
+              leftIcon={<AddIcon />}
+              colorScheme="teal"
+              onClick={onOpenCreateFacture}
+            >
+              Créer une facture
+            </Button>
           </Flex>
 
           {factures.length === 0 ? (
@@ -83,13 +122,19 @@ export default function Factures() {
             <Flex flexWrap={"wrap"} gap={4}>
               {factures.map((factures) => (
                 <Flex key={factures.idFacture}>
-                  <Flex mb={"4"} border={"1px solid gray"} p={"4"}>
+                  <Flex
+                    mb={"4"}
+                    border={"1px solid gray"}
+                    p={"4"}
+                    borderColor="teal"
+                    borderRadius={"xl"}
+                  >
                     <Flex alignItems={"center"} gap={4} justifyContent="center">
                       <Flex>
                         <Box>
                           <Heading size={"md"} mb={4}>
                             <Link to={`/factures/${factures.idFacture}`}>
-                              factures N°{factures.idFacture}
+                              <Button>factures N°{factures.idFacture}</Button>
                             </Link>
                           </Heading>
                           <Box>
@@ -123,6 +168,32 @@ export default function Factures() {
           )}
         </Box>
       </Flex>
+      <Modal isOpen={isOpenCreateFacture} onClose={onCloseCreateFacture}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Création d'une facture</ModalHeader>
+          <ModalBody>
+            <FormControl isRequired>
+              <FormLabel>Date création de la facture</FormLabel>
+              <Input type="date" ref={dateFactureRef} />
+              <FormLabel>Montant</FormLabel>
+              <Input type="float" ref={montantRef} />
+              <FormLabel>Date paiement de la facture</FormLabel>
+              <Input type="date" ref={datePaiementFactureRef} />
+              <FormLabel>Id du tiers compacte</FormLabel>
+              <Input type="number" ref={tierCompacteIdRef} />
+              <FormLabel>Id du tiers Collecte</FormLabel>
+              <Input type="number" ref={tiersCollecteIdRef} />
+            </FormControl>
+            <Button onClick={handleCreateFacture}>Creer Facture</Button>
+          </ModalBody>
+          <ModalFooter>
+            <Button variant="ghost" onClick={onCloseCreateFacture}>
+              Annuler
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
