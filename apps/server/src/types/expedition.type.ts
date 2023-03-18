@@ -16,13 +16,3 @@ export type UpdateExpedition = {
   poidNetTotal?: number;
   tiersCompacteId?: number;
 };
-
-export type Expedition = {
-  idNumBl: number;
-  dateExpedition: string;
-  destinataire: string;
-  nbPalette: number;
-  poidNetTotal: number;
-  traitementId: number[];
-  tiersCompacte?: TiersCompacte;
-};

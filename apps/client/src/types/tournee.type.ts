@@ -16,12 +16,3 @@ export type UpdateTournee = {
   chauffeurId?: number;
   tierCollecteId?: number;
 };
-
-export type Tournee = {
-  idTournee: number;
-  dateTournee: string;
-  typeVehicule: TypeVehicule;
-  remorque: Remorque;
-  chauffeurId?: number;
-  tierCollecteId?: number;
-};

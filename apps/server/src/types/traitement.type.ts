@@ -22,13 +22,3 @@ export type UpdateTraitement = {
   operateurId?: number | null;
   expeditionId?: number | null;
 };
-
-export type Traitement = {
-  idTraitement: number;
-  dateTraitement?: string;
-  qualite?: Qualite;
-  quantiteCorpsEtranger?: number;
-  scoringBonusMalus?: number;
-  operateurId?: number;
-  expeditionId?: number;
-};
