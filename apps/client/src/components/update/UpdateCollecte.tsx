@@ -10,9 +10,9 @@ import {
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Collecte as Collectes } from "../../types/collecte.type";
+import { Collecte as Collectes } from "../../store/collecte.store";
 
-export default function UpdateCollecte({}) {
+export default function UpdateCollecte() {
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -129,7 +129,7 @@ export default function UpdateCollecte({}) {
             defaultValue={collecte?.employeId}
           />
           <FormLabel>Tier collecté</FormLabel>
-          <Input ref={tiersCollecteRef} value={collecte?.tiercollecteId} />
+          <Input ref={tiersCollecteRef} value={collecte?.tierCollecteId} />
         </FormControl>
         <Button onClick={handleUpdateCollecte}>Modifier collecte</Button>
       </VStack>

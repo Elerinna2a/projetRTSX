@@ -11,6 +11,7 @@ export type CreateCollecte = {
 };
 
 export type UpdateCollecte = {
+  idNumLot: number;
   quantite?: number;
   formeCollecte?: Forme;
   dateCollecte?: string;
