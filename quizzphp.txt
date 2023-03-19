@@ -1,0 +1,241 @@
+<form method="post" action="quiz.php">
+    <p>1. Quel est le langage de programmation utilisé pour créer des sites web dynamiques?</p>
+    <input type="radio" name="q1" value="a">a) PHP<br>
+    <input type="radio" name="q1" value="b">b) HTML<br>
+    <input type="radio" name="q1" value="c">c) CSS<br>
+    <p>2. Quel est le langage de programmation utilisé pour créer des applications mobiles?</p>
+    <input type="radio" name="q2" value="a">a) Java<br>
+    <input type="radio" name="q2" value="b">b) Python<br>
+    <input type="radio" name="q2" value="c">c) Swift<br>
+    <p>3. Quel est le langage de programmation utilisé pour créer des jeux vidéo?</p>
+    <input type="radio" name="q3" value="a">a) C++<br>
+    <input type="radio" name="q3" value="b">b) Java<br>
+    <input type="radio" name="q3" value="c">c) Python<br>
+    <br>
+    <input type="submit" name="submit" value="Vérifier les réponses">
+</form>
+
+<?php
+// Les réponses correctes
+$reponses_correctes = array("a", "c", "a");
+
+// Initialiser le score
+$score = 0;
+
+// Vérifier les réponses
+if (isset($_POST['q1']) && isset($_POST['q2']) && isset($_POST['q3'])) {
+    // Récupérer les réponses de l'utilisateur
+    $reponses_utilisateur = array($_POST['q1'], $_POST['q2'], $_POST['q3']);
+
+    // Vérifier chaque réponse
+    for ($i = 0; $i < count($reponses_utilisateur); $i++) {
+        if ($reponses_utilisateur[$i] == $reponses_correctes[$i]) {
+            $score++;
+        }
+    }
+
+    // Afficher le score
+    echo "<h2>Résultats</h2>";
+    echo "<p>Vous avez obtenu un score de " . $score . " sur 3.</p>";
+}
+?>
+
+
+<?php
+// Initialisation des variables
+$question_num = 1;
+$answers = array();
+$feedback = '';
+$colors = array('incorrect' => 'red', 'correct' => 'green');
+
+// Tableau des questions et de leurs réponses possibles
+$questions = array(
+    1 => array(
+        'text' => 'Quel est le langage de programmation utilisé pour créer des sites web dynamiques?',
+        'answers' => array(
+            'a' => 'PHP',
+            'b' => 'HTML',
+            'c' => 'CSS'
+        ),
+        'correct_answer' => 'a'
+    ),
+    2 => array(
+        'text' => 'Quel est le langage de programmation utilisé pour créer des applications mobiles?',
+        'answers' => array(
+            'a' => 'Java',
+            'b' => 'Python',
+            'c' => 'Swift'
+        ),
+        'correct_answer' => 'c'
+    ),
+    3 => array(
+        'text' => 'Quel est le langage de programmation utilisé pour créer des jeux vidéo?',
+        'answers' => array(
+            'a' => 'C++',
+            'b' => 'Java',
+            'c' => 'Python'
+        ),
+        'correct_answer' => 'a'
+    )
+);
+
+// Vérification des réponses de l'utilisateur
+if (isset($_POST['submit'])) {
+    $answers = $_POST['answers'];
+
+    if (!empty($answers)) {
+        foreach ($questions as $num => $question) {
+            if ($answers[$num] == $question['correct_answer']) {
+                $feedback .= "<p style=\"color:{$colors['correct']}\">Question {$num}: Correct!</p>";
+            } else {
+                $feedback .= "<p style=\"color:{$colors['incorrect']}\">Question {$num}: Incorrect.</p>";
+            }
+        }
+    } else {
+        $feedback = "<p style=\"color:{$colors['incorrect']}\">Veuillez répondre à toutes les questions.</p>";
+    }
+}
+
+// Affichage de la question en cours
+if ($question_num <= count($questions)) {
+    $question = $questions[$question_num];
+    ?>
+    <h1>Question <?=$question_num?></h1>
+
+    <form method="post" action="">
+        <p><?=$question['text']?></p>
+        <?php foreach ($question['answers'] as $key => $answer) { ?>
+            <label><input type="checkbox" name="answers[<?=$question_num?>][]" value="<?=$key?>"><?=$answer?></label><br>
+        <?php } ?>
+        <br>
+        <input type="submit" name="next" value="Suivant">
+    </form>
+    <?php
+} else {
+    // Affichage des résultats
+    echo "<h1>Résultats</h1>";
+    echo $feedback;
+    echo "<p><a href=\"\">Recommencer le quiz</a></p>";
+}
+
+// Passage à la question suivante
+if (isset($_POST['next'])) {
+    $answers = $_POST['answers'];
+    $question_num++;
+
+    // Vérification des réponses de l'utilisateur
+    if (!empty($answers)) {
+        foreach ($questions as $num => $question) {
+            if ($answers[$num] == $question['correct_answer']) {
+                $feedback .= "<p style=\"color'{$colors['correct']}">Question {$num}: Correct!</p>";
+} else {
+$feedback .= "<p style="color:{$colors['incorrect']}">Question {$num}: Incorrect.</p>";
+}
+}
+} else {
+$feedback = "<p style="color:{$colors['incorrect']}">Veuillez répondre à toutes les questions.</p>";
+}
+
+php
+Copy code
+// Affichage de la question suivante ou des résultats
+if ($question_num <= count($questions)) {
+    $question = $questions[$question_num];
+    ?>
+    <h1>Question <?=$question_num?></h1>
+
+    <form method="post" action="">
+        <p><?=$question['text']?></p>
+        <?php foreach ($question['answers'] as $key => $answer) { ?>
+            <label><input type="checkbox" name="answers[<?=$question_num?>][]" value="<?=$key?>"><?=$answer?></label><br>
+        <?php } ?>
+        <br>
+        <input type="submit" name="next" value="Suivant">
+    </form>
+    <?php
+} else {
+    // Affichage des résultats
+    echo "<h1>Résultats</h1>";
+    echo $feedback;
+    echo "<p><a href=\"\">Recommencer le quiz</a></p>";
+}
+}
+?>
+
+<?php
+// Connexion à la base de données
+$host = 'localhost';
+$user = 'user';
+$password = 'password';
+$dbname = 'quizz';
+$dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
+$pdo = new PDO($dsn, $user, $password, $options);
+
+// Récupération des questions depuis la base de données
+$stmt = $pdo->query("SELECT * FROM questions");
+$questions = $stmt->fetchAll();
+
+// Traitement du formulaire soumis par l'utilisateur
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Vérification des réponses de l'utilisateur
+    if (!empty($_POST['answers'])) {
+        $answers = $_POST['answers'];
+        $feedback = '';
+        foreach ($answers as $num => $selected_answers) {
+            $correct_answer = $questions[$num-1]['correct_answer'];
+            if (count($selected_answers) == 1 && $selected_answers[0] == $correct_answer) {
+                $feedback .= "<p style=\"color:{$colors['correct']}\">Question {$num}: Correct!</p>";
+            } else {
+                $feedback .= "<p style=\"color:{$colors['incorrect']}\">Question {$num}: Incorrect.</p>";
+            }
+        }
+    } else {
+        $feedback = "<p style=\"color:{$colors['incorrect']}\">Veuillez répondre à toutes les questions.</p>";
+    }
+
+    // Affichage des résultats
+    echo "<h1>Résultats</h1>";
+    echo $feedback;
+    echo "<p><a href=\"\">Recommencer le quiz</a></p>";
+} else {
+    // Affichage de la première question
+    $question_num = 1;
+    $question = $questions[$question_num-1];
+    ?>
+    <h1>Question <?=$question_num?></h1>
+
+    <form method="post" action="">
+        <p><?=$question['question_text']?></p>
+        <?php foreach (array('answer_1', 'answer_2', 'answer_3', 'answer_4') as $answer_key): ?>
+<label>
+<input type="checkbox" name="answers[<?=$question_num-1?>][]" value="<?=$question[$answer_key]?>" />
+<?=$question[$answer_key]?>
+</label>
+<?php endforeach; ?>
+<br>
+<button type="submit">Suivant</button>
+</form>
+
+<?php } ?> 
+Pour la base de données, il faudrait créer une table "questions" avec les colonnes suivantes:
+
+id (int, clé primaire auto-incrémentée)
+question_text (varchar)
+answer_1 (varchar)
+answer_2 (varchar)
+answer_3 (varchar)
+answer_4 (varchar)
+correct_answer (varchar)
+Ensuite, il faudrait insérer les questions et réponses dans cette table en utilisant des requêtes SQL, par exemple:
+
+INSERT INTO questions (question_text, answer_1, answer_2, answer_3, answer_4, correct_answer) VALUES ('Quel est le pays le plus peuplé du monde?', 'Chine', 'Inde', 'Etats-Unis', 'Russie', 'Chine');
+
+Il faudrait répéter cette requête pour chaque question. Ensuite, la requête SQL pour récupérer toutes les questions serait simplement:
+
+SELECT * FROM questions;
+

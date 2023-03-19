@@ -92,6 +92,9 @@ export default function Navbar() {
             <Link to="/tiers-compactes">
               <Button>Tiers Compacte</Button>
             </Link>
+            <Link to="/login">
+              <Button onClick={onClickLogout}>Déconnexion</Button>
+            </Link>
           </>
         ) : (
           <>
