@@ -27,17 +27,6 @@ export default function Navbar() {
       });
   }
 
-  // function deleteAllSessions() {
-  //   axios
-  //     .post("http://localhost:3000/auth/deleteAllSessions")
-  //     .then(() => {
-  //       console.log("All sessions deleted successfully");
-  //     })
-  //     .catch((err) => {
-  //       console.log("Error deleting sessions: " + err);
-  //     });
-  // }
-
   return (
     <Flex
       padding={4}
