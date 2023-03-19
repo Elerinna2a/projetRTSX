@@ -223,7 +223,7 @@ export default function Collecte() {
                           <Flex flexDirection={"column"}>
                             <Text>ID : {collecte.idNumLot}</Text>
                             <Text>
-                              Nom du tiers : {collecte.nomTierCollecte}
+                              Nom du tiers: {collecte.nomTierCollecte}
                             </Text>
                             <Text>Quantite : {collecte.quantite}</Text>
                             <Text>

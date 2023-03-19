@@ -26,17 +26,6 @@ export default function Navbar() {
       });
   }
 
-  // function deleteAllSessions() {
-  //   axios
-  //     .post("http://localhost:3000/auth/deleteAllSessions")
-  //     .then(() => {
-  //       console.log("All sessions deleted successfully");
-  //     })
-  //     .catch((err) => {
-  //       console.log("Error deleting sessions: " + err);
-  //     });
-  // }
-
   return (
     <Flex
       padding={4}
@@ -49,14 +38,19 @@ export default function Navbar() {
     >
       <Box>
         <img src="/logo.png" alt="logo" width="200" height="200" />
-        {authedEmploye?.email ? (
-          <>
-            {" "}
-            Bonjour, {authedEmploye.nom} {authedEmploye.prenom}
-          </>
-        ) : (
-          <></>
-        )}
+
+        <Flex alignItems={"center"} justifyContent="center">
+          <Box mr={4}>
+            {authedEmploye?.email ? (
+              <>
+                {" "}
+                Bonjour, {authedEmploye.nom} {authedEmploye.prenom}
+              </>
+            ) : (
+              <></>
+            )}
+          </Box>
+        </Flex>
       </Box>
       <Spacer />
       <Flex
@@ -95,37 +89,10 @@ export default function Navbar() {
             <Link to="/tiers-compactes">
               <Button>Tiers Compacte</Button>
             </Link>
-
-            {authedEmploye?.email ? (
-              <>
-                <Link to="/login">
-                  <Button onClick={onClickLogout}>Déconnexion</Button>
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link to="/login">
-                  <Button>Login</Button>
-                </Link>
-              </>
-            )}
           </>
         ) : (
-          <>
-            {authedEmploye?.email ? (
-              <Link to="/login">
-                <Button onClick={onClickLogout}>Déconnexion</Button>
-              </Link>
-            ) : (
-              <Link to="/login">
-                <Button>Login</Button>
-              </Link>
-            )}
-          </>
+          <></>
         )}
-        <Button onClick={toggleColorMode}>
-          {colorMode === "light" ? "🌙" : "☀️"}
-        </Button>
       </Flex>
     </Flex>
   );
