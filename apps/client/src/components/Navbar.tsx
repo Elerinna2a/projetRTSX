@@ -1,3 +1,4 @@
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { Box, Button, Flex, Spacer, useColorMode } from "@chakra-ui/react";
 import { useStore } from "@nanostores/react";
 import axios from "axios";
@@ -26,6 +27,17 @@ export default function Navbar() {
       });
   }
 
+  // function deleteAllSessions() {
+  //   axios
+  //     .post("http://localhost:3000/auth/deleteAllSessions")
+  //     .then(() => {
+  //       console.log("All sessions deleted successfully");
+  //     })
+  //     .catch((err) => {
+  //       console.log("Error deleting sessions: " + err);
+  //     });
+  // }
+
   return (
     <Flex
       padding={4}
@@ -38,8 +50,7 @@ export default function Navbar() {
     >
       <Box>
         <img src="/logo.png" alt="logo" width="200" height="200" />
-
-        <Flex alignItems={"center"} justifyContent="center">
+        <Flex alignItems={"center"}>
           <Box mr={4}>
             {authedEmploye?.email ? (
               <>
@@ -50,6 +61,9 @@ export default function Navbar() {
               <></>
             )}
           </Box>
+          <Button onClick={toggleColorMode}>
+            {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+          </Button>
         </Flex>
       </Box>
       <Spacer />
@@ -91,7 +105,15 @@ export default function Navbar() {
             </Link>
           </>
         ) : (
-          <></>
+          <>
+            {authedEmploye?.email ? (
+              <Link to="/login">
+                <Button onClick={onClickLogout}>Déconnexion</Button>
+              </Link>
+            ) : (
+              ""
+            )}
+          </>
         )}
       </Flex>
     </Flex>
