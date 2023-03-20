@@ -1,11 +1,6 @@
 import { useStore } from "@nanostores/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Route, Routes } from "react-router-dom";
-import CollecteDetails from "./components/details/CollecteDetails";
-import EmployeDetails from "./components/details/EmployeDetails";
-import ExpeditionDetails from "./components/details/ExpeditionDetails";
-import TourneeDetails from "./components/details/TourneeDetails";
-import TraitementDetails from "./components/details/TraitementDetails";
 import UpdateCollecte from "./components/update/UpdateCollecte";
 import UpdateEmploye from "./components/update/UpdateEmploye";
 import UpdateExpedition from "./components/update/UpdateExpedition";
@@ -63,19 +58,6 @@ export default function App() {
           />
           <Route path="/login" element={notAuthOnly(<Login />)} />
           <Route path="/traitements" element={authonly(<Traitement />)} />
-
-          {/* Single page route */}
-          <Route
-            path="/collectes/:id"
-            element={authonly(<CollecteDetails />)}
-          />
-          <Route path="/employes/:id" element={authonly(<EmployeDetails />)} />
-          <Route
-            path="/expeditions/:id"
-            element={authonly(<ExpeditionDetails />)}
-          />
-          <Route path="/traitements/:id" element={<TraitementDetails />} />
-          <Route path="/tournees/:id" element={<TourneeDetails />} />
 
           {/* update page */}
           <Route path="/update-employes/:id" element={<UpdateEmploye />} />

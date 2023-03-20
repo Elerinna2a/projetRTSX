@@ -24,6 +24,7 @@ import { Collecte as Collectes } from "../store/collecte.store";
 
 export default function Collecte() {
   const [collectes, setCollectes] = useState<Collectes[]>([]);
+  const [selectedCollecte, setSelectedCollecte] = useState<Collectes>();
   const [error, setError] = useState<string | null>(null);
   const [idToDelete, setIdToDelete] = useState<number | null>(null);
   const [idToTake, setIdToTake] = useState<number | null>(null);
@@ -166,9 +167,10 @@ export default function Collecte() {
                           <Heading size={"md"} mb={4}>
                             {/* <Link to={`/collectes/${collecte.idNumLot}`}> */}
                             <Button
-                              onClick={() =>
-                                handleOpenSingleCollecte(collecte.idNumLot)
-                              }
+                              onClick={() => {
+                                setSelectedCollecte(collecte);
+                                handleOpenSingleCollecte(collecte.idNumLot);
+                              }}
                             >
                               Collecte N°{collecte.idNumLot}
                             </Button>
@@ -219,28 +221,36 @@ export default function Collecte() {
                     <ModalContent>
                       <ModalHeader>Details de la collecte</ModalHeader>
                       <ModalBody>
-                        {collecte && (
+                        {selectedCollecte && (
                           <Flex flexDirection={"column"}>
-                            <Text>ID : {collecte.idNumLot}</Text>
+                            <Text>ID : {selectedCollecte.idNumLot}</Text>
                             <Text>
-                              Nom du tiers: {collecte.nomTierCollecte}
+                              Nom du tiers: {selectedCollecte.nomTierCollecte}
                             </Text>
-                            <Text>Quantite : {collecte.quantite}</Text>
+                            <Text>Quantite : {selectedCollecte.quantite}</Text>
                             <Text>
-                              Forme de la collecte : {collecte.formeCollecte}
+                              Forme de la collecte :{" "}
+                              {selectedCollecte.formeCollecte}
                             </Text>
-                            <Link to={`/traitements/${collecte.traitementId}`}>
+                            <Link
+                              to={`/traitements/${selectedCollecte.traitementId}`}
+                            >
                               <Text>
-                                Id du traitement lié : {collecte.traitementId}
+                                Id du traitement lié :{" "}
+                                {selectedCollecte.traitementId}
                               </Text>
                             </Link>
-                            <Link to={`/employes/${collecte.employeId}`}>
+                            <Link
+                              to={`/employes/${selectedCollecte.employeId}`}
+                            >
                               <Text>
-                                Id de du chauffeur : {collecte.employeId}
+                                Id de du chauffeur :{" "}
+                                {selectedCollecte.employeId}
                               </Text>
                             </Link>
                             <Text>
-                              Date de la collecte : {collecte.dateCollecte}
+                              Date de la collecte :{" "}
+                              {selectedCollecte.dateCollecte}
                             </Text>
                           </Flex>
                         )}
@@ -258,6 +268,7 @@ export default function Collecte() {
           )}
         </Box>
       </Flex>
+
       {/* Modal Create */}
       <Modal isOpen={isOpenCreateCollecte} onClose={onCloseCreateCollecte}>
         <ModalOverlay />
