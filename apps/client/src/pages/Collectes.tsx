@@ -19,15 +19,15 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Collecte as Collectes } from "../store/collecte.store";
 
 export default function Collecte() {
+  // useRef, useState, useDisclosure
   const [collectes, setCollectes] = useState<Collectes[]>([]);
   const [selectedCollecte, setSelectedCollecte] = useState<Collectes>();
   const [error, setError] = useState<string | null>(null);
   const [idToDelete, setIdToDelete] = useState<number | null>(null);
-  const [idToTake, setIdToTake] = useState<number | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     isOpen: isOpenSingleCollecte,
@@ -39,9 +39,7 @@ export default function Collecte() {
     onOpen: onOpenCreateCollecte,
     onClose: onCloseCreateCollecte,
   } = useDisclosure();
-  const navigate = useNavigate();
 
-  // useRef
   const quantiteRef = useRef<HTMLInputElement | null>(null);
   const nomTiersRef = useRef<HTMLInputElement | null>(null);
   const formeCollecteRef = useRef<HTMLSelectElement | null>(null);
@@ -50,17 +48,17 @@ export default function Collecte() {
   const dateCollecteRef = useRef<HTMLInputElement | null>(null);
   const tierCollecteIdRef = useRef<HTMLInputElement | null>(null);
 
-  // constant attritubtion
-  const quantite = quantiteRef.current?.value;
-  const nomTierCollecte = nomTiersRef.current?.value;
-  const formeCollecte = formeCollecteRef.current?.value;
-  const employeId = employeIdCollecteRef.current?.value;
-  const traitementId = traitementIdCollecteRef.current?.value;
-  const dateCollecte = dateCollecteRef.current?.value;
-  const tiercollecteId = tierCollecteIdRef.current?.value;
-
   // Create Collecte
   const handleCreateCollecte = async () => {
+    // constant attritubtion
+
+    const quantite = quantiteRef.current?.value;
+    const nomTierCollecte = nomTiersRef.current?.value;
+    const formeCollecte = formeCollecteRef.current?.value;
+    const employeId = employeIdCollecteRef.current?.value;
+    const traitementId = traitementIdCollecteRef.current?.value;
+    const dateCollecte = dateCollecteRef.current?.value;
+    const tiercollecteId = tierCollecteIdRef.current?.value;
     try {
       if (
         quantite === undefined ||
@@ -96,17 +94,6 @@ export default function Collecte() {
       console.log("id to delete is undefined");
     }
   };
-
-  // fonction pour ouvrir avec le modal toute les informations d'une collecte
-  const handleOpenSingleCollecte = (id: number | undefined) => {
-    if (id) {
-      setIdToTake(id);
-      onOpenSingleCollecte();
-    } else {
-      console.log("id to take is undefined");
-    }
-  };
-
   const confirmDelete = () => {
     if (idToDelete) {
       axios
@@ -169,7 +156,7 @@ export default function Collecte() {
                             <Button
                               onClick={() => {
                                 setSelectedCollecte(collecte);
-                                handleOpenSingleCollecte(collecte.idNumLot);
+                                onOpenSingleCollecte();
                               }}
                             >
                               Collecte N°{collecte.idNumLot}
