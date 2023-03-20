@@ -40,8 +40,8 @@ export default function Collecte() {
     onClose: onCloseCreateCollecte,
   } = useDisclosure();
 
-  const quantiteRef = useRef<HTMLInputElement | null>(null);
   const nomTiersRef = useRef<HTMLInputElement | null>(null);
+  const quantiteRef = useRef<HTMLInputElement | null>(null);
   const formeCollecteRef = useRef<HTMLSelectElement | null>(null);
   const employeIdCollecteRef = useRef<HTMLInputElement | null>(null);
   const traitementIdCollecteRef = useRef<HTMLInputElement | null>(null);
@@ -50,8 +50,6 @@ export default function Collecte() {
 
   // Create Collecte
   const handleCreateCollecte = async () => {
-    // constant attritubtion
-
     const quantite = quantiteRef.current?.value;
     const nomTierCollecte = nomTiersRef.current?.value;
     const formeCollecte = formeCollecteRef.current?.value;
@@ -152,7 +150,6 @@ export default function Collecte() {
                       <Flex>
                         <Box>
                           <Heading size={"md"} mb={4}>
-                            {/* <Link to={`/collectes/${collecte.idNumLot}`}> */}
                             <Button
                               onClick={() => {
                                 setSelectedCollecte(collecte);
@@ -161,7 +158,6 @@ export default function Collecte() {
                             >
                               Collecte N°{collecte.idNumLot}
                             </Button>
-                            {/* </Link> */}
                           </Heading>
                           <Box>
                             <p>
@@ -178,9 +174,7 @@ export default function Collecte() {
                             </p>
                             <p>
                               <strong>Collecte fait par l'ID </strong>:
-                              <Link to={`/employes/${collecte.employeId}`}>
-                                {collecte.employeId}
-                              </Link>
+                              {collecte.employeId}
                             </p>
                           </Box>
                         </Box>
@@ -219,22 +213,13 @@ export default function Collecte() {
                               Forme de la collecte :{" "}
                               {selectedCollecte.formeCollecte}
                             </Text>
-                            <Link
-                              to={`/traitements/${selectedCollecte.traitementId}`}
-                            >
-                              <Text>
-                                Id du traitement lié :{" "}
-                                {selectedCollecte.traitementId}
-                              </Text>
-                            </Link>
-                            <Link
-                              to={`/employes/${selectedCollecte.employeId}`}
-                            >
-                              <Text>
-                                Id de du chauffeur :{" "}
-                                {selectedCollecte.employeId}
-                              </Text>
-                            </Link>
+                            <Text>
+                              Id du traitement lié :{" "}
+                              {selectedCollecte.traitementId}
+                            </Text>
+                            <Text>
+                              Id de du chauffeur : {selectedCollecte.employeId}
+                            </Text>
                             <Text>
                               Date de la collecte :{" "}
                               {selectedCollecte.dateCollecte}

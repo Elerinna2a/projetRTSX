@@ -203,24 +203,13 @@ export default function Employes() {
                                   Nom de l'employé: {selectedEmployes.nom}{" "}
                                   {selectedEmployes.prenom}
                                 </Text>
-                                <Text>Adresse :{selectedEmployes.adresse}</Text>
-                                <Text>{selectedEmployes.tel}</Text>
-                                <Link
-                                  to={`/traitements/${selectedEmployes.traitements}`}
-                                >
-                                  <Text>
-                                    Id du traitement lié :
-                                    {selectedEmployes.traitements}
-                                  </Text>
-                                </Link>
-                                <Link
-                                  to={`/employes/${selectedEmployes.collectes}`}
-                                >
-                                  <Text>
-                                    Id de du chauffeur :{" "}
-                                    {selectedEmployes.email}
-                                  </Text>
-                                </Link>
+                                <Text>
+                                  Adresse : {selectedEmployes.adresse}
+                                </Text>
+                                <Text>Tel : {selectedEmployes.tel}</Text>
+                                <Text>
+                                  Id de du chauffeur : {selectedEmployes.email}
+                                </Text>
                                 <Text>
                                   Date de la collecte : {selectedEmployes.tel}
                                 </Text>
